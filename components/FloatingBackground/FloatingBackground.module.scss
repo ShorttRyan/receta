@@ -1,0 +1,31 @@
+@import '../styles/variables';
+
+.wrap{
+  @media(max-width: $mobile) {
+    display: none;
+  }
+  perspective-origin: 50% 50%;
+}
+.svg{
+  position:absolute;
+  top: -100vh;
+  transform-style: preserve-3d;
+}
+
+$total: 50;
+@for $i from 1 through $total {
+  $scale:random(2) - .1;
+  .svg:nth-child(#{$i}){
+    left:random(120) * 1% - 20;
+    animation: raise#{$i} 10 + random(15) +s linear infinite;
+    animation-delay:random(5) - 5 + s;
+    transform: scale(.3 + $scale - .6) rotate(random(360) + deg);
+    z-index: $i - 7;
+    @keyframes raise#{$i} {
+      to{
+        top:150vh;
+        transform: scale(.3  + $scale - .6) rotate(random(360) + deg);
+      }
+    }
+  }
+}
