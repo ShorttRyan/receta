@@ -1,0 +1,16 @@
+{
+  "name": "receta-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "receta-frontend/node_modules/.bin/next dev",
+    "build": "receta-frontend/node_modules/.bin/next build",
+    "start": "receta-frontend/node_modules/.bin/next start",
+    "lint": "receta-frontend/node_modules/.bin/next lint"
+  },
+  "dependencies": {
+    "next": "12.1.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
+  }
+}
