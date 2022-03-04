@@ -29,7 +29,8 @@ const LoginSignup: React.FunctionComponent = () => {
           </div>
         </div>
         <div className={styles.loginSignup}>
-          {showLogin ? <Login /> : <Signup />}
+          <Login hide={!showLogin} />
+          <Signup hide={showLogin} />
         </div>
       </div>
     </div>
