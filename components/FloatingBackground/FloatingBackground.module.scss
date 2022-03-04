@@ -1,6 +1,9 @@
 @import 'https://fonts.googleapis.com/css?family=Playfair+Display:400,700i,900i';
 
 .wrap{
+  @media(max-width: 500px) {
+    display: none;
+  }
   perspective-origin: 50% 50%;
 }
 .svg{
