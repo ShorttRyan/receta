@@ -41,15 +41,15 @@ const FloatingBackground: React.FunctionComponent = () => {
         <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
           <text y="64" fontSize="64">🥭</text>
         </svg>
-        <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
-          <text y="64" fontSize="64">🍍</text>
-        </svg>
-        <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
-          <text y="64" fontSize="64">🥥</text>
-        </svg>
-        <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
-          <text y="64" fontSize="64">🥝</text>
-        </svg>
+        {/*<svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">*/}
+        {/*  <text y="64" fontSize="64">🍍</text>*/}
+        {/*</svg>*/}
+        {/*<svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">*/}
+        {/*  <text y="64" fontSize="64">🥥</text>*/}
+        {/*</svg>*/}
+        {/*<svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">*/}
+        {/*  <text y="64" fontSize="64">🥝</text>*/}
+        {/*</svg>*/}
         <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
           <text y="64" fontSize="64">🍅</text>
         </svg>
@@ -86,39 +86,39 @@ const FloatingBackground: React.FunctionComponent = () => {
         <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
           <text y="64" fontSize="64">🥔</text>
         </svg>
-        <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
-          <text y="64" fontSize="64">🍠</text>
-        </svg>
-        <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
-          <text y="64" fontSize="64">🥐</text>
-        </svg>
-        <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
-          <text y="64" fontSize="64">🥯</text>
-        </svg>
-        <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
-          <text y="64" fontSize="64">🍞</text>
-        </svg>
-        <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
-          <text y="64" fontSize="64">🥖</text>
-        </svg>
-        <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
-          <text y="64" fontSize="64">🥨</text>
-        </svg>
+        {/*<svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">*/}
+        {/*  <text y="64" fontSize="64">🍠</text>*/}
+        {/*</svg>*/}
+        {/*<svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">*/}
+        {/*  <text y="64" fontSize="64">🥐</text>*/}
+        {/*</svg>*/}
+        {/*<svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">*/}
+        {/*  <text y="64" fontSize="64">🥯</text>*/}
+        {/*</svg>*/}
+        {/*<svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">*/}
+        {/*  <text y="64" fontSize="64">🍞</text>*/}
+        {/*</svg>*/}
+        {/*<svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">*/}
+        {/*  <text y="64" fontSize="64">🥖</text>*/}
+        {/*</svg>*/}
+        {/*<svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">*/}
+        {/*  <text y="64" fontSize="64">🥨</text>*/}
+        {/*</svg>*/}
         <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
           <text y="64" fontSize="64">🥖</text>
         </svg>
         <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
           <text y="64" fontSize="64">🧀</text>
         </svg>
-        <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
-          <text y="64" fontSize="64">🍳</text>
-        </svg>
-        <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
-          <text y="64" fontSize="64">🥞</text>
-        </svg>
-        <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
-          <text y="64" fontSize="64">🧇</text>
-        </svg>
+        {/*<svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">*/}
+        {/*  <text y="64" fontSize="64">🍳</text>*/}
+        {/*</svg>*/}
+        {/*<svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">*/}
+        {/*  <text y="64" fontSize="64">🥞</text>*/}
+        {/*</svg>*/}
+        {/*<svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">*/}
+        {/*  <text y="64" fontSize="64">🧇</text>*/}
+        {/*</svg>*/}
         <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
           <text y="64" fontSize="64">🥓</text>
         </svg>
@@ -143,9 +143,9 @@ const FloatingBackground: React.FunctionComponent = () => {
         <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
           <text y="64" fontSize="64">🍕</text>
         </svg>
-        <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
-          <text y="64" fontSize="64">🥪</text>
-        </svg>
+        {/*<svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">*/}
+        {/*  <text y="64" fontSize="64">🥪</text>*/}
+        {/*</svg>*/}
         <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
           <text y="64" fontSize="64">🥙</text>
         </svg>
@@ -155,9 +155,9 @@ const FloatingBackground: React.FunctionComponent = () => {
         <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
           <text y="64" fontSize="64">🌯</text>
         </svg>
-        <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
-          <text y="64" fontSize="64">🥗</text>
-        </svg>
+        {/*<svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">*/}
+        {/*  <text y="64" fontSize="64">🥗</text>*/}
+        {/*</svg>*/}
         <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
           <text y="64" fontSize="64">🥘</text>
         </svg>
@@ -167,27 +167,27 @@ const FloatingBackground: React.FunctionComponent = () => {
         <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
           <text y="64" fontSize="64">🍜</text>
         </svg>
-        <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
-          <text y="64" fontSize="64">🍲</text>
-        </svg>
-        <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
-          <text y="64" fontSize="64">🍛</text>
-        </svg>
+        {/*<svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">*/}
+        {/*  <text y="64" fontSize="64">🍲</text>*/}
+        {/*</svg>*/}
+        {/*<svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">*/}
+        {/*  <text y="64" fontSize="64">🍛</text>*/}
+        {/*</svg>*/}
         <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
           <text y="64" fontSize="64">🍣</text>
         </svg>
-        <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
-          <text y="64" fontSize="64">🥟</text>
-        </svg>
-        <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
-          <text y="64" fontSize="64">🍤</text>
-        </svg>
-        <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
-          <text y="64" fontSize="64">🍙</text>
-        </svg>
-        <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
-          <text y="64" fontSize="64">🍚</text>
-        </svg>
+        {/*<svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">*/}
+        {/*  <text y="64" fontSize="64">🥟</text>*/}
+        {/*</svg>*/}
+        {/*<svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">*/}
+        {/*  <text y="64" fontSize="64">🍤</text>*/}
+        {/*</svg>*/}
+        {/*<svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">*/}
+        {/*  <text y="64" fontSize="64">🍙</text>*/}
+        {/*</svg>*/}
+        {/*<svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">*/}
+        {/*  <text y="64" fontSize="64">🍚</text>*/}
+        {/*</svg>*/}
         <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
           <text y="64" fontSize="64">🥮</text>
         </svg>
@@ -200,39 +200,39 @@ const FloatingBackground: React.FunctionComponent = () => {
         <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
           <text y="64" fontSize="64">🍰</text>
         </svg>
-        <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
-          <text y="64" fontSize="64">🎂</text>
-        </svg>
-        <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
-          <text y="64" fontSize="64">🍮</text>
-        </svg>
-        <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
-          <text y="64" fontSize="64">🍫</text>
-        </svg>
-        <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
-          <text y="64" fontSize="64">🍿</text>
-        </svg>
+        {/*<svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">*/}
+        {/*  <text y="64" fontSize="64">🎂</text>*/}
+        {/*</svg>*/}
+        {/*<svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">*/}
+        {/*  <text y="64" fontSize="64">🍮</text>*/}
+        {/*</svg>*/}
+        {/*<svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">*/}
+        {/*  <text y="64" fontSize="64">🍫</text>*/}
+        {/*</svg>*/}
+        {/*<svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">*/}
+        {/*  <text y="64" fontSize="64">🍿</text>*/}
+        {/*</svg>*/}
         <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
           <text y="64" fontSize="64">🍩</text>
         </svg>
         <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
           <text y="64" fontSize="64">🍪</text>
         </svg>
-        <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
-          <text y="64" fontSize="64">🌰</text>
-        </svg>
+        {/*<svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">*/}
+        {/*  <text y="64" fontSize="64">🌰</text>*/}
+        {/*</svg>*/}
         <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
           <text y="64" fontSize="64">🥜</text>
         </svg>
         <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
           <text y="64" fontSize="64">🍯</text>
         </svg>
-        <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
-          <text y="64" fontSize="64">☕️</text>
-        </svg>
-        <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
-          <text y="64" fontSize="64">🍵</text>
-        </svg>
+        {/*<svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">*/}
+        {/*  <text y="64" fontSize="64">☕️</text>*/}
+        {/*</svg>*/}
+        {/*<svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">*/}
+        {/*  <text y="64" fontSize="64">🍵</text>*/}
+        {/*</svg>*/}
         <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg">
           <text y="64" fontSize="64">🧉</text>
         </svg>
