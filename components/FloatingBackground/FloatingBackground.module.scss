@@ -1,7 +1,7 @@
-@import 'https://fonts.googleapis.com/css?family=Playfair+Display:400,700i,900i';
+@import '../styles/variables';
 
 .wrap{
-  @media(max-width: 500px) {
+  @media(max-width: $mobile) {
     display: none;
   }
   perspective-origin: 50% 50%;
