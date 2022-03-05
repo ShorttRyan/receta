@@ -2,8 +2,7 @@ import {NextApiRequest, NextApiResponse} from 'next'
 import {checkBody, email} from '../../../utils'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import { PrismaClient } from '@prisma/client'
-import {Prisma} from '.prisma/client'
+import { PrismaClient, Prisma } from '@prisma/client'
 
 
 const prisma = new PrismaClient()
