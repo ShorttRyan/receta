@@ -9,6 +9,6 @@ jobs:
         uses: treosh/lighthouse-ci-action@v9
         with:
           urls: |
-            https://receta-git-${{ GITHUB_HEAD_REF }}-shorttryan.vercel.app
+            "https://receta-git-${{ GITHUB_HEAD_REF }}-shorttryan.vercel.app"
           uploadArtifacts: true
           temporaryPublicStorage: true
