@@ -3,8 +3,7 @@ node_modules
 .env
 yarn-error.log
 next.config.js
-
-
+src/utils/regex.ts
 
 # dependencies
 /node_modules

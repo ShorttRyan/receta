@@ -1,20 +1,31 @@
-import {NextApiRequest, NextApiResponse} from 'next'
-import {checkBody, generateAccessToken, logPrismaError, prisma} from '../../../utils'
+import { NextApiRequest, NextApiResponse } from 'next'
+import {
+  checkBody,
+  generateAccessToken,
+  logPrismaError,
+  prisma,
+} from '../../../utils'
 import bcrypt from 'bcrypt'
 import { Prisma } from '@prisma/client'
-import {serialize} from 'cookie'
-import {cookieOptions} from '../../../constants'
+import { serialize } from 'cookie'
+import { cookieOptions } from '../../../constants'
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   if (req.method === 'POST') {
-    const requiredFields: string[] = ['email', 'username', 'password', 'firstName', 'lastName']
+    const requiredFields: string[] = [
+      'email',
+      'username',
+      'password',
+      'firstName',
+      'lastName',
+    ]
     const emptyField = checkBody(req.body, requiredFields)
     if (emptyField !== undefined) {
       res.status(400).json({
-        message: `${emptyField} field is required`
+        message: `${emptyField} field is required`,
       })
     } else {
       const salt = await bcrypt.genSalt()
@@ -28,11 +39,16 @@ export default async function handler(
             salt,
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-          }
+          },
         })
         if (user) {
-          const accessToken = generateAccessToken({username: user.username})
-          res.setHeader('Set-Cookie', serialize('auth', String(accessToken), cookieOptions)).json({accessToken})
+          const accessToken = generateAccessToken({ username: user.username })
+          res
+            .setHeader(
+              'Set-Cookie',
+              serialize('auth', String(accessToken), cookieOptions),
+            )
+            .json({ accessToken })
         }
       } catch (e) {
         if (e instanceof Prisma.PrismaClientKnownRequestError) {

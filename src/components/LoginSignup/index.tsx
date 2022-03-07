@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import styles from './LoginSignup.module.scss'
 import Signup from './Signup'
 import Login from './Login'
@@ -10,19 +10,17 @@ const LoginSignup: React.FunctionComponent = () => {
     <div className={styles.loginWrapper}>
       <div className={styles.loginContainer}>
         <div className={styles.loginHeader}>
-          <div className={styles.title}>
-            Receta
-          </div>
+          <div className={styles.title}>Receta</div>
           <div className={styles.buttonContainer}>
             <div className={styles.buttonWrapper}>
               <Button
                 onClick={() => setShowLogin(true)}
-                label='Log In'
+                label="Log In"
                 muted={!showLogin}
               />
               <Button
                 onClick={() => setShowLogin(false)}
-                label='Sign Up'
+                label="Sign Up"
                 muted={showLogin}
               />
             </div>

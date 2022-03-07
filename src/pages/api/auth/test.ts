@@ -3,7 +3,7 @@ import { logJwtError, validateAccessToken } from '../../../utils'
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   if (req.method === 'POST') {
     console.log(process.env.NODE_ENV)
@@ -14,7 +14,7 @@ export default async function handler(
       res.status(401).json(error)
       return
     }
-    res.json({message: 'Successfully logged out'})
+    res.json({ message: 'Successfully logged out' })
   } else {
     res.status(405).json({
       message: `Method not allowed`,

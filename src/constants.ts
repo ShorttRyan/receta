@@ -1,4 +1,4 @@
-import {CookieSerializeOptions} from 'cookie'
+import { CookieSerializeOptions } from 'cookie'
 
 export const cookieOptions: CookieSerializeOptions = {
   httpOnly: true,
