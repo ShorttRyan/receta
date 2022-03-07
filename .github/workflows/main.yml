@@ -9,14 +9,30 @@ jobs:
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
-      - name: Audit URLs using Lighthouse
+      - name: Audit Branch Specific URL
         uses: treosh/lighthouse-ci-action@v9
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
         with:
           urls: |
             "https://receta-git-${{ steps.extract_branch.outputs.branch }}-shorttryan.vercel.app"
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+      - name: Audit Staging URL
+        uses: treosh/lighthouse-ci-action@v9
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+        with:
+          urls: |
             "https://recetastaging.vercel.app"
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+      - name: Audit Master URL
+        uses: treosh/lighthouse-ci-action@v9
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+        with:
+          urls: |
             "https://receta.vercel.app"
           uploadArtifacts: true
           temporaryPublicStorage: true
