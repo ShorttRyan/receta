@@ -1,7 +1,6 @@
 import {NextApiRequest, NextApiResponse} from 'next'
-import {checkBody, logPrismaError, prisma} from '../../../utils'
+import {checkBody, generateAccessToken, logPrismaError, prisma} from '../../../utils'
 import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
 import { Prisma } from '@prisma/client'
 import {serialize} from 'cookie'
 import {cookieOptions} from '../../../constants'
@@ -32,9 +31,7 @@ export default async function handler(
           }
         })
         if (user) {
-          const accessToken = jwt.sign({
-            username: req.body.username
-          }, process.env.ACCESS_TOKEN_SECRET as string)
+          const accessToken = generateAccessToken({username: user.username})
           res.setHeader('Set-Cookie', serialize('auth', String(accessToken), cookieOptions)).json({accessToken})
         }
       } catch (e) {

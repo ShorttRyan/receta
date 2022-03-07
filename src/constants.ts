@@ -5,5 +5,5 @@ export const cookieOptions: CookieSerializeOptions = {
   maxAge: 2592000,
   path: '/',
   sameSite: 'strict',
-  secure: ['production', 'staging', 'preview', 'development'].includes(process.env.NODE_ENV),
+  secure: process.env.NODE_ENV === 'production',
 }
