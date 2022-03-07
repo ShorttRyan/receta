@@ -7,8 +7,9 @@ jobs:
       - uses: actions/checkout@v2
       - name: Audit URLs using Lighthouse
         uses: treosh/lighthouse-ci-action@v9
+        run: echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/})"
         with:
           urls: |
-            "https://receta-git-$GITHUB_REF_NAME-shorttryan.vercel.app"
+            "https://receta-git-$BRANCH_NAME-shorttryan.vercel.app"
           uploadArtifacts: true # save results as an action artifacts
           temporaryPublicStorage: true # upload lighthouse report to the temporary storage
