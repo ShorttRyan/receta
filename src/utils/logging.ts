@@ -1,9 +1,12 @@
-import {Prisma} from '@prisma/client'
+import { Prisma } from '@prisma/client'
 
-export const logPrismaError = (error: Prisma.PrismaClientKnownRequestError, location: string) => {
+export const logPrismaError = (
+  error: Prisma.PrismaClientKnownRequestError,
+  location: string,
+) => {
   console.log('###################### Prisma error #####################')
   console.log('location:', location)
-  console.log('meta:', {...error})
+  console.log('meta:', { ...error })
   console.log(error.message)
   console.log('######################################################')
 }
