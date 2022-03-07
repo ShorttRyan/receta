@@ -29,10 +29,7 @@ const Input: React.FunctionComponent<InputProps> = ({
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
-      <label
-        htmlFor={id}
-        className={styles.form__label}
-      >
+      <label htmlFor={id} className={styles.form__label}>
         {name}
       </label>
     </div>

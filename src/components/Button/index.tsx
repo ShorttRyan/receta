@@ -5,22 +5,21 @@ interface ButtonProps {
   label: string
   onClick?: () => void
   muted?: boolean
-  type?: "button" | "submit" | "reset"
+  type?: 'button' | 'submit' | 'reset'
 }
 
-const Button: React.FunctionComponent<ButtonProps> = (
-  {
-    onClick,
-    label,
-    type,
-    muted,
-  }
-) => {
+const Button: React.FunctionComponent<ButtonProps> = ({
+  onClick,
+  label,
+  type,
+  muted,
+}) => {
   return (
     <button
       className={muted ? styles.mutedButton : styles.primaryButton}
       onClick={onClick ? () => onClick() : undefined}
-      type={type} >
+      type={type}
+    >
       {label}
     </button>
   )
