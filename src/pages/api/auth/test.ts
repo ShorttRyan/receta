@@ -1,11 +1,12 @@
-import {NextApiRequest, NextApiResponse} from 'next'
-import {logJwtError, validateAccessToken} from '../../../utils'
+import { NextApiRequest, NextApiResponse } from 'next'
+import { logJwtError, validateAccessToken } from '../../../utils'
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
+    console.log(process.env.NODE_ENV)
     console.log(req.cookies)
     const [accessToken, error] = validateAccessToken(req.cookies.auth)
     if (accessToken === undefined) {
