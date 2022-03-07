@@ -9,6 +9,7 @@ const Home: NextPage = () => {
     <div className={styles.homeWrapper}>
       <Head>
         <title>Receta</title>
+        <link rel="apple-touch-icon" sizes="180x180" href="/receta-apple-touch-icon.png" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <link
           rel="icon"
