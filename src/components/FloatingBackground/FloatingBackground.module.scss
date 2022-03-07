@@ -13,7 +13,7 @@
   user-select:none;
 }
 
-$total: 50;
+$total: 40;
 @for $i from 1 through $total {
   $scale:random(2) - .1;
   .svg:nth-child(#{$i}){
@@ -21,7 +21,7 @@ $total: 50;
     animation: raise#{$i} 10 + random(15) +s linear infinite;
     animation-delay:random(5) - 5 + s;
     transform: scale(.3 + $scale - .6) rotate(random(360) + deg);
-    z-index: $i - 51;
+    z-index: $i - 41;
     @keyframes raise#{$i} {
       to{
         top:150vh;
