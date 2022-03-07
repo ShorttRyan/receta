@@ -16,5 +16,7 @@ jobs:
         with:
           urls: |
             "https://receta-git-${{ steps.extract_branch.outputs.branch }}-shorttryan.vercel.app"
+            "https://recetastaging.vercel.app"
+            "https://receta.vercel.app"
           uploadArtifacts: true
           temporaryPublicStorage: true
