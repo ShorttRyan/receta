@@ -7,11 +7,14 @@ export interface DecodedToken extends AccessTokenBody {
 
 export interface AccessTokenBody {
   username: string
+  email: string
+  firstName: string
+  lastName: string
 }
 
 export const generateAccessToken = (body: AccessTokenBody): string => {
   return jwt.sign(body, process.env.ACCESS_TOKEN_SECRET as string, {
-    expiresIn: '30s',
+    expiresIn: process.env.TOKEN_TTL,
   })
 }
 

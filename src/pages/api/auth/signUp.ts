@@ -42,13 +42,17 @@ export default async function handler(
           },
         })
         if (user) {
-          const accessToken = generateAccessToken({ username: user.username })
-          res
-            .setHeader(
-              'Set-Cookie',
-              serialize('auth', String(accessToken), cookieOptions),
-            )
-            .json({ accessToken })
+          const accessToken = generateAccessToken({
+            username: user.username,
+            email: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName,
+          })
+          res.setHeader(
+            'Set-Cookie',
+            serialize('auth', String(accessToken), cookieOptions),
+          )
+          res.json({ message: 'Signed up successfully.' })
         }
       } catch (e) {
         if (e instanceof Prisma.PrismaClientKnownRequestError) {
