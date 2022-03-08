@@ -33,13 +33,17 @@ export default async function handler(
         if (user) {
           const encryptedPass = await bcrypt.hash(password, user.salt)
           if (encryptedPass === user.password) {
-            const accessToken = generateAccessToken({ username: user.username })
-            res
-              .setHeader(
-                'Set-Cookie',
-                serialize('auth', String(accessToken), cookieOptions),
-              )
-              .json({ accessToken })
+            const accessToken = generateAccessToken({
+              username: user.username,
+              email: user.email,
+              firstName: user.firstName,
+              lastName: user.lastName,
+            })
+            res.setHeader(
+              'Set-Cookie',
+              serialize('auth', String(accessToken), cookieOptions),
+            )
+            res.json({ message: 'Logged in successfully.' })
           } else {
             res.status(400).json({
               message: 'Username or password is incorrect.',

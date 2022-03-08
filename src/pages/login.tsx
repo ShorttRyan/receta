@@ -1,15 +1,12 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import FloatingBackground from '../components/FloatingBackground'
+import LoginSignup from '../components/LoginSignup'
 import styles from '../styles/pages/Home.module.scss'
 import { GetServerSideProps } from 'next'
 import { validateAccessToken } from '../utils'
-import Button from '../components/Button'
-import { logOut } from '../API/auth/logOut'
-import { useRouter } from 'next/router'
 
-const Home: NextPage = () => {
-  const router = useRouter()
+const Login: NextPage = () => {
   return (
     <div className={styles.homeWrapper}>
       <Head>
@@ -27,17 +24,7 @@ const Home: NextPage = () => {
       </Head>
       <FloatingBackground />
       <div className={styles.homeContent}>
-        Home Page
-        <Button
-          label="Log Out"
-          type="button"
-          onClick={async () => {
-            const [response, error] = await logOut()
-            if (error === undefined) {
-              await router.push('/login')
-            }
-          }}
-        />
+        <LoginSignup />
       </div>
     </div>
   )
@@ -47,19 +34,11 @@ const Home: NextPage = () => {
 export const getServerSideProps: GetServerSideProps = ({ req, res }) => {
   const cookies = req.cookies
   const [token, error] = validateAccessToken(cookies?.auth)
-  if (token === undefined) {
-    res.writeHead(303, { Location: '/login' })
+  if (token) {
+    res.writeHead(303, { Location: '/' })
     res.end()
-    return { props: {} }
   }
-  return {
-    props: {
-      username: token.username,
-      email: token.email,
-      firstName: token.firstName,
-      lastName: token.lastName,
-    },
-  }
+  return { props: {} }
 }
 
-export default Home
+export default Login

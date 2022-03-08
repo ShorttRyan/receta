@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import styles from './Login.module.scss'
 import Input from '../../Input'
 import Button from '../../Button'
+import { logIn } from '../../../API/auth'
+import { useRouter } from 'next/router'
 
 interface LoginForm {
   username: string
@@ -17,12 +19,17 @@ const Login: React.FunctionComponent<LoginProps> = ({ hide }) => {
     username: '',
     password: '',
   })
+  const router = useRouter()
   return (
     <form
       className={hide ? styles.hidden : styles.loginWrapper}
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault()
-        console.log(credentials)
+        const [result, error] = await logIn(credentials)
+        console.log(result, error)
+        if (error === undefined) {
+          router.push('/')
+        }
       }}
     >
       <Input
