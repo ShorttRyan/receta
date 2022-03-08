@@ -7,4 +7,4 @@ export type LogOutFailure = {
   message: string
 }
 
-export type LogInResponse = AxiosResponse<LogOutSuccess, LogOutFailure>
+export type LogOutResponse = AxiosResponse<LogOutSuccess, LogOutFailure>

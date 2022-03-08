@@ -1,9 +1,9 @@
 import axios from 'axios'
-import { LogInResponse } from './types'
+import { LogOutResponse } from './types'
 
 export * from './types'
 
-export type LogOutPost = () => Promise<[LogInResponse?, any?]>
+export type LogOutPost = () => Promise<[LogOutResponse?, any?]>
 export const logOut: LogOutPost = async () => {
   try {
     const response = await axios.post('/api/auth/logOut')
