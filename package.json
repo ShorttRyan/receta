@@ -7,10 +7,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "pretty": "npx prettier -w ."
   },
   "dependencies": {
     "@prisma/client": "^3.10.0",
+    "axios": "^0.26.0",
     "bcrypt": "^5.0.1",
     "cookie": "^0.4.2",
     "jsonwebtoken": "^8.5.1",
@@ -21,6 +23,7 @@
     "sass": "^1.49.9"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "@types/bcrypt": "^5.0.0",
     "@types/cookie": "^0.4.1",
     "@types/jsonwebtoken": "^8.5.8",
