@@ -21,6 +21,7 @@ jobs:
         with:
           node-version: '14'
       - run: npm install -g @lhci/cli@0.8.x
+      - run: lighthouse "https://receta-git-${{ steps.extract_branch.outputs.branch }}-shorttryan.vercel.app" --extra-headers="{\"Cookie\":\"auth=${{ secrets.LHCI_GITHUB_ACCESS_TOKEN }}\"}"
 #      - name: Generating Lighthouse Report
 #        uses: treosh/lighthouse-ci-action@v9
 #        env:
