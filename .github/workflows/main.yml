@@ -23,5 +23,11 @@ jobs:
             "https://receta-git-${{ steps.extract_branch.outputs.branch }}-shorttryan.vercel.app"
           uploadArtifacts: true
           temporaryPublicStorage: true
-          runs: 3
-          extra-headers: "{\"auth\":\"${{ secrets.LHCI_GITHUB_ACCESS_TOKEN }}\"}"
+      - name: LHCI Run
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - run: npm install -g @lhci/cli@0.8.x
+      - run: lighthouse "https://receta-git-${{ steps.extract_branch.outputs.branch }}-shorttryan.vercel.app" --extra-headers="{\"Cookie\":\"auth=${{ secrets.LHCI_GITHUB_ACCESS_TOKEN }}\"}"
+
