@@ -15,8 +15,6 @@ jobs:
         id: extract_branch
       - uses: actions/checkout@master
       - run: mkdir tmp
-      - run: cd tmp
-      - run: mkdir artifacts
       - uses: actions/checkout@master
       - name: Lighthouse
         env:
@@ -24,7 +22,7 @@ jobs:
           LHCI_GITHUB_ACCESS_TOKEN: ${{ secrets.LHCI_GITHUB_ACCESS_TOKEN }}
         uses: foo-software/lighthouse-check-action@master
         with:
-          outputDirectory: /home/runner/work/receta-frontend/tmp/artifacts
+          outputDirectory: /home/runner/work/receta-frontend/tmp
           urls: "https://receta-git-${{ steps.extract_branch.outputs.branch }}-shorttryan.vercel.app"
           extraHeaders: "{\"Cookie\":\"auth=${{ secrets.LHCI_GITHUB_ACCESS_TOKEN }}\"}"
           gitHubAccessToken: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
@@ -32,4 +30,4 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: Lighthouse reports
-          path: /home/runner/work/receta-frontend/tmp/artifacts
+          path: /home/runner/work/receta-frontend/tmp
