@@ -15,10 +15,12 @@ jobs:
         id: extract_branch
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+          LHCI_GITHUB_ACCESS_TOKEN: ${{ secrets.LHCI_GITHUB_ACCESS_TOKEN }}
         with:
           node-version: '14'
-      - run: npm install
-      - run: npm test
+      - run: npm install -g @lhci/cli@0.8.x
 #      - name: Generating Lighthouse Report
 #        uses: treosh/lighthouse-ci-action@v9
 #        env:
