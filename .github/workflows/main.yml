@@ -14,6 +14,8 @@ jobs:
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
       - uses: actions/checkout@master
+      - run: mkdir ${{ github.workspace }}/tmp/artifacts
+      - uses: actions/checkout@master
       - name: Lighthouse
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
