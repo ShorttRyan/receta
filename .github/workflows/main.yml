@@ -1,24 +1,55 @@
-name: Lighthouse CI
-on: push
+name: Lighthouse
+on: [pull_request]
+
 jobs:
-  lighthouse:
+  Lighthouse:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Wait for build to finish
+      - name: Wait For Remote Build
         shell: bash
-        run: sleep 70s
-        id: stall
-      - name: Extract branch name
+        run: sleep 100s
+      - name: Create Artifacts Directory
         shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        id: extract_branch
-      - name: Audit URLs using Lighthouse
-        uses: treosh/lighthouse-ci-action@v9
-        env:
-          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+        run: mkdir artifacts
+      - name: Lighthouse Audit Feature Branch
+        uses: foo-software/lighthouse-check-action@master
         with:
-          urls: |
-            "https://receta-git-${{ steps.extract_branch.outputs.branch }}-shorttryan.vercel.app"
-          uploadArtifacts: true
-          temporaryPublicStorage: true
+          outputDirectory: ./artifacts
+          device: "all"
+          urls: "https://receta-git-${{ github.head_ref }}-shorttryan.vercel.app"
+          extraHeaders: "{\"Cookie\":\"auth=${{ secrets.LHCI_FEAT_ACCESS_TOKEN }}\"}"
+          prCommentEnabled: true
+          prCommentSaveOld: true
+          gitHubAccessToken: ${{ secrets.LHCI_COMMENT_TOKEN }}
+          gitAuthor: ${{ github.actor }}
+          gitBranch: ${{ github.ref }}
+      - name: Lighthouse Audit Staging
+        uses: foo-software/lighthouse-check-action@master
+        with:
+          outputDirectory: ./artifacts
+          device: "all"
+          urls: "https://recetastaging.vercel.app"
+          extraHeaders: "{\"Cookie\":\"auth=${{ secrets.LHCI_STAGING_ACCESS_TOKEN }}\"}"
+          prCommentEnabled: true
+          prCommentSaveOld: true
+          gitHubAccessToken: ${{ secrets.LHCI_COMMENT_TOKEN }}
+          gitAuthor: ${{ github.actor }}
+          gitBranch: ${{ github.ref }}
+      - name: Lighthouse Audit Master
+        uses: foo-software/lighthouse-check-action@master
+        with:
+          outputDirectory: ./artifacts
+          device: "all"
+          urls: "https://receta.vercel.app"
+          extraHeaders: "{\"Cookie\":\"auth=${{ secrets.LHCI_PROD_ACCESS_TOKEN }}\"}"
+          prCommentEnabled: true
+          prCommentSaveOld: true
+          gitHubAccessToken: ${{ secrets.LHCI_COMMENT_TOKEN }}
+          gitAuthor: ${{ github.actor }}
+          gitBranch: ${{ github.ref }}
+      - name: Upload artifacts
+        uses: actions/upload-artifact@master
+        with:
+          name: Lighthouse reports
+          path: ./artifacts
