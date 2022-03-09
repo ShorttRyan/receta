@@ -1,5 +1,6 @@
 name: Lighthouse CI
-on: push
+on: [pull_request, push]
+
 jobs:
   lighthouse:
     runs-on: ubuntu-latest
@@ -14,9 +15,6 @@ jobs:
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
       - uses: actions/checkout@master
-      - run: mkdir tmp
-      - run: ls
-      - uses: actions/checkout@master
       - name: Lighthouse
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
@@ -27,6 +25,8 @@ jobs:
           urls: "https://receta-git-${{ steps.extract_branch.outputs.branch }}-shorttryan.vercel.app"
           extraHeaders: "{\"Cookie\":\"auth=${{ secrets.LHCI_GITHUB_ACCESS_TOKEN }}\"}"
           gitHubAccessToken: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+          gitAuthor: ${{ github.actor }}
+          gitBranch: ${{ github.ref }}
       - name: Upload artifacts
         uses: actions/upload-artifact@master
         with:
