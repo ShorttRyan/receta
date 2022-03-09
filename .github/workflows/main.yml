@@ -27,7 +27,7 @@ jobs:
             "https://receta-git-${{ steps.extract_branch.outputs.branch }}-shorttryan.vercel.app"
             "https://receta-git-${{ steps.extract_branch.outputs.branch }}-shorttryan.vercel.app/login"
           extraHeaders: "{\"Cookie\":\"auth=${{ secrets.LHCI_GITHUB_ACCESS_TOKEN }}\"}"
-          gitHubAccessToken: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+          gitHubAccessToken: ${{ secrets.LHCI_COMMENT_TOKEN }}
           gitAuthor: ${{ github.actor }}
           gitBranch: ${{ github.ref }}
       - name: Upload artifacts
