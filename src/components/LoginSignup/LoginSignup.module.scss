@@ -2,9 +2,10 @@
 .loginWrapper {
   display: flex;
   align-items: center;
-  width: 35%;
-  max-width: 400px;
-  min-width: 300px;
+  width: 450px;
+  @media(max-width: $mobile) {
+    width: 90%;
+  }
 }
 .loginContainer {
   background: white;
@@ -25,7 +26,10 @@
   box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px 0;
 }
 .loginSignup {
-  padding: 20px;
+  @media(max-width: $mobile) {
+    max-height: 250px;
+    overflow: scroll;
+  }
 }
 .buttonContainer {
   width: 100%;
