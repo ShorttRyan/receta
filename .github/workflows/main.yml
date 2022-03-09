@@ -13,20 +13,37 @@ jobs:
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
-      - name: Generating Lighthouse Report
-        uses: treosh/lighthouse-ci-action@v9
-        env:
-          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
-          LHCI_GITHUB_ACCESS_TOKEN: ${{ secrets.LHCI_GITHUB_ACCESS_TOKEN }}
-        with:
-          urls: |
-            "https://receta-git-${{ steps.extract_branch.outputs.branch }}-shorttryan.vercel.app"
-          uploadArtifacts: true
-          temporaryPublicStorage: true
-      - name: LHCI Run
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
         with:
-          node-version: 14
-      - run: npm install -g @lhci/cli@0.8.x
-      - run: lighthouse "https://receta-git-${{ steps.extract_branch.outputs.branch }}-shorttryan.vercel.app" --extra-headers="{\"Cookie\":\"auth=${{ secrets.LHCI_GITHUB_ACCESS_TOKEN }}\"}"
-
+          node-version: '14'
+      - run: npm install
+      - run: npm test
+#      - name: Generating Lighthouse Report
+#        uses: treosh/lighthouse-ci-action@v9
+#        env:
+#          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+#          LHCI_GITHUB_ACCESS_TOKEN: ${{ secrets.LHCI_GITHUB_ACCESS_TOKEN }}
+#        with:
+#          urls: |
+#            "https://receta-git-${{ steps.extract_branch.outputs.branch }}-shorttryan.vercel.app"
+#          uploadArtifacts: true
+#          temporaryPublicStorage: true
+#      - uses: actions/checkout@v2
+#      - uses: actions/setup-node@v1
+#        with:
+#          node-version: 14
+#      - run: npm install && npm install -g @lhci/cli@0.8.x
+#      - run: npm run build
+#      - run: lhci autorun
+#      - name: CUSTOM
+#      - uses: actions/checkout@v2
+#      - uses: actions/setup-node@v1
+#        env:
+#          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+#          LHCI_GITHUB_ACCESS_TOKEN: ${{ secrets.LHCI_GITHUB_ACCESS_TOKEN }}
+#        with:
+#          node-version: 14
+#      - run: npm install -g @lhci/cli@0.8.x
+#      - run: lighthouse "https://receta-git-${{ steps.extract_branch.outputs.branch }}-shorttryan.vercel.app" --extra-headers="{\"Cookie\":\"auth=${{ secrets.LHCI_GITHUB_ACCESS_TOKEN }}\"}"
+#
