@@ -7,6 +7,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: amondnet/vercel-action@v20
+      - env:
+          VERCEL_ACTION: ${{ secrets.VERCEL_ACTION }}
+          VERCEL_GITHUB_TOKEN: ${{ secrets.VERCEL_GITHUB_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         with:
           vercel-token: ${{ secrets.VERCEL_ACTION }}
           github-token: ${{ secrets.VERCEL_GITHUB_TOKEN }}
