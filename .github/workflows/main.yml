@@ -6,18 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: amondnet/vercel-action@v20
-        env:
-          VERCEL_ACTION: ${{ secrets.VERCEL_ACTION }}
-          VERCEL_GITHUB_TOKEN: ${{ secrets.VERCEL_GITHUB_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-        with:
-          vercel-token: ${{ secrets.VERCEL_ACTION }}
-          github-token: ${{ secrets.VERCEL_GITHUB_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
-          working-directory: ./sub-directory
       - name: Extract branch name
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
@@ -27,7 +15,8 @@ jobs:
         env:
           LHCI_COMMENT_TOKEN: ${{ secrets.LHCI_COMMENT_TOKEN }}
           LHCI_GITHUB_ACCESS_TOKEN: ${{ secrets.LHCI_GITHUB_ACCESS_TOKEN }}
-        uses: foo-software/lighthouse-check-action@master
+      - uses: foo-software/lighthouse-check-action@master
+      - name: Running Lighthouse Report
         with:
           outputDirectory: .
           device: "all"
