@@ -5,10 +5,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Wait for build to finish
-        shell: bash
-        run: sleep 70s
-        id: stall
+#      - name: Wait for build to finish
+#        shell: bash
+#        run: sleep 70s
+#        id: stall
       - name: Extract branch name
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
