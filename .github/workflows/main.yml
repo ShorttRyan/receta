@@ -6,10 +6,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      #      - name: Wait for build to finish
-      #        shell: bash
-      #        run: sleep 70s
-      #        id: stall
+#      - name: Wait for build to finish
+#        shell: bash
+#        run: sleep 100s
+#        id: stall
       - name: Extract branch name
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
@@ -23,7 +23,7 @@ jobs:
         with:
           outputDirectory: .
           device: "all"
-          urls: "https://receta-git-${{ steps.extract_branch.outputs.branch }}-shorttryan.vercel.app,https://receta-git-${{ steps.extract_branch.outputs.branch }}-shorttryan.vercel.app/login"
+          urls: "https://receta-git-${{ steps.extract_branch.outputs.branch }}-shorttryan.vercel.app"
           extraHeaders: "{\"Cookie\":\"auth=${{ secrets.LHCI_GITHUB_ACCESS_TOKEN }}\"}"
           gitHubAccessToken: ${{ secrets.LHCI_COMMENT_TOKEN }}
           gitAuthor: ${{ github.actor }}
