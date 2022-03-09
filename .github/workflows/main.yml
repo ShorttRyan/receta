@@ -23,7 +23,7 @@ jobs:
         with:
           outputDirectory: .
           device: "all"
-          urls: "https://receta-shorttryan.vercel.app"
+          urls: "https://receta.vercel.app"
           extraHeaders: "{\"Cookie\":\"auth=${{ secrets.LHCI_GITHUB_ACCESS_TOKEN }}\"}"
           prCommentEnabled: true
           prCommentSaveOld: true
