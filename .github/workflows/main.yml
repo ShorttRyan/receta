@@ -14,7 +14,7 @@ jobs:
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
       - uses: actions/checkout@master
-      - run: mkdir ${{ github.workspace }}/tmp/artifacts
+      - run: mkdir /tmp/artifacts
       - uses: actions/checkout@master
       - name: Lighthouse
         env:
@@ -30,4 +30,4 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: Lighthouse reports
-          path: ${{ github.workspace }}/tmp/artifacts
+          path: /tmp/artifacts
