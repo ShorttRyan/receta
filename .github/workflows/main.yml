@@ -6,10 +6,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-#      - name: Wait for build to finish
-#        shell: bash
-#        run: sleep 100s
-#        id: stall
+      - uses: amondnet/vercel-action@v20
+      with:
+        vercel-token: ${{ secrets.VERCEL_ACTION }} # Required
+        github-token: ${{ secrets.VERCEL_GITHUB_TOKEN }} #Optional
+        vercel-args: '--prod' #Optional
+        vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}  #Required
+        vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}} #Required
+        working-directory: ./sub-directory
       - name: Extract branch name
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
@@ -23,7 +27,7 @@ jobs:
         with:
           outputDirectory: .
           device: "all"
-          urls: "https://receta.vercel.app"
+          urls: ${{ steps.now.outputs.preview-url }}
           extraHeaders: "{\"Cookie\":\"auth=${{ secrets.LHCI_GITHUB_ACCESS_TOKEN }}\"}"
           prCommentEnabled: true
           prCommentSaveOld: true
