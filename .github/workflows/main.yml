@@ -5,10 +5,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-#      - name: Wait for build to finish
-#        shell: bash
-#        run: sleep 70s
-#        id: stall
+      #      - name: Wait for build to finish
+      #        shell: bash
+      #        run: sleep 70s
+      #        id: stall
       - name: Extract branch name
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
@@ -22,7 +22,7 @@ jobs:
           LHCI_GITHUB_ACCESS_TOKEN: ${{ secrets.LHCI_GITHUB_ACCESS_TOKEN }}
         uses: foo-software/lighthouse-check-action@master
         with:
-          outputDirectory: ${{ github.workspace }}/tmp/artifacts
+          outputDirectory: /home/runner/work/receta-frontend/tmp/artifacts
           urls: "https://receta-git-${{ steps.extract_branch.outputs.branch }}-shorttryan.vercel.app"
           extraHeaders: "{\"Cookie\":\"auth=${{ secrets.LHCI_GITHUB_ACCESS_TOKEN }}\"}"
           gitHubAccessToken: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
@@ -30,4 +30,4 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: Lighthouse reports
-          path: /tmp/artifacts
+          path: /home/runner/work/receta-frontend/tmp/artifacts
