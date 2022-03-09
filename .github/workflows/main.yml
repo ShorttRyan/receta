@@ -23,6 +23,7 @@ jobs:
           gitHubAccessToken: ${{ secrets.LHCI_COMMENT_TOKEN }}
           gitAuthor: ${{ github.actor }}
           gitBranch: ${{ github.ref }}
+        if: ${{ github.base_ref === 'staging' }}
       - name: Lighthouse Audit Staging
         uses: foo-software/lighthouse-check-action@master
         with:
