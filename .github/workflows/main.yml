@@ -13,12 +13,15 @@ jobs:
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
-      - name: Audit URLs using Lighthouse
+      - name: Generating Lighthouse Report
         uses: treosh/lighthouse-ci-action@v9
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+          LHCI_GITHUB_ACCESS_TOKEN: ${{ secrets.LHCI_GITHUB_ACCESS_TOKEN }}
         with:
           urls: |
             "https://receta-git-${{ steps.extract_branch.outputs.branch }}-shorttryan.vercel.app"
           uploadArtifacts: true
           temporaryPublicStorage: true
+          runs: 3
+          extra-headers: "{\"auth\":\"${{ secrets.LHCI_GITHUB_ACCESS_TOKEN }}\"}"
