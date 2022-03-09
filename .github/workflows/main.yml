@@ -15,8 +15,8 @@ jobs:
         env:
           LHCI_COMMENT_TOKEN: ${{ secrets.LHCI_COMMENT_TOKEN }}
           LHCI_GITHUB_ACCESS_TOKEN: ${{ secrets.LHCI_GITHUB_ACCESS_TOKEN }}
-      - uses: foo-software/lighthouse-check-action@master
       - name: Running Lighthouse Report
+        uses: foo-software/lighthouse-check-action@master
         with:
           outputDirectory: .
           device: "all"
