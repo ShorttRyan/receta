@@ -9,6 +9,12 @@ jobs:
       - name: Create Artifacts Directory
         shell: bash
         run: mkdir artifacts
+      - name: pwd
+        shell: bash
+        run: pwd
+      - name: ls
+        shell: bash
+        run: ls
       - uses: actions/checkout@master
       - name: Lighthouse Audit Feature Branch
         uses: foo-software/lighthouse-check-action@master
