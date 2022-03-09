@@ -16,9 +16,9 @@ jobs:
         uses: foo-software/lighthouse-check-action@master
         with:
           outputDirectory: ./artifacts
-          device: "all"
-          urls: "https://receta-git-${{ github.head_ref }}-shorttryan.vercel.app"
-          extraHeaders: "{\"Cookie\":\"auth=${{ secrets.LHCI_FEAT_ACCESS_TOKEN }}\"}"
+          device: 'all'
+          urls: 'https://receta-git-${{ github.head_ref }}-shorttryan.vercel.app'
+          extraHeaders: '{"Cookie":"auth=${{ secrets.LHCI_FEAT_ACCESS_TOKEN }}"}'
           prCommentEnabled: true
           prCommentSaveOld: true
           gitHubAccessToken: ${{ secrets.LHCI_COMMENT_TOKEN }}
@@ -28,9 +28,9 @@ jobs:
         uses: foo-software/lighthouse-check-action@master
         with:
           outputDirectory: ./artifacts
-          device: "all"
-          urls: "https://recetastaging.vercel.app"
-          extraHeaders: "{\"Cookie\":\"auth=${{ secrets.LHCI_STAGING_ACCESS_TOKEN }}\"}"
+          device: 'all'
+          urls: 'https://recetastaging.vercel.app'
+          extraHeaders: '{"Cookie":"auth=${{ secrets.LHCI_STAGING_ACCESS_TOKEN }}"}'
           prCommentEnabled: true
           prCommentSaveOld: true
           gitHubAccessToken: ${{ secrets.LHCI_COMMENT_TOKEN }}
@@ -40,9 +40,9 @@ jobs:
         uses: foo-software/lighthouse-check-action@master
         with:
           outputDirectory: ./artifacts
-          device: "all"
-          urls: "https://receta.vercel.app"
-          extraHeaders: "{\"Cookie\":\"auth=${{ secrets.LHCI_PROD_ACCESS_TOKEN }}\"}"
+          device: 'all'
+          urls: 'https://receta.vercel.app'
+          extraHeaders: '{"Cookie":"auth=${{ secrets.LHCI_PROD_ACCESS_TOKEN }}"}'
           prCommentEnabled: true
           prCommentSaveOld: true
           gitHubAccessToken: ${{ secrets.LHCI_COMMENT_TOKEN }}
