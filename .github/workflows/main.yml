@@ -6,15 +6,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Extract branch name
+      - name: Create Artifacts Directory
         shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        id: extract_branch
+        run: mkdir artifacts
       - uses: actions/checkout@master
       - name: Lighthouse Audit Feature Branch
         uses: foo-software/lighthouse-check-action@master
         with:
-          outputDirectory: .
+          outputDirectory: ./artifacts
           device: "all"
           urls: "https://receta-git-${{ github.head_ref }}-shorttryan.vercel.app"
           extraHeaders: "{\"Cookie\":\"auth=${{ secrets.LHCI_FEAT_ACCESS_TOKEN }}\"}"
@@ -23,11 +22,10 @@ jobs:
           gitHubAccessToken: ${{ secrets.LHCI_COMMENT_TOKEN }}
           gitAuthor: ${{ github.actor }}
           gitBranch: ${{ github.ref }}
-        if: ${{ github.base_ref === 'staging' }}
       - name: Lighthouse Audit Staging
         uses: foo-software/lighthouse-check-action@master
         with:
-          outputDirectory: .
+          outputDirectory: ./artifacts
           device: "all"
           urls: "https://recetastaging.vercel.app"
           extraHeaders: "{\"Cookie\":\"auth=${{ secrets.LHCI_STAGING_ACCESS_TOKEN }}\"}"
@@ -39,7 +37,7 @@ jobs:
       - name: Lighthouse Audit Master
         uses: foo-software/lighthouse-check-action@master
         with:
-          outputDirectory: .
+          outputDirectory: ./artifacts
           device: "all"
           urls: "https://receta.vercel.app"
           extraHeaders: "{\"Cookie\":\"auth=${{ secrets.LHCI_PROD_ACCESS_TOKEN }}\"}"
@@ -52,4 +50,4 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: Lighthouse reports
-          path: .
+          path: ./artifacts
