@@ -23,6 +23,7 @@ jobs:
           outputDirectory: ${{ github.workspace }}/tmp/artifacts
           urls: "https://receta-git-${{ steps.extract_branch.outputs.branch }}-shorttryan.vercel.app"
           extraHeaders: "{\"Cookie\":\"auth=${{ secrets.LHCI_GITHUB_ACCESS_TOKEN }}\"}"
+          gitHubAccessToken: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
       - name: Upload artifacts
         uses: actions/upload-artifact@master
         with:
