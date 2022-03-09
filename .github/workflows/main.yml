@@ -12,16 +12,37 @@ jobs:
         id: extract_branch
       - uses: actions/checkout@master
       - name: Lighthouse Audit Feature Branch
-        env:
-          LHCI_COMMENT_TOKEN: ${{ secrets.LHCI_COMMENT_TOKEN }}
-          LHCI_BASE_GITHUB_ACCESS_TOKEN: fromJSON('[secrets.LHCI_FEAT_GITHUB_ACCESS_TOKEN, secrets.LHCI_STAGING_GITHUB_ACCESS_TOKEN]')[github.head_ref == 'staging']
-          LHCI_TARGET_GITHUB_ACCESS_TOKEN: fromJSON('[secrets.LHCI_STAGING_GITHUB_ACCESS_TOKEN, secrets.LHCI_MASTER_GITHUB_ACCESS_TOKEN]')[github.head_ref == 'staging']
         uses: foo-software/lighthouse-check-action@master
         with:
           outputDirectory: .
           device: "all"
           urls: "https://receta-git-${{ github.head_ref }}-shorttryan.vercel.app"
-          extraHeaders: "{\"Cookie\":\"auth=$LHCI_TARGET_GITHUB_ACCESS_TOKEN\"}"
+          extraHeaders: "{\"Cookie\":\"auth=${{ secrets.LHCI_FEAT_ACCESS_TOKEN }}\"}"
+          prCommentEnabled: true
+          prCommentSaveOld: true
+          gitHubAccessToken: ${{ secrets.LHCI_COMMENT_TOKEN }}
+          gitAuthor: ${{ github.actor }}
+          gitBranch: ${{ github.ref }}
+        if: github.base_ref === 'staging'
+      - name: Lighthouse Audit Staging
+        uses: foo-software/lighthouse-check-action@master
+        with:
+          outputDirectory: .
+          device: "all"
+          urls: "https://recetastaging.vercel.app"
+          extraHeaders: "{\"Cookie\":\"auth=${{ secrets.LHCI_STAGING_ACCESS_TOKEN }}\"}"
+          prCommentEnabled: true
+          prCommentSaveOld: true
+          gitHubAccessToken: ${{ secrets.LHCI_COMMENT_TOKEN }}
+          gitAuthor: ${{ github.actor }}
+          gitBranch: ${{ github.ref }}
+      - name: Lighthouse Audit Master
+        uses: foo-software/lighthouse-check-action@master
+        with:
+          outputDirectory: .
+          device: "all"
+          urls: "https://receta.vercel.app"
+          extraHeaders: "{\"Cookie\":\"auth=${{ secrets.LHCI_PROD_ACCESS_TOKEN }}\"}"
           prCommentEnabled: true
           prCommentSaveOld: true
           gitHubAccessToken: ${{ secrets.LHCI_COMMENT_TOKEN }}
