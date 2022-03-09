@@ -22,7 +22,10 @@ jobs:
         uses: foo-software/lighthouse-check-action@master
         with:
           outputDirectory: .
-          urls: "https://receta-git-${{ steps.extract_branch.outputs.branch }}-shorttryan.vercel.app"
+          device: "all"
+          urls: |
+            "https://receta-git-${{ steps.extract_branch.outputs.branch }}-shorttryan.vercel.app"
+            "https://receta-git-${{ steps.extract_branch.outputs.branch }}-shorttryan.vercel.app/login"
           extraHeaders: "{\"Cookie\":\"auth=${{ secrets.LHCI_GITHUB_ACCESS_TOKEN }}\"}"
           gitHubAccessToken: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
           gitAuthor: ${{ github.actor }}
