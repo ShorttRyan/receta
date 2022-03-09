@@ -13,8 +13,7 @@ jobs:
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
-      - name: Create artifacts firectory
-        uses: actions/checkout@master
+      - uses: actions/checkout@master
         run: mkdir /home/runner/work/receta-frontend/tmp/artifacts
       - uses: actions/checkout@master
       - name: Lighthouse
