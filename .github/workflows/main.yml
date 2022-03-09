@@ -11,16 +11,17 @@ jobs:
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
       - uses: actions/checkout@master
-      - name: Lighthouse Audit Branch
+      - name: Lighthouse Audit Feature Branch
         env:
           LHCI_COMMENT_TOKEN: ${{ secrets.LHCI_COMMENT_TOKEN }}
-          LHCI_GITHUB_ACCESS_TOKEN: ${{ secrets.LHCI_GITHUB_ACCESS_TOKEN }}
+          LHCI_BASE_GITHUB_ACCESS_TOKEN: "${{ github.head_ref }} === 'staging' ? ${{ LHCI_STAGING_GITHUB_ACCESS_TOKEN }} : ${{ LHCI_FEAT_GITHUB_ACCESS_TOKEN }}"
+          LHCI_TARGET_GITHUB_ACCESS_TOKEN: "${{ github.head_ref }} === 'staging' ? ${{ LHCI_MASTER_GITHUB_ACCESS_TOKEN }} : ${{ LHCI_STAGING_GITHUB_ACCESS_TOKEN }}"
         uses: foo-software/lighthouse-check-action@master
         with:
           outputDirectory: .
           device: "all"
-          urls: "https://receta-git-${{ github.base_ref }}-shorttryan.vercel.app, https://receta-git-${{ github.head_ref }}-shorttryan.vercel.app"
-          extraHeaders: "{\"Cookie\":\"auth=${{ secrets.LHCI_GITHUB_ACCESS_TOKEN }}\"}"
+          urls: "https://receta-git-${{ github.head_ref }}-shorttryan.vercel.app"
+          extraHeaders: "{\"Cookie\":\"auth=$LHCI_TARGET_GITHUB_ACCESS_TOKEN\"}"
           prCommentEnabled: true
           prCommentSaveOld: true
           gitHubAccessToken: ${{ secrets.LHCI_COMMENT_TOKEN }}
