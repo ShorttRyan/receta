@@ -1,17 +1,19 @@
 @import '../src/styles/variables';
-$white: #fff;
-$gray: #9b9b9b;
 .form__group {
+  margin-top: 5px;
   position: relative;
   padding: 15px 0 0;
   width: 100%;
 }
-
+.form__group__error {
+  animation: shake 1s;
+}
 .form__field {
   font-family: inherit;
   width: 100%;
-  border: 0;
-  border-bottom: 2px solid $gray;
+  border-width: 0;
+  border-radius: 0;
+  border-bottom: 2px solid $primaryMuted;
   outline: 0;
   font-size: 1.3rem;
   color: black;
@@ -30,13 +32,28 @@ $gray: #9b9b9b;
   }
 }
 
+.form__field__error {
+  color: $errorMuted !important;
+  border-bottom: 2px solid $errorMuted !important;
+}
+.form__field__error:focus {
+  color: $error !important;
+  border-image: linear-gradient(to right, $error,$errorMuted) 1 !important;
+  ~ .form__label__error {
+    color: $error !important;
+  }
+}
+.form__label__error {
+  color: $errorMuted !important;
+}
+
 .form__label {
   position: absolute;
   top: 0;
   display: block;
   transition: 0.2s;
   font-size: 1rem;
-  color: $gray;
+  color: $primaryMuted;
 }
 
 .form__field:focus {
@@ -51,10 +68,29 @@ $gray: #9b9b9b;
   }
   padding-bottom: 6px;
   font-weight: 700;
-  border-width: 3px;
-  border-image: linear-gradient(to right, $primary,$muted) 1;
+  border-width: 0;
+  border-bottom-width: 3px;
+  border-image: linear-gradient(to right, $primary,$primaryMuted) 1;
 }
 /* reset input */
 .form__field{
   &:required,&:invalid { box-shadow:none; }
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
 }
