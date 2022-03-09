@@ -5,7 +5,7 @@ import styles from '../styles/pages/Home.module.scss'
 import { GetServerSideProps } from 'next'
 import { validateAccessToken } from '../utils'
 import Button from '../components/Button'
-import { logOut } from '../API/auth/logOut'
+import { logOut } from '../API/auth'
 import { useRouter } from 'next/router'
 
 const Home: NextPage = () => {
