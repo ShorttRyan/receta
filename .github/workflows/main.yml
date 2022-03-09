@@ -23,9 +23,7 @@ jobs:
         with:
           outputDirectory: .
           device: "all"
-          urls: |
-            "https://receta-git-${{ steps.extract_branch.outputs.branch }}-shorttryan.vercel.app"
-            "https://receta-git-${{ steps.extract_branch.outputs.branch }}-shorttryan.vercel.app/login"
+          urls: "https://receta-git-${{ steps.extract_branch.outputs.branch }}-shorttryan.vercel.app,https://receta-git-${{ steps.extract_branch.outputs.branch }}-shorttryan.vercel.app/login"
           extraHeaders: "{\"Cookie\":\"auth=${{ secrets.LHCI_GITHUB_ACCESS_TOKEN }}\"}"
           gitHubAccessToken: ${{ secrets.LHCI_COMMENT_TOKEN }}
           gitAuthor: ${{ github.actor }}
