@@ -15,7 +15,7 @@ jobs:
         id: extract_branch
       - name: Create artifacts firectory
         uses: actions/checkout@master
-        run: mkdir /home/runner/work/receta-frontend/receta-frontend/tmp/artifacts
+        run: mkdir /home/runner/work/receta-frontend/tmp/artifacts
       - uses: actions/checkout@master
       - name: Lighthouse
         env:
