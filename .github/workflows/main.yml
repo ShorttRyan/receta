@@ -14,8 +14,8 @@ jobs:
       - name: Lighthouse Audit Feature Branch
         env:
           LHCI_COMMENT_TOKEN: ${{ secrets.LHCI_COMMENT_TOKEN }}
-          LHCI_BASE_GITHUB_ACCESS_TOKEN: "${{ github.head_ref }} === 'staging' ? ${{ secrets.LHCI_STAGING_GITHUB_ACCESS_TOKEN }} : ${{ secrets.LHCI_FEAT_GITHUB_ACCESS_TOKEN }}"
-          LHCI_TARGET_GITHUB_ACCESS_TOKEN: "${{ github.head_ref }} === 'staging' ? ${{ secrets.LHCI_MASTER_GITHUB_ACCESS_TOKEN }} : ${{ secrets.LHCI_STAGING_GITHUB_ACCESS_TOKEN }}"
+          LHCI_BASE_GITHUB_ACCESS_TOKEN: fromJSON('[secrets.LHCI_FEAT_GITHUB_ACCESS_TOKEN, secrets.LHCI_STAGING_GITHUB_ACCESS_TOKEN]')[github.head_ref == 'staging']
+          LHCI_TARGET_GITHUB_ACCESS_TOKEN: fromJSON('[secrets.LHCI_STAGING_GITHUB_ACCESS_TOKEN, secrets.LHCI_MASTER_GITHUB_ACCESS_TOKEN]')[github.head_ref == 'staging']
         uses: foo-software/lighthouse-check-action@master
         with:
           outputDirectory: .
