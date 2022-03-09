@@ -19,7 +19,7 @@ jobs:
         with:
           outputDirectory: .
           device: "all"
-          urls: "https://receta-git-${{ github.branch_name }}-shorttryan.vercel.app"
+          urls: "https://receta-git-${{ github.ref_name }}-shorttryan.vercel.app"
           extraHeaders: "{\"Cookie\":\"auth=${{ secrets.LHCI_GITHUB_ACCESS_TOKEN }}\"}"
           prCommentEnabled: true
           prCommentSaveOld: true
