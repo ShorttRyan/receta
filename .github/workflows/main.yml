@@ -20,5 +20,11 @@ jobs:
           LHCI_GITHUB_ACCESS_TOKEN: ${{ secrets.LHCI_GITHUB_ACCESS_TOKEN }}
         uses: foo-software/lighthouse-check-action@master
         with:
+          outputDirectory: ${{ github.workspace }}/tmp/artifacts
           urls: "https://receta-git-${{ steps.extract_branch.outputs.branch }}-shorttryan.vercel.app"
-#          extraHeaders: "{\"Cookie\":\"auth=${{ secrets.LHCI_GITHUB_ACCESS_TOKEN }}\"}"
+          extraHeaders: "{\"Cookie\":\"auth=${{ secrets.LHCI_GITHUB_ACCESS_TOKEN }}\"}"
+      - name: Upload artifacts
+        uses: actions/upload-artifact@master
+        with:
+          name: Lighthouse reports
+          path: ${{ github.workspace }}/tmp/artifacts
