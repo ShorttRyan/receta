@@ -24,7 +24,7 @@ export default async function handler(
       })
     } else {
       try {
-        const identifier = req.body.username
+        const identifier = req.body.username.toLowerCase()
         const password = req.body.password
         const clause: Prisma.UserFindUniqueArgs = identifier.match(email)
           ? { where: { email: identifier } }
