@@ -14,6 +14,7 @@ jobs:
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
       - uses: actions/checkout@master
+      - run: pwd
       - run: mkdir /home/runner/work/receta-frontend/tmp/artifacts
       - uses: actions/checkout@master
       - name: Lighthouse
