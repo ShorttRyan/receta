@@ -1,11 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import { email } from '../../../utils'
 import {
   checkBody,
-  email,
   logPrismaError,
   generateAccessToken,
   prisma,
-} from '../../../utils'
+} from '../../../utils/Server'
 import bcrypt from 'bcrypt'
 import { Prisma } from '@prisma/client'
 import { serialize } from 'cookie'

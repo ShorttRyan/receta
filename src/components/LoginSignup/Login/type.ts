@@ -8,9 +8,11 @@ export const initialValue: LoginForm = {
   username: {
     value: '',
     error: false,
+    required: true,
   },
   password: {
     value: '',
     error: false,
+    required: true,
   },
 }

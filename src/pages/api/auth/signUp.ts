@@ -4,7 +4,7 @@ import {
   generateAccessToken,
   logPrismaError,
   prisma,
-} from '../../../utils'
+} from '../../../utils/Server'
 import bcrypt from 'bcrypt'
 import { Prisma } from '@prisma/client'
 import { serialize } from 'cookie'
@@ -60,7 +60,7 @@ export default async function handler(
           const meta = e.meta as any
           if (e.code === 'P2002') {
             res.status(400).json({
-              code: e.code,
+              prismaCode: e.code,
               field: meta?.target[0],
               message: `Request could not be completed due to non-unique fields.`,
             })
