@@ -1,12 +1,11 @@
 @import '../src/styles/variables';
 .form__group {
-  margin-top: 5px;
   position: relative;
   padding: 15px 0 0;
   width: 100%;
 }
-.form__group__error {
-  animation: shake 1s;
+.form__group__shake {
+  animation: shake 0.8s;
 }
 .form__field {
   font-family: inherit;
@@ -15,7 +14,7 @@
   border-radius: 0;
   border-bottom: 2px solid $primaryMuted;
   outline: 0;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   color: black;
   padding: 7px 0;
   background: transparent;
@@ -26,7 +25,7 @@
   }
 
   &:placeholder-shown ~ .form__label {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     cursor: text;
     top: 20px;
   }
@@ -46,13 +45,18 @@
 .form__label__error {
   color: $errorMuted !important;
 }
+.form__error_message {
+  color: $error;
+  font-size: 10px;
+  min-height: 16px;
+}
 
 .form__label {
   position: absolute;
   top: 0;
   display: block;
   transition: 0.2s;
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: $primaryMuted;
 }
 
@@ -62,14 +66,14 @@
     top: 0;
     display: block;
     transition: 0.2s;
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: $primary;
     font-weight:700;
   }
   padding-bottom: 6px;
   font-weight: 700;
-  border-width: 0;
-  border-bottom-width: 3px;
+  border-width: 0 !important;
+  border-bottom-width: 3px !important;
   border-image: linear-gradient(to right, $primary,$primaryMuted) 1;
 }
 /* reset input */

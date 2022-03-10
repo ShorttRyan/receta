@@ -8,8 +8,9 @@ interface InputProps {
   type: string
   placeholder: string
   id: string
-  error?: boolean
-  message?: boolean
+  error: boolean
+  useShake?: boolean
+  message?: string
   onBlur?: () => void
 }
 
@@ -21,12 +22,14 @@ const Input: React.FunctionComponent<InputProps> = ({
   value,
   setValue,
   error,
+  useShake,
+  message,
   onBlur,
 }) => {
   return (
     <div
       className={`${styles.form__group} ${styles.field} ${
-        error && styles.form__group__error
+        error && useShake && styles.form__group__shake
       }`}
     >
       <input
@@ -49,6 +52,7 @@ const Input: React.FunctionComponent<InputProps> = ({
       >
         {name}
       </label>
+      <div className={styles.form__error_message}>{error && message}</div>
     </div>
   )
 }

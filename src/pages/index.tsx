@@ -3,10 +3,10 @@ import Head from 'next/head'
 import FloatingBackground from '../components/FloatingBackground'
 import styles from '../styles/pages/Home.module.scss'
 import { GetServerSideProps } from 'next'
-import { validateAccessToken } from '../utils'
+import { validateAccessToken } from '../utils/Server'
 import Button from '../components/Button'
-import { logOut } from '../API/auth'
 import { useRouter } from 'next/router'
+import { logOut } from '../API/auth/logOut'
 
 const Home: NextPage = () => {
   const router = useRouter()
