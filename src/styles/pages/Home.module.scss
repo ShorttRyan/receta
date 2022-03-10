@@ -1,11 +1,7 @@
 .homeContent {
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-content: center;
-}
-
-.homeWrapper {
-  height: 100vh;
-  width: 100vw;
+  overflow-y: scroll;
 }

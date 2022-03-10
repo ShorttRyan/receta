@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styles from './Login.module.scss'
 import Input from '../../Input'
 import Button from '../../Button'
-import { logIn } from '../../../API/auth'
+import { logIn } from '../../../API/auth/logIn'
 import { useRouter } from 'next/router'
 import { initialValue, LoginForm } from './type'
 
@@ -13,12 +13,6 @@ interface LoginProps {
 const Login: React.FunctionComponent<LoginProps> = ({ hide }) => {
   const [credentials, setCredentials] = useState<LoginForm>(initialValue)
   const router = useRouter()
-  useEffect(() => {
-    setCredentials({
-      username: { value: '', error: false },
-      password: { value: '', error: false },
-    })
-  }, [hide])
   return (
     <form
       className={hide ? styles.hidden : styles.loginWrapper}
@@ -59,6 +53,7 @@ const Login: React.FunctionComponent<LoginProps> = ({ hide }) => {
           newCredentials.username.error = false
           setCredentials(newCredentials)
         }}
+        useShake={true}
       />
       <Input
         name="Password"
@@ -77,6 +72,7 @@ const Login: React.FunctionComponent<LoginProps> = ({ hide }) => {
           newCredentials.password.error = false
           setCredentials(newCredentials)
         }}
+        useShake={true}
       />
       <div className={styles.submitWrapper}>
         <Button label="Submit" type="submit" />

@@ -8,7 +8,10 @@ body {
   font-smooth: always;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow: hidden;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  overflow-y: scroll;
 }
 
 a {
