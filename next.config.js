@@ -11,6 +11,10 @@ const nextConfig = withPWA({
     dest: "public",
     register: true,
     skipWaiting: true
+  },
+  i18n: {
+    locales: ["en"],
+    defaultLocale: "en"
   }
 })
 
