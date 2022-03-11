@@ -7,9 +7,18 @@ import { validateAccessToken } from '../utils/Server'
 import Button from '../components/Button'
 import { useRouter } from 'next/router'
 import { logOut } from '../API/auth/logOut'
+import { useState } from 'react'
 
-const Home: NextPage = () => {
+interface HomePageProps {
+  username: string
+  firstName: string
+  lastName: string
+  email: string
+}
+
+const Home: NextPage<HomePageProps> = (props) => {
   const router = useRouter()
+  const [logoutDisabled, setLogoutDisabled] = useState<boolean>(false)
   return (
     <div className={styles.homeWrapper}>
       <Head>
@@ -20,6 +29,7 @@ const Home: NextPage = () => {
           href="/receta-apple-touch-icon.png"
         />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="description" content="Receta Dashboard" />
         <link
           rel="icon"
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍔</text></svg>"
@@ -27,16 +37,20 @@ const Home: NextPage = () => {
       </Head>
       <FloatingBackground />
       <div className={styles.homeContent}>
-        Home Page
+        Hello {props.firstName}
         <Button
           label="Log Out"
           type="button"
           onClick={async () => {
+            setLogoutDisabled(true)
             const [response, error] = await logOut()
             if (error === undefined) {
               await router.push('/login')
+              return
             }
+            setLogoutDisabled(false)
           }}
+          disabled={logoutDisabled}
         />
       </div>
     </div>

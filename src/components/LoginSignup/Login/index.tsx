@@ -12,11 +12,13 @@ interface LoginProps {
 
 const Login: React.FunctionComponent<LoginProps> = ({ hide }) => {
   const [credentials, setCredentials] = useState<LoginForm>(initialValue)
+  const [disabled, setDisabled] = useState<boolean>(false)
   const router = useRouter()
   return (
     <form
       className={hide ? styles.hidden : styles.loginWrapper}
       onSubmit={async (e) => {
+        setDisabled(true)
         e.preventDefault()
         const newCredentials = { ...credentials }
         newCredentials.username.error = false
@@ -34,6 +36,7 @@ const Login: React.FunctionComponent<LoginProps> = ({ hide }) => {
           newCredentials.password.error = true
           setCredentials(newCredentials)
         }
+        setDisabled(false)
       }}
     >
       <Input
@@ -75,7 +78,7 @@ const Login: React.FunctionComponent<LoginProps> = ({ hide }) => {
         useShake={true}
       />
       <div className={styles.submitWrapper}>
-        <Button label="Submit" type="submit" />
+        <Button label="Submit" type="submit" disabled={disabled} />
       </div>
     </form>
   )
