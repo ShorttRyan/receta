@@ -9,16 +9,21 @@
   transform-style: preserve-3d;
   user-select: none;
 }
+.noMobile {
+  @media(max-width: $mobile) {
+    display: none;
+  }
+}
 
-$total: 30;
+$total: 17;
 @for $i from 1 through $total {
   $scale:random(2) - .1;
   .svg:nth-child(#{$i}){
     left:random(110) * 1% - 20;
-    animation: raise#{$i} 10 + random(15) +s linear infinite;
+    animation: raise#{$i} 8 + random(8) +s linear infinite;
     animation-delay:random(5) - 5 + s;
     transform: scale(.3 + $scale - .6) rotate(random(360) + deg);
-    z-index: $i - 31;
+    z-index: $i - 18;
     @keyframes raise#{$i} {
       to{
         top:150vh;

@@ -12,6 +12,7 @@ interface SignupProps {
 
 const Signup: React.FunctionComponent<SignupProps> = ({ hide }) => {
   const [credentials, setCredentials] = useState<SignupForm>(initialValue)
+  const [disabled, setDisabled] = useState<boolean>(false)
   const router = useRouter()
   return (
     <form
@@ -19,13 +20,15 @@ const Signup: React.FunctionComponent<SignupProps> = ({ hide }) => {
       onSubmit={async (e) => {
         e.preventDefault()
         if (!preSignupSubmit(credentials, setCredentials)) return
+        setDisabled(true)
         const [response, error] = await signUp({
           email: credentials.email.value,
           username: credentials.username.value,
           password: credentials.password.value,
-          firstName: credentials.password.value,
-          lastName: credentials.password.value,
+          firstName: credentials.firstName.value,
+          lastName: credentials.lastName.value,
         })
+        setDisabled(false)
         if (error === undefined) {
           await router.push('/')
           return
@@ -165,7 +168,7 @@ const Signup: React.FunctionComponent<SignupProps> = ({ hide }) => {
         message={credentials.lastName.message}
       />
       <div className={styles.submitWrapper}>
-        <Button label="Submit" type="submit" />
+        <Button label="Submit" type="submit" disabled={disabled} />
       </div>
     </form>
   )
