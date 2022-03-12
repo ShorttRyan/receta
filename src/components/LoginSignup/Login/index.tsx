@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import styles from './Login.module.scss'
 import Input from '../../Input'
-import Button from '../../Button'
 import { logIn } from '../../../API/auth/logIn'
 import { useRouter } from 'next/router'
 import { initialValue, LoginForm } from './type'
+import Button from '../../Button'
 
 interface LoginProps {
   hide: boolean
@@ -29,7 +29,7 @@ const Login: React.FunctionComponent<LoginProps> = ({ hide }) => {
           password: credentials.password.value,
         })
         if (error === undefined) {
-          await router.push('/')
+          await router.reload()
         } else {
           const newCredentials = { ...credentials }
           newCredentials.username.error = true
@@ -78,7 +78,12 @@ const Login: React.FunctionComponent<LoginProps> = ({ hide }) => {
         useShake={true}
       />
       <div className={styles.submitWrapper}>
-        <Button label="Submit" type="submit" disabled={disabled} />
+        <Button
+          label="Submit"
+          type="submit"
+          disabled={disabled}
+          style="primary"
+        />
       </div>
     </form>
   )

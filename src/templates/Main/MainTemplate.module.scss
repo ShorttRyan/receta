@@ -1,3 +1,10 @@
+@import '../src/styles/variables';
 .baseDiv {
-
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.contentWrapper {
+  width: 100%;
+  max-width: $large;
 }

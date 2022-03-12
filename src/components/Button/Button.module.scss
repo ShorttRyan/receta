@@ -1,28 +1,45 @@
 @import '../src/styles/variables';
-.primaryButton {
+.button {
+  border: none;
+  padding: 8px 12px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: inherit;
+}
+
+.login {
   background: $primary;
   color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 25px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  outline: inherit;
 }
-
-.mutedButton {
-  background: $primaryMuted;
+.login__muted {
+  background: $primaryBright;
   color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 25px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  outline: inherit;
 }
 
-.disabledButton {
-  background: $disabled;
+.primary {
+  background: $primary;
+  color: white;
+}
+.primary:hover {
+  background: $primaryBright;
+  color: white;
+}
+.primary__disabled {
+  background: $primaryBright;
+  color: white;
+}
+
+.danger {
+  background: $error;
+  color: white;
+}
+.danger:hover {
+  background: $errorMuted;
+  color: white;
+}
+.danger__disabled {
+  background: $errorMuted;
+  color: white;
 }

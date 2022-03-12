@@ -1,0 +1,36 @@
+import React, { useState } from 'react'
+import styles from './ProfileContent.module.scss'
+import { ProfilePageProps } from '../../pages/profile'
+import Button from '../../components/Button'
+import { logOut } from '../../API/auth/logOut'
+import { useRouter } from 'next/router'
+
+const ProfileContent: React.FunctionComponent<ProfilePageProps> = (props) => {
+  const [disabled, setDisabled] = useState<boolean>(false)
+  const router = useRouter()
+  return (
+    <div className={styles.ProfileWrapper}>
+      <div className={styles.header}>
+        <div className={styles.userTitle}>@{props.username}</div>
+        <Button
+          label="Sign Out"
+          type="button"
+          style="danger"
+          disabled={disabled}
+          onClick={async () => {
+            setDisabled(true)
+            const [response, error] = await logOut()
+            if (error === undefined) {
+              await router.replace('/login')
+              return
+            }
+            setDisabled(false)
+          }}
+        />
+      </div>
+      Profile
+    </div>
+  )
+}
+
+export default ProfileContent
