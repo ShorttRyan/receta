@@ -10,6 +10,7 @@ export interface AccessTokenBody {
   email: string
   firstName: string
   lastName: string
+  id: number
 }
 
 export const generateAccessToken = (body: AccessTokenBody): string => {

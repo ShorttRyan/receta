@@ -29,7 +29,7 @@ const Login: React.FunctionComponent<LoginProps> = ({ hide }) => {
           password: credentials.password.value,
         })
         if (error === undefined) {
-          router.push('/')
+          await router.push('/')
         } else {
           const newCredentials = { ...credentials }
           newCredentials.username.error = true

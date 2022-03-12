@@ -1,0 +1,8 @@
+@import '../src/styles/variables';
+.navbarWrapper {
+  background: $primary;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
