@@ -14,8 +14,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  console.log(req.cookies)
-  console.log(req.body)
   if (req.method === 'PUT') {
     const requiredFields: string[] = ['email', 'firstName', 'lastName']
     const emptyField = checkBody(req.body, requiredFields)
