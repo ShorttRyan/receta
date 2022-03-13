@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken'
 import { NextApiResponse } from 'next'
+import { logJwtError } from './logging'
 
 export interface DecodedToken extends AccessTokenBody {
   iat: number
@@ -22,6 +23,7 @@ export const generateAccessToken = (body: AccessTokenBody): string => {
 
 export const validateAccessToken = (
   token: string,
+  location?: string,
   res?: NextApiResponse,
 ): [DecodedToken?, any?] => {
   try {
@@ -31,6 +33,7 @@ export const validateAccessToken = (
     ) as DecodedToken
     return [decodedToken, undefined]
   } catch (e) {
+    location && logJwtError(e, location)
     if (res) {
       res.status(404).json({ message: 'Missing token.' })
       res.end()

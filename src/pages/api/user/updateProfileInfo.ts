@@ -14,6 +14,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
+  console.log(req.cookies)
+  console.log(req.body)
   if (req.method === 'PUT') {
     const requiredFields: string[] = ['email', 'firstName', 'lastName']
     const emptyField = checkBody(req.body, requiredFields)
@@ -23,7 +25,11 @@ export default async function handler(
       })
     } else {
       try {
-        const [token, error] = validateAccessToken(req.cookies?.auth, res)
+        const [token, error] = validateAccessToken(
+          req.cookies?.auth,
+          '/user/updateProfileInfo',
+          res,
+        )
         if (token) {
           const user = await prisma.user.update({
             where: {
