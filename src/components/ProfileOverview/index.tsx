@@ -4,6 +4,10 @@ import IconButton from '../IconButton'
 import Input from '../Input'
 import { UpdateProfileForm } from './type'
 import Button from '../Button'
+import { preUpdateProfileSubmit } from '../../utils/Client'
+import { isPrismaFailure } from '../../API/user/updateProfileInfo'
+import { updateProfileInfo } from '../../API/user/updateProfileInfo'
+import { useRouter } from 'next/router'
 
 interface ProfileOverviewProps {
   email: string
@@ -16,7 +20,9 @@ const ProfileOverview: React.FunctionComponent<ProfileOverviewProps> = ({
   firstName,
   lastName,
 }) => {
+  const router = useRouter()
   const [editing, setEditing] = useState<boolean>(false)
+  const [disabled, setDisabled] = useState<boolean>(false)
   const [info, setInfo] = useState<UpdateProfileForm>({
     firstName: {
       value: firstName,
@@ -39,8 +45,30 @@ const ProfileOverview: React.FunctionComponent<ProfileOverviewProps> = ({
       <div className={styles.updateForm}>
         {editing ? (
           <form
-            onSubmit={(e) => {
+            onSubmit={async (e) => {
               e.preventDefault()
+              if (!preUpdateProfileSubmit(info, setInfo)) return
+              setDisabled(true)
+              const [response, error] = await updateProfileInfo({
+                firstName: info.firstName.value,
+                lastName: info.lastName.value,
+                email: info.email.value,
+              })
+              setDisabled(false)
+              if (error === undefined) {
+                await router.reload()
+                return
+              }
+              const newInfo: UpdateProfileForm = { ...info }
+              const errorData = error.response.data
+              if (!isPrismaFailure(errorData)) return
+              if (error.response.data.prismaCode === 'P2002') {
+                newInfo[errorData.field].error = true
+                newInfo[
+                  errorData.field
+                ].message = `A user already exists with this ${errorData.field}`
+              }
+              setInfo(newInfo)
             }}
           >
             <Input
@@ -101,7 +129,7 @@ const ProfileOverview: React.FunctionComponent<ProfileOverviewProps> = ({
               message={info.email.message}
             />
             <div className={styles.buttonSection}>
-              <Button label="Submit" type="submit" />
+              <Button label="Submit" type="submit" disabled={disabled} />
               <Button
                 label="Cancel"
                 type="button"
