@@ -1,0 +1,34 @@
+@import'../src/styles/variables';
+.profileOverviewWrapper {
+  position: relative;
+}
+.updateForm {
+  max-width: 500px;
+}
+.editButtonWrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.infoGroup {
+  margin-bottom: 10px;
+  border-bottom: 2px solid $primaryBright;
+  padding: 5px 0;
+}
+.infoLabel {
+  color: $primaryBright;
+  font-size: 28px;
+  font-weight: 500
+}
+.infoValue {
+  font-size: 24px;
+  font-weight: 300
+}
+.infoSection {
+  padding-top: $iconSize;
+}
+.buttonSection {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}

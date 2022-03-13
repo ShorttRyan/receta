@@ -3,16 +3,16 @@ import Head from 'next/head'
 import { GetServerSideProps } from 'next'
 import { validateAccessToken } from '../utils/Server'
 import MainTemplate from '../templates/Main'
-import HomeContent from '../pageComponents/HomeContent'
+import ProfileContent from '../pageComponents/ProfileContent'
 
-interface HomePageProps {
+export interface ProfilePageProps {
   username: string
   firstName: string
   lastName: string
   email: string
 }
 
-const Home: NextPage<HomePageProps> = () => {
+const Profile: NextPage<ProfilePageProps> = (props) => {
   return (
     <>
       <Head>
@@ -23,14 +23,14 @@ const Home: NextPage<HomePageProps> = () => {
           href="/receta-apple-touch-icon.png"
         />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta name="description" content="Receta Dashboard" />
+        <meta name="description" content="Profile Page" />
         <link
           rel="icon"
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍔</text></svg>"
         />
       </Head>
       <MainTemplate>
-        <HomeContent />
+        <ProfileContent {...props} />
       </MainTemplate>
     </>
   )
@@ -55,4 +55,4 @@ export const getServerSideProps: GetServerSideProps = ({ req, res }) => {
   }
 }
 
-export default Home
+export default Profile

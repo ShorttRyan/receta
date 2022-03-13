@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import styles from '../Login/Login.module.scss'
 import Input from '../../Input'
-import Button from '../../Button'
 import { initialValue, SignupForm } from './type'
 import { preSignupSubmit } from '../../../utils/Client'
 import { isPrismaFailure, signUp } from '../../../API/auth/signUp'
 import { useRouter } from 'next/router'
+import Button from '../../Button'
 interface SignupProps {
   hide: boolean
 }
@@ -30,7 +30,7 @@ const Signup: React.FunctionComponent<SignupProps> = ({ hide }) => {
         })
         setDisabled(false)
         if (error === undefined) {
-          await router.push('/')
+          await router.reload()
           return
         }
         const newCredentials: SignupForm = { ...credentials }
@@ -168,7 +168,12 @@ const Signup: React.FunctionComponent<SignupProps> = ({ hide }) => {
         message={credentials.lastName.message}
       />
       <div className={styles.submitWrapper}>
-        <Button label="Submit" type="submit" disabled={disabled} />
+        <Button
+          label="Submit"
+          type="submit"
+          disabled={disabled}
+          style="primary"
+        />
       </div>
     </form>
   )
