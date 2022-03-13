@@ -56,6 +56,7 @@ const ProfileOverview: React.FunctionComponent<ProfileOverviewProps> = ({
               })
               setDisabled(false)
               if (error === undefined) {
+                await router.replace(router.asPath)
                 await router.reload()
                 return
               }
