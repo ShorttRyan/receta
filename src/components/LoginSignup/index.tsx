@@ -17,11 +17,15 @@ const LoginSignup: React.FunctionComponent = () => {
                 onClick={() => setShowLogin(true)}
                 label="Log In"
                 muted={!showLogin}
+                style="login"
+                type="button"
               />
               <Button
                 onClick={() => setShowLogin(false)}
                 label="Sign Up"
                 muted={showLogin}
+                style="login"
+                type="button"
               />
             </div>
           </div>

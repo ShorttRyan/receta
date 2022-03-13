@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import FloatingBackground from '../components/FloatingBackground'
 import LoginSignup from '../components/LoginSignup'
-import styles from '../styles/pages/Home.module.scss'
+import styles from '../styles/pages/Login.module.scss'
 import { GetServerSideProps } from 'next'
 import { validateAccessToken } from '../utils/Server'
 
@@ -13,8 +13,8 @@ const Login: NextPage = () => {
         <title>Receta</title>
         <meta name="description" content="Receta Login Page" />
       </Head>
-      <div className={styles.homeWrapper}>
-        <div className={styles.homeContent}>
+      <div>
+        <div className={styles.loginContent}>
           <LoginSignup />
         </div>
       </div>

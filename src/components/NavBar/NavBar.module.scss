@@ -1,0 +1,25 @@
+@import '../src/styles/variables';
+.navbarWrapper {
+  background: white;
+  color: $primary;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  border-bottom: 1px solid $primaryBright;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px 0;
+}
+.navbarContent {
+  width: 100%;
+  max-width: $large;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.titleWrapper {
+  cursor: pointer;
+  font-size: 24px;
+  font-weight: 700;
+}
+.titleWrapper:hover {
+  color: $primaryBright;
+}

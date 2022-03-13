@@ -4,8 +4,8 @@ import {
   generateAccessToken,
   logPrismaError,
   prisma,
+  validateAccessToken,
 } from '../../../utils/Server'
-import bcrypt from 'bcrypt'
 import { Prisma } from '@prisma/client'
 import { serialize } from 'cookie'
 import { cookieOptions } from '../../../constants'
@@ -14,36 +14,33 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  if (req.method === 'POST') {
-    const requiredFields: string[] = [
-      'email',
-      'username',
-      'password',
-      'firstName',
-      'lastName',
-    ]
+  if (req.method === 'PUT') {
+    const requiredFields: string[] = ['email', 'firstName', 'lastName']
     const emptyField = checkBody(req.body, requiredFields)
     if (emptyField !== undefined) {
       res.status(400).json({
         message: `${emptyField} field is required`,
       })
     } else {
-      const salt = await bcrypt.genSalt()
-      const encryptedPass = await bcrypt.hash(req.body.password, salt)
       try {
-        const user = await prisma.user.create({
-          data: {
-            email: req.body.email.toLowerCase(),
-            username: req.body.username.toLowerCase(),
-            password: encryptedPass,
-            salt,
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-          },
-        })
-        if (user) {
+        const [token, error] = validateAccessToken(
+          req.cookies?.auth,
+          '/user/updateProfileInfo',
+          res,
+        )
+        if (token) {
+          const user = await prisma.user.update({
+            where: {
+              username: token.username,
+            },
+            data: {
+              firstName: req.body.firstName,
+              lastName: req.body.lastName,
+              email: req.body.email,
+            },
+          })
           const accessToken = generateAccessToken({
-            username: user.username,
+            username: token.username,
             email: user.email,
             firstName: user.firstName,
             lastName: user.lastName,
@@ -53,11 +50,11 @@ export default async function handler(
             'Set-Cookie',
             serialize('auth', String(accessToken), cookieOptions),
           )
-          res.json({ message: 'Signed up successfully.' })
+          res.json({ message: 'Updated profile successfully.' })
         }
       } catch (e) {
         if (e instanceof Prisma.PrismaClientKnownRequestError) {
-          logPrismaError(e, '/auth/signUp')
+          logPrismaError(e, '/user/updateProfileInfo')
           const meta = e.meta as any
           if (e.code === 'P2002') {
             res.status(400).json({
