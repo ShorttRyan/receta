@@ -1,6 +1,6 @@
 {
   "theme_color": "#228B22",
-  "background_color": "#32cd32",
+  "background_color": "#fff",
   "display": "fullscreen",
   "description": "Recipe app developed by Ryan Shortt",
   "scope": "/",
