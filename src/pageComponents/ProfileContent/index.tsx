@@ -23,7 +23,7 @@ const ProfileContent: React.FunctionComponent<ProfilePageProps> = (props) => {
               setDisabled(true)
               const [response, error] = await logOut()
               if (error === undefined) {
-                await router.replace('/login')
+                await router.reload()
                 return
               }
               setDisabled(false)

@@ -29,7 +29,6 @@ const Login: React.FunctionComponent<LoginProps> = ({ hide }) => {
           password: credentials.password.value,
         })
         if (error === undefined) {
-          await new Promise((r) => setTimeout(r, 15000))
           await router.reload()
         } else {
           const newCredentials = { ...credentials }
