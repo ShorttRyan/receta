@@ -24,7 +24,6 @@ export default async function handler(
         'notes',
       ]
       if (checkBody(req.body, requiredFields, res)) {
-        console.log(token)
         try {
           const recipe = await prisma.recipe.create({
             data: {
@@ -33,6 +32,7 @@ export default async function handler(
                   username: token.username,
                 },
               },
+              publishedAt: Date.now(),
               title: req.body.title,
               timeToComplete: req.body.timeToComplete,
               ingredients: req.body.ingredients,
@@ -40,10 +40,8 @@ export default async function handler(
               notes: req.body.notes,
             },
           })
-          console.log(recipe)
           res.json({ message: 'SUCCESS' })
         } catch (e) {
-          console.log(e)
           res.json({ message: 'FAILURE' })
         }
       }

@@ -1,18 +1,21 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { GetServerSideProps } from 'next'
-import { validateAccessToken } from '../utils/Server'
+import { prisma, validateAccessToken } from '../utils/Server'
 import MainTemplate from '../templates/Main'
 import HomeContent from '../pageComponents/HomeContent'
+import { Recipe } from '@prisma/client'
 
 interface HomePageProps {
   username: string
   firstName: string
   lastName: string
   email: string
+  publishedRecipes: Recipe[]
 }
 
-const Home: NextPage<HomePageProps> = () => {
+const Home: NextPage<HomePageProps> = (props) => {
+  console.log(props)
   return (
     <>
       <Head>
@@ -37,7 +40,7 @@ const Home: NextPage<HomePageProps> = () => {
 }
 
 // @ts-ignore
-export const getServerSideProps: GetServerSideProps = ({ req, res }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const cookies = req.cookies
   const [token, error] = validateAccessToken(cookies?.auth)
   if (token === undefined) {
@@ -45,12 +48,21 @@ export const getServerSideProps: GetServerSideProps = ({ req, res }) => {
     res.end()
     return { props: {} }
   }
+  let publishedRecipes: Recipe[] = []
+  try {
+    publishedRecipes = await prisma.recipe.findMany({
+      where: {
+        authorUsername: token.username,
+      },
+    })
+  } catch (e) {}
   return {
     props: {
       username: token.username,
       email: token.email,
       firstName: token.firstName,
       lastName: token.lastName,
+      publishedRecipes,
     },
   }
 }
