@@ -11,11 +11,24 @@ datasource db {
 }
 
 model User {
-  id          Int       @id       @default(autoincrement())
-  email       String    @unique
-  username    String    @unique
-  salt        String
-  password    String
-  firstName   String
-  lastName    String
+  id                Int       @id       @default(autoincrement())
+  email             String    @unique
+  username          String    @unique
+  salt              String
+  password          String
+  firstName         String
+  lastName          String
+  publishedRecipes  Recipe[]
+}
+
+model Recipe {
+  id              String       @id    @default(uuid())
+  publishedAt     DateTime            @default(now())
+  author          User                @relation(fields: [authorUsername], references: [username])
+  authorUsername  String
+  title           String
+  timeToComplete  Int
+  ingredients     Json[]
+  steps           String[]
+  notes           String[]
 }
