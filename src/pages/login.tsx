@@ -26,7 +26,7 @@ const Login: NextPage = () => {
 // @ts-ignore
 export const getServerSideProps: GetServerSideProps = ({ req, res }) => {
   const cookies = req.cookies
-  const [token, error] = validateAccessToken(cookies?.auth)
+  const [token, error] = validateAccessToken(cookies?.auth, '/login.tsx')
   if (token) {
     res.writeHead(303, { Location: '/' })
     res.end()
