@@ -3,6 +3,7 @@ import {
   checkBody,
   logPrismaError,
   prisma,
+  serialize,
   validateAccessToken,
 } from '../../../utils/Server'
 import { Prisma } from '@prisma/client'
@@ -50,11 +51,7 @@ export default async function handler(
               authorUsername: token.username,
             },
           })
-          const updatedRecipes = JSON.parse(
-            JSON.stringify(userRecipes, (key, value) =>
-              typeof value === 'bigint' ? value.toString() : value,
-            ),
-          )
+          const updatedRecipes = serialize(userRecipes)
           res.json(updatedRecipes)
         } catch (e) {
           const errorResponse: {
