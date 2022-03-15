@@ -5,8 +5,11 @@
   display: flex;
   justify-content: center;
   padding: 20px;
-  border-bottom: 1px solid $primaryBright;
+  border-bottom: 2px solid $primary;
   box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px 0;
+  &:hover {
+    border-bottom: 2px solid $primaryBright;
+  }
 }
 .navbarContent {
   width: 100%;

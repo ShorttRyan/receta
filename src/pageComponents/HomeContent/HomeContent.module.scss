@@ -1,0 +1,27 @@
+@import '../src/styles/variables';
+$buttonPadding: 30px;
+$borderWidth: 2px;
+$containerHeight: 51px;
+.subNavWrapper {
+  border-bottom: $borderWidth solid $primary;
+  display: flex;
+  height: $containerHeight;
+}
+.subNavLinkWrapper {
+  position: absolute;
+  width: 100%;
+  display: flex;
+}
+.subNavLink {
+  all: unset;
+  color: $primary;
+  font-weight: bold;
+  padding: $buttonPadding/2 30px $buttonPadding/2 30px;
+  border-bottom: $borderWidth solid $primary;
+  &:hover {
+    color: $primaryBright;
+    border-bottom: $borderWidth solid $primaryBright;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px 0;
+  }
+}
