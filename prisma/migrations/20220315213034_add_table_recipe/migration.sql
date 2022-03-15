@@ -3,6 +3,8 @@ CREATE TABLE "Recipe" (
     "id" TEXT NOT NULL,
     "publishedAt" BIGINT NOT NULL,
     "authorUsername" TEXT NOT NULL,
+    "authorFirstName" TEXT NOT NULL,
+    "authorLastName" TEXT NOT NULL,
     "private" BOOLEAN NOT NULL,
     "title" TEXT NOT NULL,
     "timeToComplete" INTEGER NOT NULL,

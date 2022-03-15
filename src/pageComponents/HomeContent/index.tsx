@@ -1,16 +1,39 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './HomeContent.module.scss'
+import MyRecipes from './MyRecipes'
+import LikedRecipes from './LikedRecipes'
+import { HomePageProps } from '../../pages'
 
-const HomeContent: React.FunctionComponent = () => {
+enum HomeTabs {
+  MyRecipes = 'myRecipes',
+  LikedRecipes = 'likedRecipes',
+}
+
+const HomeContent: React.FunctionComponent<HomePageProps> = (props) => {
+  const [content, switchContent] = useState<HomeTabs>(HomeTabs.MyRecipes)
+  console.log(props)
   return (
     <>
       <div className={styles.subNavWrapper}>
         <div className={styles.subNavLinkWrapper}>
-          <button className={styles.subNavLink}>My Recipes</button>
-          <button className={styles.subNavLink}>Liked Recipes</button>
+          <button
+            className={styles.subNavLink}
+            onClick={() => switchContent(HomeTabs.MyRecipes)}
+          >
+            My Recipes
+          </button>
+          <button
+            className={styles.subNavLink}
+            onClick={() => switchContent(HomeTabs.LikedRecipes)}
+          >
+            Liked Recipes
+          </button>
         </div>
       </div>
-      <div>Home Content</div>
+      {content === HomeTabs.MyRecipes && (
+        <MyRecipes recipes={props.publishedRecipes} />
+      )}
+      {content === HomeTabs.LikedRecipes && <LikedRecipes />}
     </>
   )
 }

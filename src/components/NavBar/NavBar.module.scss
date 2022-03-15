@@ -1,10 +1,11 @@
 @import '../src/styles/variables';
 .navbarWrapper {
+  height: $navBarHeight;
   background: white;
   color: $primary;
   display: flex;
   justify-content: center;
-  padding: 20px;
+  padding: $contentPadding;
   border-bottom: 2px solid $primary;
   box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px 0;
   &:hover {
@@ -22,7 +23,7 @@
   cursor: pointer;
   font-size: 24px;
   font-weight: 700;
-}
-.titleWrapper:hover {
-  color: $primaryBright;
+  &:hover {
+    color: $primaryBright;
+  }
 }

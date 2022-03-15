@@ -6,7 +6,7 @@ import MainTemplate from '../templates/Main'
 import HomeContent from '../pageComponents/HomeContent'
 import { Recipe } from '@prisma/client'
 
-interface HomePageProps {
+export interface HomePageProps {
   username: string
   firstName: string
   lastName: string
@@ -15,7 +15,6 @@ interface HomePageProps {
 }
 
 const Home: NextPage<HomePageProps> = (props) => {
-  console.log(props)
   return (
     <>
       <Head>
@@ -33,7 +32,7 @@ const Home: NextPage<HomePageProps> = (props) => {
         />
       </Head>
       <MainTemplate>
-        <HomeContent />
+        <HomeContent {...props} />
       </MainTemplate>
     </>
   )

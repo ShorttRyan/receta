@@ -37,6 +37,8 @@ export default async function handler(
                   username: token.username,
                 },
               },
+              authorFirstName: token.firstName,
+              authorLastName: token.lastName,
               private: req.body.private,
               publishedAt: Date.now(),
               title: req.body.title,
