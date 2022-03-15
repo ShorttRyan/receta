@@ -1,8 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { checkBody, validateAccessToken } from '../../../utils/Server'
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
+import {
+  checkBody,
+  logPrismaError,
+  prisma,
+  validateAccessToken,
+} from '../../../utils/Server'
+import { Prisma } from '@prisma/client'
 
 export default async function handler(
   req: NextApiRequest,
@@ -26,7 +29,7 @@ export default async function handler(
       ]
       if (checkBody(req.body, requiredFields, res)) {
         try {
-          const recipe = await prisma.recipe.create({
+          await prisma.recipe.create({
             data: {
               author: {
                 connect: {
@@ -42,9 +45,29 @@ export default async function handler(
               notes: req.body.notes,
             },
           })
-          res.json({ message: 'SUCCESS' })
+          const userRecipes = await prisma.recipe.findMany({
+            where: {
+              authorUsername: token.username,
+            },
+          })
+          const updatedRecipes = JSON.parse(
+            JSON.stringify(userRecipes, (key, value) =>
+              typeof value === 'bigint' ? value.toString() : value,
+            ),
+          )
+          res.json(updatedRecipes)
         } catch (e) {
-          res.json({ message: 'FAILURE' })
+          const errorResponse: {
+            message: string
+            prismaError?: Prisma.PrismaClientKnownRequestError
+          } = {
+            message: 'Failed to create recipe',
+          }
+          if (e instanceof Prisma.PrismaClientKnownRequestError) {
+            logPrismaError(e, '/recipes/create')
+            errorResponse.prismaError = e
+          }
+          res.json(errorResponse)
         }
       }
       break
