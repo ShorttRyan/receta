@@ -26,6 +26,7 @@ model Recipe {
   publishedAt     BigInt
   author          User                @relation(fields: [authorUsername], references: [username])
   authorUsername  String
+  private         Boolean
   title           String
   timeToComplete  Int
   ingredients     Json[]

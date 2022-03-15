@@ -18,6 +18,7 @@ export default async function handler(
       if (token === undefined) break
       const requiredFields: string[] = [
         'title',
+        'private',
         'timeToComplete',
         'ingredients',
         'steps',
@@ -32,6 +33,7 @@ export default async function handler(
                   username: token.username,
                 },
               },
+              private: req.body.private,
               publishedAt: Date.now(),
               title: req.body.title,
               timeToComplete: req.body.timeToComplete,
