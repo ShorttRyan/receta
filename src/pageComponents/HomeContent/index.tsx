@@ -17,13 +17,19 @@ const HomeContent: React.FunctionComponent<HomePageProps> = (props) => {
       <div className={styles.subNavWrapper}>
         <div className={styles.subNavLinkWrapper}>
           <button
-            className={styles.subNavLink}
+            className={`
+            ${styles.subNavLink} 
+            ${content === HomeTabs.MyRecipes && styles.activeTab}
+            `}
             onClick={() => switchContent(HomeTabs.MyRecipes)}
           >
             My Recipes
           </button>
           <button
-            className={styles.subNavLink}
+            className={`
+            ${styles.subNavLink} 
+            ${content === HomeTabs.LikedRecipes && styles.activeTab}
+            `}
             onClick={() => switchContent(HomeTabs.LikedRecipes)}
           >
             Liked Recipes
@@ -33,7 +39,9 @@ const HomeContent: React.FunctionComponent<HomePageProps> = (props) => {
       {content === HomeTabs.MyRecipes && (
         <MyRecipes recipes={props.publishedRecipes} />
       )}
-      {content === HomeTabs.LikedRecipes && <LikedRecipes />}
+      {content === HomeTabs.LikedRecipes && (
+        <LikedRecipes recipes={props.likedRecipes} />
+      )}
     </>
   )
 }
