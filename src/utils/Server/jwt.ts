@@ -35,7 +35,7 @@ export const validateAccessToken = (
   } catch (e) {
     location && logJwtError(e, location)
     if (res) {
-      res.status(404).json({ message: 'Missing token.' })
+      res.status(403).json({ message: 'Missing token.' })
       res.end()
     }
     return [undefined, e]

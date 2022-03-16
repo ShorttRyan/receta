@@ -12,6 +12,7 @@ export interface HomePageProps {
   lastName: string
   email: string
   publishedRecipes: Recipe[]
+  likedRecipes: Recipe[]
 }
 
 const Home: NextPage<HomePageProps> = (props) => {
@@ -47,16 +48,35 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     res.end()
     return { props: {} }
   }
+
   let publishedRecipes: Recipe[] = []
   try {
-    const userRecipes = await prisma.recipe.findMany({
+    publishedRecipes = await prisma.recipe.findMany({
       where: {
         authorUsername: token.username,
       },
     })
-    publishedRecipes = serialize(userRecipes)
   } catch (e) {
     console.log('### Error on Index.tsx ###')
+    console.log('### Finding Published Recipes ###')
+    console.log('user token: ', token)
+    console.log(e)
+  }
+
+  let likedRecipes: Recipe[] = []
+  try {
+    likedRecipes = await prisma.recipe.findMany({
+      where: {
+        likedBy: {
+          some: {
+            id: token.id,
+          },
+        },
+      },
+    })
+  } catch (e) {
+    console.log('### Error on Index.tsx ###')
+    console.log('### Finding Liked Recipes ###')
     console.log('user token: ', token)
     console.log(e)
   }
@@ -67,6 +87,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
       firstName: token.firstName,
       lastName: token.lastName,
       publishedRecipes,
+      likedRecipes,
     },
   }
 }

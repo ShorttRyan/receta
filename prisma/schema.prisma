@@ -18,20 +18,22 @@ model User {
   password          String
   firstName         String
   lastName          String
-  publishedRecipes  Recipe[]
+  publishedRecipes  Recipe[]            @relation("PublishedRecipes")
+  likedRecipes      Recipe[]
 }
 
 model Recipe {
-  id              String       @id    @default(uuid())
-  publishedAt     BigInt
-  author          User                @relation(fields: [authorUsername], references: [username])
-  authorUsername  String
-  authorFirstName String
-  authorLastName  String
-  private         Boolean
-  title           String
-  timeToComplete  Int
-  ingredients     Json[]
-  steps           String[]
-  notes           String[]
+  id                String       @id    @default(uuid())
+  publishedAt       String
+  author            User                @relation("PublishedRecipes", fields: [authorId], references: [id])
+  authorId          Int
+  authorUsername    String
+  authorName        String
+  private           Boolean
+  title             String
+  timeToComplete    Int
+  ingredients       Json[]
+  steps             String[]
+  notes             String[]
+  likedBy           User[]
 }

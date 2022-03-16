@@ -16,7 +16,7 @@ export default async function handler(
     case 'POST':
       const [token, error] = validateAccessToken(
         req.cookies?.auth,
-        '/user/updateProfileInfo',
+        '/recipes/create',
         res,
       )
       if (token === undefined) break
@@ -34,13 +34,13 @@ export default async function handler(
             data: {
               author: {
                 connect: {
-                  username: token.username,
+                  id: token.id,
                 },
               },
-              authorFirstName: token.firstName,
-              authorLastName: token.lastName,
+              authorUsername: token.username,
+              authorName: `${token.firstName} ${token.lastName}`,
               private: req.body.private,
-              publishedAt: Date.now(),
+              publishedAt: `${Date.now()}`,
               title: req.body.title,
               timeToComplete: req.body.timeToComplete,
               ingredients: req.body.ingredients,
@@ -53,8 +53,7 @@ export default async function handler(
               authorUsername: token.username,
             },
           })
-          const updatedRecipes = serialize(userRecipes)
-          res.json(updatedRecipes)
+          res.json(userRecipes)
         } catch (e) {
           const errorResponse: {
             message: string
