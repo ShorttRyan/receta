@@ -11,7 +11,6 @@ enum HomeTabs {
 
 const HomeContent: React.FunctionComponent<HomePageProps> = (props) => {
   const [content, switchContent] = useState<HomeTabs>(HomeTabs.MyRecipes)
-  console.log(props)
   return (
     <>
       <div className={styles.subNavWrapper}>

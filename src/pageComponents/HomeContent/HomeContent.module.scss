@@ -3,30 +3,29 @@ $buttonPadding: 30px;
 $borderWidth: 2px;
 $containerHeight: 51px;
 .subNavWrapper {
-  border-bottom: $borderWidth solid $primary;
-  display: flex;
   height: $containerHeight;
+  border: none;
+  border-bottom: $borderWidth solid $primary;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
 }
 .subNavLinkWrapper {
-  position: absolute;
-  width: 100%;
-  display: flex;
+  display: inline-block;
 }
 .subNavLink {
   all: unset;
   color: $primary;
   font-weight: bold;
   padding: $buttonPadding/2 30px $buttonPadding/2 30px;
-  border-bottom: $borderWidth solid $primary;
+  border: none;
   &:hover {
     color: $primaryBright;
-    border-bottom: $borderWidth solid $primaryBright;
     cursor: pointer;
-    box-shadow: 0 30px 60px rgb(0,0,0,0.15)
+    box-shadow: 0 30px 60px rgb(0,0,0,0.15);
   }
   &.activeTab {
     color: $primaryBright !important;
-    border-bottom: $borderWidth solid $primaryBright !important;
   }
 }
 
