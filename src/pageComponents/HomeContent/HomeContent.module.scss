@@ -1,0 +1,70 @@
+@import '../src/styles/variables';
+$buttonPadding: 30px;
+$borderWidth: 2px;
+$containerHeight: 52px;
+.subNavWrapper {
+  position: relative;
+  border: none;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  .bottomBar {
+    bottom: 0;
+    width: 100%;
+    position: absolute;
+    height: $borderWidth;
+    background: $primary;
+  }
+  .subNavLinkWrapper {
+    position: relative;
+    display: inline-block;
+  }
+  .subNavLink {
+    all: unset;
+    color: $primary;
+    font-weight: bold;
+    padding: $buttonPadding/2 30px $buttonPadding/2 30px;
+    border: none;
+    &:hover {
+      color: $primaryBright;
+      cursor: pointer;
+      box-shadow: 0 30px 60px rgb(0,0,0,0.15);
+    }
+    &.activeTab {
+      color: $primaryBright !important;
+    }
+  }
+}
+.subNavLinkWrapper .activeTab {
+  border-width: 0;
+  border-bottom: $borderWidth solid $primaryBright
+}
+.subNavLinkWrapper .activeTab:hover {
+  border-width: 0;
+  border-bottom: $borderWidth solid $primaryBright
+}
+
+.recipes_Wrapper_Empty {
+
+  .contentWrapper_Empty {
+    position: absolute;
+    width: calc(100% - #{2*$contentPadding});
+    max-width: $large - 2*$contentPadding;
+    height: calc(100% - #{$navBarHeight} - #{$subNavHeight} - #{$extraPadding});
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .add_recipe_empty {
+    position: absolute;
+    top: $contentPadding;
+    right: $contentPadding;
+  }
+  .empty_title {
+    font-size: 24px;
+    color: $primary;
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+}

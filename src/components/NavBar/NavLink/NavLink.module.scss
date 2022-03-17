@@ -2,7 +2,7 @@
 .iconWrapper {
   cursor: pointer;
   font-size: 24px;
-}
-.iconWrapper:hover {
-  color: $primaryBright;
+  &:hover {
+    color: $primaryBright;
+  }
 }

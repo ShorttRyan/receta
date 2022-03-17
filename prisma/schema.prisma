@@ -11,11 +11,29 @@ datasource db {
 }
 
 model User {
-  id      Int      @id @default(autoincrement())
-  email   String   @unique
-  username  String  @unique
-  salt  String
-  password  String
-  firstName    String
-  lastName    String
+  id                Int       @id       @default(autoincrement())
+  email             String    @unique
+  username          String    @unique
+  salt              String
+  password          String
+  firstName         String
+  lastName          String
+  publishedRecipes  Recipe[]            @relation("PublishedRecipes")
+  likedRecipes      Recipe[]
+}
+
+model Recipe {
+  id                String       @id    @default(uuid())
+  publishedAt       String
+  author            User                @relation("PublishedRecipes", fields: [authorId], references: [id])
+  authorId          Int
+  authorUsername    String
+  authorName        String
+  private           Boolean
+  title             String
+  timeToComplete    Int
+  ingredients       Json[]
+  steps             String[]
+  notes             String[]
+  likedBy           User[]
 }

@@ -14,24 +14,20 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  if (req.method === 'PUT') {
-    const requiredFields: string[] = ['email', 'firstName', 'lastName']
-    const emptyField = checkBody(req.body, requiredFields)
-    if (emptyField !== undefined) {
-      res.status(400).json({
-        message: `${emptyField} field is required`,
-      })
-    } else {
-      try {
-        const [token, error] = validateAccessToken(
-          req.cookies?.auth,
-          '/user/updateProfileInfo',
-          res,
-        )
-        if (token) {
+  switch (req.method) {
+    case 'PUT':
+      const [token, error] = validateAccessToken(
+        req.cookies?.auth,
+        '/user/updateProfileInfo',
+        res,
+      )
+      if (token === undefined) break
+      const requiredFields: string[] = ['email', 'firstName', 'lastName']
+      if (checkBody(req.body, requiredFields, res)) {
+        try {
           const user = await prisma.user.update({
             where: {
-              username: token.username,
+              id: token.id,
             },
             data: {
               firstName: req.body.firstName,
@@ -51,24 +47,24 @@ export default async function handler(
             serialize('auth', String(accessToken), cookieOptions),
           )
           res.json({ message: 'Updated profile successfully.' })
-        }
-      } catch (e) {
-        if (e instanceof Prisma.PrismaClientKnownRequestError) {
-          logPrismaError(e, '/user/updateProfileInfo')
-          const meta = e.meta as any
-          if (e.code === 'P2002') {
-            res.status(400).json({
-              prismaCode: e.code,
-              field: meta?.target[0],
-              message: `Request could not be completed due to non-unique fields.`,
-            })
+        } catch (e) {
+          if (e instanceof Prisma.PrismaClientKnownRequestError) {
+            logPrismaError(e, '/user/updateProfileInfo')
+            const meta = e.meta as any
+            if (e.code === 'P2002') {
+              res.status(400).json({
+                prismaCode: e.code,
+                field: meta?.target[0],
+                message: `Request could not be completed due to non-unique fields.`,
+              })
+            }
           }
         }
       }
-    }
-  } else {
-    res.status(405).json({
-      message: `Method not allowed`,
-    })
+      break
+    default:
+      res.status(405).json({
+        message: `Method not allowed`,
+      })
   }
 }

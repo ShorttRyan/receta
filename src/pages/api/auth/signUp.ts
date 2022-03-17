@@ -22,12 +22,7 @@ export default async function handler(
       'firstName',
       'lastName',
     ]
-    const emptyField = checkBody(req.body, requiredFields)
-    if (emptyField !== undefined) {
-      res.status(400).json({
-        message: `${emptyField} field is required`,
-      })
-    } else {
+    if (checkBody(req.body, requiredFields, res)) {
       const salt = await bcrypt.genSalt()
       const encryptedPass = await bcrypt.hash(req.body.password, salt)
       try {

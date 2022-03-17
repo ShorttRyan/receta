@@ -10,7 +10,7 @@ const ProfileContent: React.FunctionComponent<ProfilePageProps> = (props) => {
   const [disabled, setDisabled] = useState<boolean>(false)
   const router = useRouter()
   return (
-    <div className={styles.ProfileWrapper}>
+    <div>
       <div className={styles.header}>
         <div className={styles.userTitle}>@{props.username}</div>
         <div className={styles.buttonWrapper}>
