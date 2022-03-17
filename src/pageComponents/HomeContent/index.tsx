@@ -14,6 +14,7 @@ const HomeContent: React.FunctionComponent<HomePageProps> = (props) => {
   return (
     <>
       <div className={styles.subNavWrapper}>
+        <div className={styles.bottomBar} />
         <div className={styles.subNavLinkWrapper}>
           <button
             className={`

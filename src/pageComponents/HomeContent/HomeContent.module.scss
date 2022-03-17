@@ -1,34 +1,48 @@
 @import '../src/styles/variables';
 $buttonPadding: 30px;
 $borderWidth: 2px;
-$containerHeight: 51px;
+$containerHeight: 52px;
 .subNavWrapper {
-  height: $containerHeight;
+  position: relative;
   border: none;
-  border-bottom: $borderWidth solid $primary;
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
-}
-.subNavLinkWrapper {
-  display: inline-block;
-}
-.subNavLink {
-  all: unset;
-  color: $primary;
-  font-weight: bold;
-  padding: $buttonPadding/2 30px $buttonPadding/2 30px;
-  border: none;
-  &:hover {
-    color: $primaryBright;
-    cursor: pointer;
-    box-shadow: 0 30px 60px rgb(0,0,0,0.15);
+  .bottomBar {
+    bottom: 0;
+    width: 100%;
+    position: absolute;
+    height: $borderWidth;
+    background: $primary;
   }
-  &.activeTab {
-    color: $primaryBright !important;
+  .subNavLinkWrapper {
+    position: relative;
+    display: inline-block;
+  }
+  .subNavLink {
+    all: unset;
+    color: $primary;
+    font-weight: bold;
+    padding: $buttonPadding/2 30px $buttonPadding/2 30px;
+    border: none;
+    &:hover {
+      color: $primaryBright;
+      cursor: pointer;
+      box-shadow: 0 30px 60px rgb(0,0,0,0.15);
+    }
+    &.activeTab {
+      color: $primaryBright !important;
+    }
   }
 }
-
+.subNavLinkWrapper .activeTab {
+  border-width: 0;
+  border-bottom: $borderWidth solid $primaryBright
+}
+.subNavLinkWrapper .activeTab:hover {
+  border-width: 0;
+  border-bottom: $borderWidth solid $primaryBright
+}
 
 .recipes_Wrapper_Empty {
 
