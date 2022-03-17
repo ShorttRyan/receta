@@ -13,4 +13,7 @@
   width: 100%;
   max-width: $large;
   padding: 0 $contentPadding;
+  @media(max-width: $mobile) {
+    padding: 0;
+  }
 }

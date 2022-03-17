@@ -1,0 +1,23 @@
+@import './src/styles/variables';
+.form_wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+}
+.input_name {
+  font-weight: 600;
+  color: $primary;
+}
+.section_meta {
+  width: 80%;
+}
+.ttc_wrapper {
+  .timer_wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
+}
+
