@@ -39,7 +39,7 @@ const Profile: NextPage<ProfilePageProps> = (props) => {
 // @ts-ignore
 export const getServerSideProps: GetServerSideProps = ({ req, res }) => {
   const cookies = req.cookies
-  const [token, error] = validateAccessToken(cookies?.auth)
+  const [token, error] = validateAccessToken(cookies?.auth, '/profile.tsx')
   if (token === undefined) {
     res.writeHead(303, { Location: '/login' })
     res.end()

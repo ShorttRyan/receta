@@ -17,12 +17,7 @@ export default async function handler(
 ) {
   if (req.method === 'POST') {
     const requiredFields: string[] = ['username', 'password']
-    const emptyField = checkBody(req.body, requiredFields)
-    if (emptyField !== undefined) {
-      res.status(400).json({
-        message: `${emptyField} field is required`,
-      })
-    } else {
+    if (checkBody(req.body, requiredFields, res)) {
       try {
         const identifier = req.body.username.toLowerCase()
         const password = req.body.password
