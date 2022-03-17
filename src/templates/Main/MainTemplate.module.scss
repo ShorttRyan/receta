@@ -4,6 +4,11 @@
   height: 100%;
   width: 100%;
 }
+.contentWrapper {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
 .content {
   width: 100%;
   max-width: $large;

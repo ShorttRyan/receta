@@ -6,7 +6,9 @@ const MainTemplate: React.FunctionComponent = ({ children }) => {
   return (
     <div className={styles.baseDiv}>
       <NavBar />
-      <div className={styles.content}>{children}</div>
+      <div className={styles.contentWrapper}>
+        <div className={styles.content}>{children}</div>
+      </div>
     </div>
   )
 }

@@ -14,7 +14,7 @@
 }
 .navbarContent {
   width: 100%;
-  max-width: $large;
+  max-width: $large - 2*$contentPadding;
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -6,22 +6,20 @@ import Link from 'next/link'
 
 const NavBar: React.FunctionComponent = () => {
   return (
-    <>
-      <div className={styles.navbarWrapper}>
-        <div className={styles.navbarContent}>
-          <Link href={'/'}>
-            <a>
-              <div className={styles.titleWrapper}>🍔 Receta</div>
-            </a>
-          </Link>
-          <Link href={'/profile'}>
-            <a>
-              <NavLink icon={<IoPersonCircleOutline />} />
-            </a>
-          </Link>
-        </div>
+    <div className={styles.navbarWrapper}>
+      <div className={styles.navbarContent}>
+        <Link href={'/'}>
+          <a>
+            <div className={styles.titleWrapper}>🍔 Receta</div>
+          </a>
+        </Link>
+        <Link href={'/profile'}>
+          <a>
+            <NavLink icon={<IoPersonCircleOutline />} />
+          </a>
+        </Link>
       </div>
-    </>
+    </div>
   )
 }
 

@@ -49,6 +49,7 @@ $containerHeight: 52px;
   .contentWrapper_Empty {
     position: absolute;
     width: calc(100% - #{2*$contentPadding});
+    max-width: $large - 2*$contentPadding;
     height: calc(100% - #{$navBarHeight} - #{$subNavHeight} - #{$extraPadding});
     display: flex;
     flex-direction: column;
