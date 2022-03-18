@@ -26,7 +26,9 @@ const Timer: React.FunctionComponent<TimerProps> = ({
           disabled={value === 0}
         />
         <div className={styles.value_wrapper}>
-          <div className={styles.value}>{value}</div>
+          <div className={`${styles.value} ${value === 0 && styles.empty}`}>
+            {value}
+          </div>
         </div>
         <Button
           label="+"

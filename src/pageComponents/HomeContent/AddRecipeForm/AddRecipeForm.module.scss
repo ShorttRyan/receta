@@ -7,8 +7,8 @@
   padding-top: 20px;
 }
 .input_name {
-  font-weight: 600;
-  color: $primary;
+  font-weight: 800;
+  color: $primaryBright;
 }
 .section_meta {
   width: 80%;
@@ -16,7 +16,7 @@
 .ttc_wrapper {
   margin-top: 20px;
   border-bottom: 2px solid $primaryBright;
-  box-shadow: 0 15px 10px -10px rgb(0,0,0, 0.1);
+  //box-shadow: 0 15px 10px -10px rgb(0,0,0, 0.1);
   .timer_wrapper {
     width: 100%;
     margin-top: 10px;
