@@ -1,0 +1,18 @@
+@import './src/styles/variables';
+
+.dd_wrapper {
+
+}
+.label {
+  color: $primaryBright;
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin: 5px;
+}
+
+.select {
+  border: none;
+  color: $primary;
+  font-weight: 600;
+  padding: 5px;
+}

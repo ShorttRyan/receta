@@ -15,4 +15,12 @@
   width: 100%;
   display: flex;
   justify-content: space-around;
+  align-items: center;
+  @media(max-width: $medium) {
+    display: block;
+  }
+}
+
+.input_wrapper {
+  min-width: 275px;
 }

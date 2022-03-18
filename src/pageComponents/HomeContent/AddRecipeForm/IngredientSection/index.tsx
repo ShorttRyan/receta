@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { AddIngredientForm, Ingredient, initialValue } from './types'
+import { AddIngredientForm, Ingredient, initialValue, Units } from './types'
 import IngredientComponent from './IngredientComponent'
 import styles from './IngredientsSection.module.scss'
 import Input from '../../../../components/Input'
 import Button from '../../../../components/Button'
+import DropDown from '../../../../components/DropDown'
 
 interface IngredientSectionProps {
   ingredients: Ingredient[]
@@ -30,7 +31,7 @@ const IngredientSection: React.FunctionComponent<IngredientSectionProps> = ({
         ))}
       </ul>
       <div className={styles.add_ingredient_wrapper}>
-        <div className={styles.name_wrapper}>
+        <div className={styles.input_wrapper}>
           <Input
             name="Name"
             value={newIngredient.name.value}
@@ -46,7 +47,7 @@ const IngredientSection: React.FunctionComponent<IngredientSectionProps> = ({
             message={newIngredient.name.message}
           />
         </div>
-        <div className={styles.name_wrapper}>
+        <div className={styles.input_wrapper}>
           <Input
             name="Amount"
             value={newIngredient.amount.value}
@@ -62,6 +63,7 @@ const IngredientSection: React.FunctionComponent<IngredientSectionProps> = ({
             message={newIngredient.amount.message}
           />
         </div>
+        <DropDown id={'unit'} name={'Unit'} label={'Unit'} options={Units} />
         <Button
           label="+"
           type="button"

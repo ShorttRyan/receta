@@ -3,7 +3,7 @@ import { FormInput } from '../../../../components/Input/type'
 export interface AddIngredientForm {
   name: FormInput<string>
   amount: FormInput<number | null>
-  unit: FormInput<Unit | null>
+  unit: FormInput<string | null>
 }
 
 export const initialValue: AddIngredientForm = {
@@ -30,17 +30,7 @@ export const initialValue: AddIngredientForm = {
 export interface Ingredient {
   name: string
   amount: number
-  unit: Unit
+  unit: string
 }
 
-export enum Unit {
-  Cups = 'Cups',
-  Tbs = 'Tbs',
-  Tsp = 'Tsp',
-  Mg = 'mg',
-  G = 'g',
-  Kg = 'Kg',
-  ml = 'ml',
-  L = 'L',
-  Oz = 'Oz',
-}
+export const Units = ['Cups', 'Tbs', 'Tsp', 'mg', 'g', 'Kg', 'ml', 'L', 'Oz']
