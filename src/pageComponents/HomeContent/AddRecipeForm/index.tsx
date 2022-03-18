@@ -3,11 +3,14 @@ import styles from './AddRecipeForm.module.scss'
 import Input from '../../../components/Input'
 import { AddRecipeForm, initialValue } from './types'
 import Timer from './Timer'
+import IngredientSection from './IngredientSection'
+import { Ingredient } from './IngredientSection/types'
 
 const AddRecipe: React.FunctionComponent = () => {
   const [form, setForm] = useState<AddRecipeForm>(initialValue)
-  const [hours, setHours] = useState<number>(1)
+  const [hours, setHours] = useState<number>(0)
   const [minutes, setMinutes] = useState<number>(0)
+  const [ingredients, setIngredients] = useState<Ingredient[]>([])
   return (
     <form className={styles.form_wrapper}>
       <div className={styles.section_meta}>
@@ -42,6 +45,10 @@ const AddRecipe: React.FunctionComponent = () => {
             />
           </div>
         </div>
+        <IngredientSection
+          ingredients={ingredients}
+          setIngredients={setIngredients}
+        />
       </div>
     </form>
   )
