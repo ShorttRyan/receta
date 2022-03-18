@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './Timer.module.scss'
-import IconButton from '../../../../components/IconButton'
+import Button from '../../../../components/Button'
 
 interface TimerProps {
   label: string
@@ -16,9 +16,25 @@ const Timer: React.FunctionComponent<TimerProps> = ({
 }) => {
   return (
     <div className={styles.timer_wrapper}>
-      <IconButton onClick={() => setValue(value - increment)} />
-      {label}
-      <IconButton onClick={() => setValue(value + increment)} />
+      <div className={styles.label}>{label}</div>
+      <div className={styles.controls}>
+        <Button
+          label="-"
+          type="button"
+          onClick={() => setValue(value - increment)}
+          style="dangerCircle"
+          disabled={value === 0}
+        />
+        <div className={styles.value_wrapper}>
+          <div className={styles.value}>{value}</div>
+        </div>
+        <Button
+          label="+"
+          type="button"
+          onClick={() => setValue(value + increment)}
+          style="primaryCircle"
+        />
+      </div>
     </div>
   )
 }

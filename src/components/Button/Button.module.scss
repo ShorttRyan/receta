@@ -27,7 +27,7 @@
   color: white;
 }
 .primary__disabled {
-  background: $primaryBright;
+  background: $primaryDisabled;
   color: white;
 }
 
@@ -36,10 +36,20 @@
   color: white;
 }
 .danger:hover {
-  background: $errorMuted;
+  background: $errorBright;
   color: white;
 }
 .danger__disabled {
-  background: $errorMuted;
+  background: $errorDisabled;
   color: white;
+}
+
+.circle {
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 50%;
 }

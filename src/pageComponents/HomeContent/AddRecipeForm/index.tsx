@@ -42,7 +42,6 @@ const AddRecipe: React.FunctionComponent = () => {
             />
           </div>
         </div>
-        <div className={styles.private_wrapper}>Make this recipe private?</div>
       </div>
     </form>
   )

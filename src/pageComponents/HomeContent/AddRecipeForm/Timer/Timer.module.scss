@@ -1,4 +1,33 @@
 @import './src/styles/variables';
 .timer_wrapper {
-  background: #97BE11;
+  position: relative;
+  margin: 0 40px 20px 40px;
+  .label {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    height: 25px;
+    font-weight: 300;
+    color: $primary;
+  }
+  .controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 25px;
+    .value_wrapper {
+      margin: 5px;
+      .value {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+        width: 50px;
+        text-align: center;
+        border-radius: 50%;
+        border: 1px solid $primary;
+        color: $primary;
+      }
+    }
+  }
 }
