@@ -6,6 +6,7 @@ interface DropDownProps {
   label: string
   name: string
   options: string[]
+  onChange: (newVal: string) => void
 }
 
 const DropDown: React.FunctionComponent<DropDownProps> = ({
@@ -13,13 +14,19 @@ const DropDown: React.FunctionComponent<DropDownProps> = ({
   label,
   name,
   options,
+  onChange,
 }) => {
   return (
     <div className={styles.dd_wrapper}>
       <label className={styles.label} htmlFor={id}>
         {label}:
       </label>
-      <select className={styles.select} id={id} name={name}>
+      <select
+        className={styles.select}
+        id={id}
+        name={name}
+        onChange={(e) => onChange(e.target.value)}
+      >
         {options.map((option) => (
           <option className={styles.option} key={option} value={option}>
             {option}

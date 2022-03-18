@@ -2,8 +2,8 @@ import { FormInput } from '../../../../components/Input/type'
 
 export interface AddIngredientForm {
   name: FormInput<string>
-  amount: FormInput<number | null>
-  unit: FormInput<string | null>
+  amount: FormInput<string>
+  unit: FormInput<string>
 }
 
 export const initialValue: AddIngredientForm = {
@@ -14,13 +14,13 @@ export const initialValue: AddIngredientForm = {
     message: '',
   },
   amount: {
-    value: null,
+    value: '',
     required: true,
     error: false,
     message: '',
   },
   unit: {
-    value: null,
+    value: 'Cup',
     required: true,
     error: false,
     message: '',
@@ -29,8 +29,8 @@ export const initialValue: AddIngredientForm = {
 
 export interface Ingredient {
   name: string
-  amount: number
+  amount: string
   unit: string
 }
 
-export const Units = ['Cups', 'Tbs', 'Tsp', 'mg', 'g', 'Kg', 'ml', 'L', 'Oz']
+export const Units = ['Cup', 'Tbs', 'Tsp', 'mg', 'g', 'Kg', 'ml', 'L', 'Oz']

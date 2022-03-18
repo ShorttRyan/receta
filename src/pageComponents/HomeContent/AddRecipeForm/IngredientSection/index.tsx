@@ -5,6 +5,7 @@ import styles from './IngredientsSection.module.scss'
 import Input from '../../../../components/Input'
 import Button from '../../../../components/Button'
 import DropDown from '../../../../components/DropDown'
+import { getUnit } from './IngredientComponent/getUnit'
 
 interface IngredientSectionProps {
   ingredients: Ingredient[]
@@ -63,30 +64,40 @@ const IngredientSection: React.FunctionComponent<IngredientSectionProps> = ({
             message={newIngredient.amount.message}
           />
         </div>
-        <DropDown id={'unit'} name={'Unit'} label={'Unit'} options={Units} />
+        <DropDown
+          id={'unit'}
+          name={'Unit'}
+          label={'Unit'}
+          options={Units}
+          onChange={(newVal) => {
+            const ing = { ...newIngredient }
+            ing.unit.value = newVal
+            setNewIngredient(ing)
+          }}
+        />
         <Button
           label="+"
           type="button"
           onClick={() => {
-            if (
-              newIngredient.amount.value !== null &&
-              newIngredient.unit.value !== null
-            )
+            if (newIngredient.amount.value !== null) {
+              const unit = getUnit(
+                newIngredient.unit.value,
+                newIngredient.amount.value,
+              )
               setIngredients([
                 ...ingredients,
                 {
                   name: newIngredient.name.value,
                   amount: newIngredient.amount?.value,
-                  unit: newIngredient.unit?.value,
+                  unit,
                 },
               ])
+            }
           }}
           style="primaryCircle"
           disabled={
             newIngredient.name.value.length === 0 ||
-            newIngredient?.amount?.value === null ||
-            newIngredient?.unit?.value === null ||
-            newIngredient?.amount?.value === 0
+            newIngredient?.amount.value.length === 0
           }
         />
       </div>
