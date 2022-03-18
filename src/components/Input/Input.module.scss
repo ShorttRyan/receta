@@ -58,6 +58,12 @@
   transition: 0.2s;
   font-size: 0.9rem;
   color: $primaryBright;
+  &.title {
+    color: $primary;
+    font-weight: 600;
+    font-size: 16px;
+    padding-bottom: 5px;
+  }
 }
 
 .form__field:focus {
@@ -69,6 +75,11 @@
     font-size: 0.9rem;
     color: $primary;
     font-weight:700;
+    &.title {
+      font-weight: 700;
+      font-size: 16px;
+      padding-bottom: 5px;
+    }
   }
   padding-bottom: 6px;
   font-weight: 700;

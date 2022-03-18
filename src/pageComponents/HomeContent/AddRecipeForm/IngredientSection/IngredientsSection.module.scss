@@ -1,0 +1,18 @@
+@import './src/styles/variables';
+
+.section_wrapper {
+  margin-top: 36px;
+  border-bottom: 2px solid $primaryBright;
+}
+
+.section_title {
+  font-weight: 600;
+  color: $primary;
+  font-size: 16px;
+}
+
+.add_ingredient_wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}

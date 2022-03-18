@@ -35,6 +35,7 @@ const Timer: React.FunctionComponent<TimerProps> = ({
           type="button"
           onClick={() => setValue(value + increment)}
           style="primaryCircle"
+          disabled={increment === 5 && value === 55}
         />
       </div>
     </div>

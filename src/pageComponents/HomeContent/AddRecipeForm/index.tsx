@@ -27,6 +27,7 @@ const AddRecipe: React.FunctionComponent = () => {
           id="title"
           error={form.title.error}
           message={form.title.message}
+          title
         />
         <div className={styles.ttc_wrapper}>
           <div className={styles.input_name}>Time To Complete</div>
