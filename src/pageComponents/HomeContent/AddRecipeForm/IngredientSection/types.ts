@@ -33,4 +33,4 @@ export interface Ingredient {
   unit: string
 }
 
-export const Units = ['Cup', 'Tbs', 'Tsp', 'mg', 'g', 'Kg', 'ml', 'L', 'Oz']
+export const Units = ['Cup', 'Tbs', 'Tsp', 'Kg', 'g', 'mg', 'L', 'ml', 'Oz']
