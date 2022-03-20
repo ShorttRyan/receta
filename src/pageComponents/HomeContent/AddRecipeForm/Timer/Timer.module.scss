@@ -8,7 +8,14 @@
     text-align: center;
     height: 25px;
     font-weight: 300;
-    color: $primary;
+    //color: $primary;
+  }
+  .buttonOffset {
+    margin-top: -2px;
+  }
+  .buttonOffset2 {
+    margin-top: -2px;
+    margin-left: 1px;
   }
   .controls {
     display: flex;

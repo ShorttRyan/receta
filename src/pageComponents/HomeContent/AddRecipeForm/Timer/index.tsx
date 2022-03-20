@@ -19,24 +19,26 @@ const Timer: React.FunctionComponent<TimerProps> = ({
       <div className={styles.label}>{label}</div>
       <div className={styles.controls}>
         <Button
-          label="-"
           type="button"
           onClick={() => setValue(value - increment)}
           style="dangerCircle"
           disabled={value === 0}
-        />
+        >
+          <div className={styles.buttonOffset}>-</div>
+        </Button>
         <div className={styles.value_wrapper}>
           <div className={`${styles.value} ${value === 0 && styles.empty}`}>
             {value}
           </div>
         </div>
         <Button
-          label="+"
           type="button"
           onClick={() => setValue(value + increment)}
           style="primaryCircle"
           disabled={increment === 5 && value === 55}
-        />
+        >
+          <div className={styles.buttonOffset2}>+</div>
+        </Button>
       </div>
     </div>
   )

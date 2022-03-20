@@ -4,7 +4,6 @@ import IngredientComponent from './IngredientComponent'
 import styles from './IngredientsSection.module.scss'
 import Input from '../../../../components/Input'
 import Button from '../../../../components/Button'
-import DropDown from '../../../../components/DropDown'
 import { getUnit } from './IngredientComponent/getUnit'
 
 interface IngredientSectionProps {
@@ -19,20 +18,49 @@ const IngredientSection: React.FunctionComponent<IngredientSectionProps> = ({
   const [newIngredient, setNewIngredient] =
     useState<AddIngredientForm>(initialValue)
   return (
-    <div className={styles.section_wrapper}>
+    <form
+      className={styles.section_wrapper}
+      onSubmit={(e) => {
+        e.preventDefault()
+        if (newIngredient.amount.value !== null) {
+          const unit = getUnit(
+            newIngredient.unit.value,
+            newIngredient.amount.value,
+          )
+          setIngredients([
+            ...ingredients,
+            {
+              name: newIngredient.name.value,
+              amount: newIngredient.amount?.value,
+              unit,
+            },
+          ])
+          setNewIngredient({
+            name: {
+              value: '',
+              error: false,
+              required: true,
+              message: '',
+            },
+            amount: {
+              value: '',
+              error: false,
+              required: true,
+              message: '',
+            },
+            unit: {
+              value: '',
+              error: false,
+              required: true,
+              message: '',
+            },
+          })
+        }
+      }}
+    >
       <div className={styles.section_title}>Ingredients</div>
-      <ul>
-        {ingredients.map(({ name, amount, unit }, index) => (
-          <IngredientComponent
-            key={index.toString() + name}
-            name={name}
-            amount={amount}
-            unit={unit}
-          />
-        ))}
-      </ul>
       <div className={styles.add_ingredient_wrapper}>
-        <div className={styles.input_wrapper}>
+        <div className={styles.name_amount_wrapper}>
           <Input
             name="Name"
             value={newIngredient.name.value}
@@ -47,8 +75,6 @@ const IngredientSection: React.FunctionComponent<IngredientSectionProps> = ({
             error={newIngredient.name.error}
             message={newIngredient.name.message}
           />
-        </div>
-        <div className={styles.input_wrapper}>
           <Input
             name="Amount"
             value={newIngredient.amount.value}
@@ -64,44 +90,70 @@ const IngredientSection: React.FunctionComponent<IngredientSectionProps> = ({
             message={newIngredient.amount.message}
           />
         </div>
-        <DropDown
-          id={'unit'}
-          name={'Unit'}
-          label={'Unit'}
-          options={Units}
-          onChange={(newVal) => {
-            const ing = { ...newIngredient }
-            ing.unit.value = newVal
-            setNewIngredient(ing)
-          }}
-        />
-        <Button
-          label="+"
-          type="button"
-          onClick={() => {
-            if (newIngredient.amount.value !== null) {
-              const unit = getUnit(
-                newIngredient.unit.value,
-                newIngredient.amount.value,
-              )
-              setIngredients([
-                ...ingredients,
-                {
-                  name: newIngredient.name.value,
-                  amount: newIngredient.amount?.value,
-                  unit,
-                },
-              ])
-            }
-          }}
-          style="primaryCircle"
-          disabled={
-            newIngredient.name.value.length === 0 ||
-            newIngredient?.amount.value.length === 0
-          }
-        />
+        <div className={styles.unit_container}>
+          <div className={styles.unit_wrapper}>
+            {Units.map((unit) => (
+              <Button
+                key={unit}
+                type="button"
+                label={unit}
+                style={
+                  newIngredient.unit.value === unit
+                    ? 'option_selected'
+                    : 'option_unselected'
+                }
+                onClick={() => {
+                  const ing = { ...newIngredient }
+                  ing.unit.value = unit
+                  setNewIngredient(ing)
+                }}
+              />
+            ))}
+          </div>
+          <div className={styles.extraButtons}>
+            <Button
+              key="unitless"
+              type="button"
+              style="danger"
+              label="Clear Unit"
+              onClick={() => {
+                const ing = { ...newIngredient }
+                ing.unit.value = ''
+                setNewIngredient(ing)
+              }}
+            />
+            <Button
+              label="Add Ingredient"
+              type="submit"
+              style="primary"
+              disabled={
+                newIngredient.name.value.length === 0 ||
+                newIngredient?.amount.value.length === 0
+              }
+            />
+          </div>
+        </div>
       </div>
-    </div>
+
+      <div className={styles.list_wrapper}>
+        {ingredients.length > 0 && (
+          <table className={styles.list}>
+            <tr>
+              <th className={styles.title}>Name</th>
+              <th className={styles.title}>Amount</th>
+            </tr>
+            {ingredients.map(({ name, amount, unit }, index) => (
+              <IngredientComponent
+                key={index.toString() + name}
+                name={name}
+                amount={amount}
+                unit={unit}
+              />
+            ))}
+          </table>
+        )}
+      </div>
+    </form>
   )
 }
 

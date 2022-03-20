@@ -2,9 +2,16 @@ import React from 'react'
 import styles from './Button.module.scss'
 
 interface ButtonProps {
-  label: string
   type: 'button' | 'submit' | 'reset'
-  style?: 'primary' | 'danger' | 'login' | 'dangerCircle' | 'primaryCircle'
+  label?: string
+  style?:
+    | 'primary'
+    | 'danger'
+    | 'login'
+    | 'dangerCircle'
+    | 'primaryCircle'
+    | 'option_selected'
+    | 'option_unselected'
   disabled?: boolean
   onClick?: () => void
   muted?: boolean
@@ -17,6 +24,7 @@ const LoginButton: React.FunctionComponent<ButtonProps> = ({
   disabled,
   muted,
   style,
+  children,
 }) => {
   let buttonStyle
   switch (style) {
@@ -40,6 +48,12 @@ const LoginButton: React.FunctionComponent<ButtonProps> = ({
         disabled ? styles.primary__disabled : styles.primary
       }`
       break
+    case 'option_selected':
+      buttonStyle = `${styles.button} ${styles.option_selected}`
+      break
+    case 'option_unselected':
+      buttonStyle = `${styles.button} ${styles.option_unselected}`
+      break
     case 'primary':
     default:
       buttonStyle = `${styles.button} ${
@@ -56,6 +70,7 @@ const LoginButton: React.FunctionComponent<ButtonProps> = ({
       disabled={disabled}
     >
       {label}
+      {children}
     </button>
   )
 }

@@ -12,7 +12,7 @@ const AddRecipe: React.FunctionComponent = () => {
   const [minutes, setMinutes] = useState<number>(0)
   const [ingredients, setIngredients] = useState<Ingredient[]>([])
   return (
-    <form className={styles.form_wrapper}>
+    <div className={styles.form_wrapper}>
       <div className={styles.section_meta}>
         <Input
           name="Title"
@@ -51,7 +51,7 @@ const AddRecipe: React.FunctionComponent = () => {
           setIngredients={setIngredients}
         />
       </div>
-    </form>
+    </div>
   )
 }
 
