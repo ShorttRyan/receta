@@ -8,6 +8,7 @@ import { preUpdateProfileSubmit } from '../../utils/Client'
 import { isPrismaFailure } from '../../API/user/updateProfileInfo'
 import { updateProfileInfo } from '../../API/user/updateProfileInfo'
 import { useRouter } from 'next/router'
+import { FiEdit } from 'react-icons/fi'
 
 interface ProfileOverviewProps {
   email: string
@@ -142,7 +143,11 @@ const ProfileOverview: React.FunctionComponent<ProfileOverviewProps> = ({
         ) : (
           <>
             <div className={styles.editButtonWrapper}>
-              <IconButton onClick={() => setEditing(true)} />
+              <IconButton
+                onClick={() => setEditing(true)}
+                Icon={FiEdit}
+                disabled={false}
+              />
             </div>
             <div className={styles.infoSection}>
               <div className={styles.infoGroup}>

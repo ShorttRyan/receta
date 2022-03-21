@@ -1,20 +1,31 @@
 import React from 'react'
 import styles from './IconButton.module.scss'
-import { FiEdit } from 'react-icons/fi'
+import { IconType } from 'react-icons'
 
 interface IconButtonProps {
   onClick: () => void
+  Icon: IconType
+  disabled: boolean
 }
 
-const IconButton: React.FunctionComponent<IconButtonProps> = ({ onClick }) => {
+const IconButton: React.FunctionComponent<IconButtonProps> = ({
+  onClick,
+  Icon,
+  disabled,
+}) => {
   return (
     <button
       type="button"
       onClick={() => onClick()}
       className={styles.buttonWrapper}
+      disabled={disabled}
     >
-      <div className={`${styles.iconWrapper} ${styles.iconFill}`}>
-        <FiEdit className={styles.icon} />
+      <div
+        className={`${disabled && styles.disabled} ${styles.iconWrapper} ${
+          styles.iconFill
+        }`}
+      >
+        <Icon className={styles.icon} />
       </div>
     </button>
   )

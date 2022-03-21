@@ -10,7 +10,9 @@ const AddRecipe: React.FunctionComponent = () => {
   const [form, setForm] = useState<AddRecipeForm>(initialValue)
   const [hours, setHours] = useState<number>(0)
   const [minutes, setMinutes] = useState<number>(0)
-  const [ingredients, setIngredients] = useState<Ingredient[]>([])
+  const [ingredients, setIngredients] = useState<Ingredient[]>([
+    { name: '', amount: '', unit: '' },
+  ])
   return (
     <div className={styles.form_wrapper}>
       <div className={styles.section_meta}>

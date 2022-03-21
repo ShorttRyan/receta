@@ -1,13 +1,13 @@
 @import './src/styles/variables';
 
 .dd_wrapper {
-
+  border-bottom: 1px solid $primaryBright;
+  margin-bottom: 3px;
 }
 .label {
   color: $primaryBright;
-  font-size: 1.1rem;
+  font-size: 16px;
   font-weight: 400;
-  margin: 5px;
 }
 
 .select {
@@ -15,4 +15,9 @@
   color: $primary;
   font-weight: 600;
   padding: 5px;
+  outline: none;
+}
+
+.disabled::-ms-expand {
+  display: none;
 }
