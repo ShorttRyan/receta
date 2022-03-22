@@ -6,26 +6,31 @@
 
 .name {
   width: 55%;
-  padding: 10px 4px;
+  padding: 7px 4px;
   border-right: 1px solid $primary;
 }
 .amount {
   width: 30%;
-  padding: 10px 4px;
+  padding: 7px 4px;
   border-left: 1px solid $primary;
   border-right: 1px solid $primary;
 }
 .unit {
   width: 15%;
-  padding: 10px 4px;
+  padding: 7px 4px;
   border-left: 1px solid $primary;
   .content {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 }
 
+.disabledColor {
+  padding-left: 6px;
+  color: $disabledInput;
+}
 
 .input {
   width: 100%;
@@ -34,15 +39,16 @@
   border-bottom: 1px solid $primaryBright;
   font-size: 18px;
   background: none !important;
+  padding-bottom: 5px;
   &:focus {
+    padding-bottom: 4px;
     border-bottom: 2px solid $primaryBright;
   }
 }
 
 .disabledInput {
   border-bottom: none !important;
-  text-align: center;
-  font-weight: bold;
+  padding-left: 6px;
   &:focus {
     border-bottom:  none !important;
   }

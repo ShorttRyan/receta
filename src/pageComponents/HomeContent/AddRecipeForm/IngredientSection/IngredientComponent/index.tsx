@@ -4,6 +4,7 @@ import DropDown from '../../../../../components/DropDown'
 import { Units } from '../types'
 import IconButton from '../../../../../components/IconButton'
 import { FiEdit, FiSave, FiPlus } from 'react-icons/fi'
+import { getUnit } from './getUnit'
 
 interface IngredientCompProps {
   name: string
@@ -14,7 +15,8 @@ interface IngredientCompProps {
   onUnitChange: (newVal: string) => void
   onAdd: () => void
   isLast: boolean
-  isEditing: boolean
+  editingIndex: number
+  index: number
   startEditing: () => void
   stopEditing: () => void
 }
@@ -27,77 +29,77 @@ const IngredientComponent: React.FunctionComponent<IngredientCompProps> = ({
   onUnitChange,
   onAdd,
   isLast,
-  isEditing,
+  editingIndex,
+  index,
   startEditing,
   stopEditing,
 }) => {
+  const isEditingThisEntry: boolean = index === editingIndex
+  const isEditing: boolean = editingIndex !== -1
+  const activeSection: boolean = isEditing ? isEditingThisEntry : isLast
+  const showEdit: boolean = !isLast && !isEditingThisEntry
+  if (isLast && isEditing) {
+    return <></>
+  }
   return (
     <tr className={styles.row}>
       <td className={styles.name}>
         <input
-          className={`${styles.input} ${!isEditing && styles.disabledInput}`}
+          className={`${styles.input} ${
+            !activeSection && styles.disabledInput
+          }`}
           name="name"
           value={name}
           onChange={(e) => onNameChange(e.target.value)}
-          disabled={!isEditing}
+          disabled={!activeSection}
         />
       </td>
       <td className={styles.amount}>
         <input
-          className={`${styles.input} ${!isEditing && styles.disabledInput}`}
+          className={`${styles.input} ${
+            !activeSection && styles.disabledInput
+          }`}
           name="amount"
           value={amount}
-          type="number"
           onChange={(e) => onAmountChange(e.target.value)}
-          onKeyDown={(e) =>
-            ['e', 'E', '+', '-'].includes(e.key) && e.preventDefault()
-          }
-          disabled={!isEditing}
+          disabled={!activeSection}
         />
       </td>
       <td className={styles.unit}>
         <div className={styles.content}>
-          {isLast ? (
-            <>
-              <DropDown
-                value={unit}
-                options={Units}
-                onChange={(newVal) => onUnitChange(newVal)}
-              />
-              <IconButton
-                Icon={FiPlus}
-                onClick={() => onAdd()}
-                disabled={name === '' || amount === ''}
-              />
-            </>
+          {activeSection ? (
+            <DropDown
+              value={unit}
+              options={Units}
+              onChange={(newVal) => onUnitChange(newVal)}
+            />
           ) : (
-            <>
-              {isEditing ? (
-                <>
-                  <IconButton
-                    Icon={FiPlus}
-                    onClick={() => onAdd()}
-                    disabled={name === '' || amount === ''}
-                  />
-                  <IconButton
-                    Icon={FiSave}
-                    onClick={() => stopEditing()}
-                    disabled={name === '' || amount === ''}
-                  />
-                </>
-              ) : (
-                <>
-                  <div className={styles.unitName}>{unit}</div>
-                  <IconButton
-                    Icon={FiEdit}
-                    onClick={() => startEditing()}
-                    disabled={false}
-                  />
-                </>
-              )}
-            </>
+            <div className={styles.disabledColor}>{getUnit(unit, amount)}</div>
           )}
         </div>
+      </td>
+      <td>
+        {isLast && (
+          <IconButton
+            Icon={FiPlus}
+            onClick={() => onAdd()}
+            disabled={name === '' || amount === '' || isEditing}
+          />
+        )}
+        {isEditingThisEntry && (
+          <IconButton
+            Icon={FiSave}
+            onClick={() => stopEditing()}
+            disabled={name === '' || amount === ''}
+          />
+        )}
+        {showEdit && (
+          <IconButton
+            Icon={FiEdit}
+            onClick={() => startEditing()}
+            disabled={isEditing}
+          />
+        )}
       </td>
     </tr>
   )
