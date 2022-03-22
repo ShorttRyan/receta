@@ -147,6 +147,8 @@ const ProfileOverview: React.FunctionComponent<ProfileOverviewProps> = ({
                 onClick={() => setEditing(true)}
                 Icon={FiEdit}
                 disabled={false}
+                style="primary"
+                size="medium"
               />
             </div>
             <div className={styles.infoSection}>

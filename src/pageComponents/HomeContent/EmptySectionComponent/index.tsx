@@ -22,6 +22,8 @@ const EmptySectionComponent: React.FunctionComponent<EmptySectionProps> = ({
             onClick={() => setAddingRecipe(true)}
             Icon={FiEdit}
             disabled={false}
+            style="primary"
+            size="large"
           />
         </div>
       )}

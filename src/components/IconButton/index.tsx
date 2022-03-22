@@ -6,8 +6,8 @@ interface IconButtonProps {
   onClick: () => void
   Icon: IconType
   disabled: boolean
-  size?: 'sm' | 'md' | 'lg'
-  style?: 'primary' | 'danger'
+  style: 'primary' | 'danger'
+  size: 'small' | 'medium' | 'large'
 }
 
 const IconButton: React.FunctionComponent<IconButtonProps> = ({
@@ -17,14 +17,21 @@ const IconButton: React.FunctionComponent<IconButtonProps> = ({
   size,
   style,
 }) => {
-  let buttonClassNames = ''
+  let wrapperClassNames = `${styles.iconWrapper}`
   switch (size) {
-    case 'sm':
+    case 'small':
+      wrapperClassNames += ` ${disabled ? styles.disabled : styles[style]}`
+      wrapperClassNames += ` ${styles[size]}`
       break
-    case 'lg':
+    case 'large':
+      wrapperClassNames += ` ${disabled ? styles.disabled : styles[style]}`
+      wrapperClassNames += ` ${styles[size]}`
       break
-    case 'md':
+    case 'medium':
     default:
+      wrapperClassNames += ` ${disabled ? styles.disabled : styles[style]}`
+      wrapperClassNames += ` ${styles[size]}`
+      break
   }
   return (
     <button
@@ -33,11 +40,7 @@ const IconButton: React.FunctionComponent<IconButtonProps> = ({
       className={styles.buttonWrapper}
       disabled={disabled}
     >
-      <div
-        className={`${disabled && styles.disabled} ${styles.iconWrapper} ${
-          styles.iconFill
-        }`}
-      >
+      <div className={wrapperClassNames}>
         <Icon className={styles.icon} />
       </div>
     </button>

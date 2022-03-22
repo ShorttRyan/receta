@@ -87,7 +87,8 @@ const IngredientComponent: React.FunctionComponent<IngredientCompProps> = ({
             Icon={FiPlus}
             onClick={() => onAdd()}
             disabled={name === '' || amount === '' || isEditing}
-            size="sm"
+            size="small"
+            style="primary"
           />
         )}
         {showRemove && (
@@ -95,7 +96,7 @@ const IngredientComponent: React.FunctionComponent<IngredientCompProps> = ({
             Icon={FiMinus}
             onClick={() => onRemove()}
             disabled={isEditing}
-            size="sm"
+            size="small"
             style="danger"
           />
         )}
@@ -104,7 +105,8 @@ const IngredientComponent: React.FunctionComponent<IngredientCompProps> = ({
             Icon={FiSave}
             onClick={() => stopEditing()}
             disabled={name === '' || amount === ''}
-            size="sm"
+            size="small"
+            style="primary"
           />
         )}
         {showEdit && (
@@ -112,7 +114,8 @@ const IngredientComponent: React.FunctionComponent<IngredientCompProps> = ({
             Icon={FiEdit}
             onClick={() => startEditing()}
             disabled={isEditing}
-            size="sm"
+            size="small"
+            style="primary"
           />
         )}
       </td>
