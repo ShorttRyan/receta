@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Ingredient } from './types'
 import IngredientComponent from './IngredientComponent'
 import styles from './IngredientsSection.module.scss'
+import { uuid } from '../../../../utils'
 
 interface IngredientSectionProps {
   ingredients: Ingredient[]
@@ -32,9 +33,9 @@ const IngredientSection: React.FunctionComponent<IngredientSectionProps> = ({
                 <th className={styles.title}>Unit</th>
                 <th className={styles.title} />
               </tr>
-              {ingredients.map(({ name, amount, unit }, index) => (
+              {ingredients.map(({ name, amount, unit, id }, index) => (
                 <IngredientComponent
-                  key={index}
+                  key={id}
                   name={name}
                   amount={amount}
                   unit={unit}
@@ -56,7 +57,12 @@ const IngredientSection: React.FunctionComponent<IngredientSectionProps> = ({
                   onAdd={() => {
                     setIngredients([
                       ...ingredients,
-                      { name: '', amount: '', unit: 'N/A' },
+                      {
+                        name: '',
+                        amount: '',
+                        unit: 'N/A',
+                        id: uuid(),
+                      },
                     ])
                   }}
                   isLast={index === ingredients.length - 1}
@@ -64,6 +70,11 @@ const IngredientSection: React.FunctionComponent<IngredientSectionProps> = ({
                   index={index}
                   startEditing={() => setEditing(index)}
                   stopEditing={() => setEditing(-1)}
+                  onRemove={() => {
+                    const ingredientsCopy = [...ingredients]
+                    ingredientsCopy.splice(index, 1)
+                    setIngredients(ingredientsCopy)
+                  }}
                 />
               ))}
             </tbody>

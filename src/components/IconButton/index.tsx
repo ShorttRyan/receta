@@ -6,13 +6,26 @@ interface IconButtonProps {
   onClick: () => void
   Icon: IconType
   disabled: boolean
+  size?: 'sm' | 'md' | 'lg'
+  style?: 'primary' | 'danger'
 }
 
 const IconButton: React.FunctionComponent<IconButtonProps> = ({
   onClick,
   Icon,
   disabled,
+  size,
+  style,
 }) => {
+  let buttonClassNames = ''
+  switch (size) {
+    case 'sm':
+      break
+    case 'lg':
+      break
+    case 'md':
+    default:
+  }
   return (
     <button
       type="button"

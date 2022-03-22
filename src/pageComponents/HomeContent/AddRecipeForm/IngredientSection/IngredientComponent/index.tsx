@@ -3,7 +3,7 @@ import styles from './IngredientComponent.module.scss'
 import DropDown from '../../../../../components/DropDown'
 import { Units } from '../types'
 import IconButton from '../../../../../components/IconButton'
-import { FiEdit, FiSave, FiPlus } from 'react-icons/fi'
+import { FiEdit, FiSave, FiPlus, FiMinus } from 'react-icons/fi'
 import { getUnit } from './getUnit'
 
 interface IngredientCompProps {
@@ -19,6 +19,7 @@ interface IngredientCompProps {
   index: number
   startEditing: () => void
   stopEditing: () => void
+  onRemove: () => void
 }
 const IngredientComponent: React.FunctionComponent<IngredientCompProps> = ({
   name,
@@ -33,11 +34,13 @@ const IngredientComponent: React.FunctionComponent<IngredientCompProps> = ({
   index,
   startEditing,
   stopEditing,
+  onRemove,
 }) => {
   const isEditingThisEntry: boolean = index === editingIndex
   const isEditing: boolean = editingIndex !== -1
   const activeSection: boolean = isEditing ? isEditingThisEntry : isLast
   const showEdit: boolean = !isLast && !isEditingThisEntry
+  const showRemove: boolean = !isLast
   if (isLast && isEditing) {
     return <></>
   }
@@ -78,12 +81,22 @@ const IngredientComponent: React.FunctionComponent<IngredientCompProps> = ({
           )}
         </div>
       </td>
-      <td>
+      <td className={styles.controls}>
         {isLast && (
           <IconButton
             Icon={FiPlus}
             onClick={() => onAdd()}
             disabled={name === '' || amount === '' || isEditing}
+            size="sm"
+          />
+        )}
+        {showRemove && (
+          <IconButton
+            Icon={FiMinus}
+            onClick={() => onRemove()}
+            disabled={isEditing}
+            size="sm"
+            style="danger"
           />
         )}
         {isEditingThisEntry && (
@@ -91,6 +104,7 @@ const IngredientComponent: React.FunctionComponent<IngredientCompProps> = ({
             Icon={FiSave}
             onClick={() => stopEditing()}
             disabled={name === '' || amount === ''}
+            size="sm"
           />
         )}
         {showEdit && (
@@ -98,6 +112,7 @@ const IngredientComponent: React.FunctionComponent<IngredientCompProps> = ({
             Icon={FiEdit}
             onClick={() => startEditing()}
             disabled={isEditing}
+            size="sm"
           />
         )}
       </td>
