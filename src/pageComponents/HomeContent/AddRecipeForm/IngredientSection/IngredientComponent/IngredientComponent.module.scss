@@ -27,11 +27,15 @@
   }
 }
 .controls {
-  min-width: 80px;
+  min-width: 5%;
   padding: 7px 4px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  .button_wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .disabledColor {

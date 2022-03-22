@@ -32,6 +32,7 @@ const IngredientSection: React.FunctionComponent<IngredientSectionProps> = ({
                 <th className={styles.title}>Amount</th>
                 <th className={styles.title}>Unit</th>
                 <th className={styles.title} />
+                <th className={styles.title} />
               </tr>
               {ingredients.map(({ name, amount, unit, id }, index) => (
                 <IngredientComponent

@@ -82,42 +82,48 @@ const IngredientComponent: React.FunctionComponent<IngredientCompProps> = ({
         </div>
       </td>
       <td className={styles.controls}>
-        {isLast && (
-          <IconButton
-            Icon={FiPlus}
-            onClick={() => onAdd()}
-            disabled={name === '' || amount === '' || isEditing}
-            size="small"
-            style="primary"
-          />
-        )}
-        {showRemove && (
-          <IconButton
-            Icon={FiMinus}
-            onClick={() => onRemove()}
-            disabled={isEditing}
-            size="small"
-            style="danger"
-          />
-        )}
-        {isEditingThisEntry && (
-          <IconButton
-            Icon={FiSave}
-            onClick={() => stopEditing()}
-            disabled={name === '' || amount === ''}
-            size="small"
-            style="primary"
-          />
-        )}
-        {showEdit && (
-          <IconButton
-            Icon={FiEdit}
-            onClick={() => startEditing()}
-            disabled={isEditing}
-            size="small"
-            style="primary"
-          />
-        )}
+        <div className={styles.button_wrapper}>
+          {isEditingThisEntry && (
+            <IconButton
+              Icon={FiSave}
+              onClick={() => stopEditing()}
+              disabled={name === '' || amount === ''}
+              size="small"
+              style="primary"
+            />
+          )}
+          {showEdit && (
+            <IconButton
+              Icon={FiEdit}
+              onClick={() => startEditing()}
+              disabled={isEditing}
+              size="small"
+              style="primary"
+            />
+          )}
+        </div>
+      </td>
+      <td className={styles.controls}>
+        <div className={styles.button_wrapper}>
+          {isLast && (
+            <IconButton
+              Icon={FiPlus}
+              onClick={() => onAdd()}
+              disabled={name === '' || amount === '' || isEditing}
+              size="small"
+              style="primary"
+            />
+          )}
+          {showRemove && (
+            <IconButton
+              Icon={FiMinus}
+              onClick={() => onRemove()}
+              disabled={isEditing}
+              size="small"
+              style="danger"
+            />
+          )}
+        </div>
       </td>
     </tr>
   )

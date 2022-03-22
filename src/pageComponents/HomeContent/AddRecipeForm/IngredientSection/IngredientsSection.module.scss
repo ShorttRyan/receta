@@ -54,6 +54,7 @@
     padding: 0;
     border-spacing: 0;
     .title {
+      min-width: 31px;
       color: $primary;
       border-bottom: 2px solid $primary;
       padding-bottom: 5px;
