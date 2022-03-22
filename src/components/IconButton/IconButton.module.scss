@@ -33,9 +33,11 @@ $border-radius: 0.5;
     color: $primary;
     transition: all 0.25s ease;
   }
-  &:hover{
-    .icon {
-      color: white;
+  @media(min-width: $mobile) {
+    &:hover{
+      .icon {
+        color: white;
+      }
     }
   }
 }
@@ -81,19 +83,21 @@ $border-radius: 0.5;
     transition-duration: 0.5s;
     box-shadow: inset 0 0 0 1px $primary;
   }
-  &.medium {
-    &:hover::before{
-      box-shadow: inset 0 0 0 $iconSize $primary;
+  @media(min-width: $mobile) {
+    &.medium {
+      &:hover::before{
+        box-shadow: inset 0 0 0 $iconSize $primary;
+      }
     }
-  }
-  &.small {
-    &:hover::before{
-      box-shadow: inset 0 0 0 $iconSizeSm $primary;
+    &.small {
+      &:hover::before{
+        box-shadow: inset 0 0 0 $iconSizeSm $primary;
+      }
     }
-  }
-  &.large {
-    &:hover::before{
-      box-shadow: inset 0 0 0 $iconSizeLg $primary;
+    &.large {
+      &:hover::before{
+        box-shadow: inset 0 0 0 $iconSizeLg $primary;
+      }
     }
   }
 }
@@ -103,28 +107,25 @@ $border-radius: 0.5;
     transition-duration: 0.5s;
     box-shadow: inset 0 0 0 1px $error;
   }
-  &.medium {
-    &:hover::before{
-      box-shadow: inset 0 0 0 $iconSize $error;
+  @media(min-width: $mobile) {
+    &.medium {
+      &:hover::before{
+        box-shadow: inset 0 0 0 $iconSize $error;
+      }
     }
-  }
-  &.small {
-    &:hover::before{
-      box-shadow: inset 0 0 0 $iconSizeSm $error;
+    &.small {
+      &:hover::before{
+        box-shadow: inset 0 0 0 $iconSizeSm $error;
+      }
     }
-  }
-  &.large {
-    &:hover::before{
-      box-shadow: inset 0 0 0 $iconSizeLg $error;
+    &.large {
+      &:hover::before{
+        box-shadow: inset 0 0 0 $iconSizeLg $error;
+      }
     }
   }
   .icon {
     color: $error !important;
-  }
-  &:hover {
-    .icon {
-      color: white !important;
-    }
   }
 }
 
