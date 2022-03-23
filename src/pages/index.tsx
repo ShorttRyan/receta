@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { GetServerSideProps } from 'next'
-import { prisma, serialize, validateAccessToken } from '../utils/Server'
+import { prisma, validateAccessToken } from '../utils/Server'
 import MainTemplate from '../templates/Main'
 import HomeContent from '../pageComponents/HomeContent'
 import { Recipe } from '@prisma/client'
