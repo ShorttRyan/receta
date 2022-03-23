@@ -24,6 +24,7 @@ const Login: React.FunctionComponent<LoginProps> = ({ hide }) => {
         newCredentials.username.error = false
         newCredentials.password.error = false
         setCredentials(newCredentials)
+        // noinspection JSUnusedLocalSymbols
         const [result, error] = await logIn({
           username: credentials.username.value,
           password: credentials.password.value,

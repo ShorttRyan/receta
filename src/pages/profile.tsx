@@ -1,3 +1,5 @@
+// noinspection HtmlUnknownTarget
+
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { GetServerSideProps } from 'next'
@@ -37,8 +39,10 @@ const Profile: NextPage<ProfilePageProps> = (props) => {
 }
 
 // @ts-ignore
+// noinspection JSUnusedGlobalSymbols
 export const getServerSideProps: GetServerSideProps = ({ req, res }) => {
   const cookies = req.cookies
+  // noinspection JSUnusedLocalSymbols
   const [token, error] = validateAccessToken(cookies?.auth, '/profile.tsx')
   if (token === undefined) {
     res.writeHead(303, { Location: '/login' })
@@ -55,4 +59,5 @@ export const getServerSideProps: GetServerSideProps = ({ req, res }) => {
   }
 }
 
+// noinspection JSUnusedGlobalSymbols
 export default Profile

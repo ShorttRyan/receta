@@ -24,8 +24,10 @@ const Login: NextPage = () => {
 }
 
 // @ts-ignore
+// noinspection JSUnusedGlobalSymbols
 export const getServerSideProps: GetServerSideProps = ({ req, res }) => {
   const cookies = req.cookies
+  // noinspection JSUnusedLocalSymbols
   const [token, error] = validateAccessToken(cookies?.auth, '/login.tsx')
   if (token) {
     res.writeHead(303, { Location: '/' })

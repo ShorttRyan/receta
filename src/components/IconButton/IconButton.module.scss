@@ -127,6 +127,7 @@ $border-radius: 0.5;
         box-shadow: inset 0 0 0 $iconSizeSm $error;
       }
     }
+    //noinspection ALL
     &.large {
       &:hover::before{
         box-shadow: inset 0 0 0 $iconSizeLg $error;

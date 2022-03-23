@@ -1,9 +1,5 @@
 @import './src/styles/variables';
 
-.row {
-
-}
-
 .name {
   width: 55%;
   padding: 7px 4px;
@@ -38,16 +34,18 @@
   }
 }
 
-.disabledColor {
+.disabled_unit {
   padding-left: 6px;
+  padding-bottom: 5px;
   color: $disabledInput;
 }
 
 .input {
   width: 100%;
-  border: none;
   outline: none;
+  border: none;
   border-bottom: 1px solid $primaryBright;
+  border-radius: 0;
   font-size: 18px;
   background: none !important;
   padding-bottom: 5px;
@@ -58,13 +56,15 @@
 }
 
 .disabledInput {
+  -webkit-appearance: none;
+  background: none;
   border-bottom: none !important;
   padding-left: 6px;
+  color: $disabledInput !important;
+  opacity: 1;
+  -webkit-text-fill-color: $disabledInput;
   &:focus {
     border-bottom:  none !important;
   }
 }
 
-.plus {
-  margin: -2px 0 0 0;
-}

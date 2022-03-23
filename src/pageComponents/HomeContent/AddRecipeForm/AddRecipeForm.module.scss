@@ -4,12 +4,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 20px;
 }
 .input_name {
   color: $primary;
-  font-weight: 600;
-  font-size: 16px;
+  font-size: $sectionTitleFontSize;
+  font-weight: $sectionTitleFontWeight;
 }
 .section_meta {
   padding: 20px;
@@ -20,12 +19,12 @@
   }
 }
 .ttc_wrapper {
-  margin-top: 20px;
+  margin-top: 50px;
   border-bottom: 2px solid $primaryBright;
-  //box-shadow: 0 15px 10px -10px rgb(0,0,0, 0.1);
+  box-shadow: $underShadow;
   .timer_wrapper {
     width: 100%;
-    margin: 10px 0;
+    margin: $sectionMargin;
     display: flex;
     justify-content: center;
   }

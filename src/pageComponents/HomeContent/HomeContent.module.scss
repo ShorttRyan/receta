@@ -29,6 +29,8 @@ $containerHeight: 52px;
       cursor: pointer;
       box-shadow: 0 30px 60px rgb(0,0,0,0.15);
     }
+
+    //noinspection ALL
     &.activeTab {
       color: $primary !important;
     }
