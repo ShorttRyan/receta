@@ -1,0 +1,27 @@
+@import '../src/styles/variables';
+
+.contentWrapper_Empty {
+  position: absolute;
+  width: calc(100% - #{2*$contentPadding});
+  max-width: $large - 2*$contentPadding;
+  height: calc(100% - #{$navBarHeight} - #{$subNavHeight} - #{$extraPadding});
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @media(max-width: $mobile) {
+    width: 100%;
+  }
+}
+.add_recipe_empty {
+  position: absolute;
+  top: $contentPadding;
+  right: $contentPadding;
+}
+.empty_title {
+  font-size: 24px;
+  color: $primary;
+  font-weight: 500;
+  margin-bottom: 24px;
+  text-align: center;
+}

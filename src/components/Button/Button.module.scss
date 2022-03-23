@@ -7,39 +7,56 @@
   font-weight: 600;
   cursor: pointer;
   outline: inherit;
+  color: white;
 }
 
 .login {
   background: $primary;
-  color: white;
 }
 .login__muted {
   background: $primaryBright;
-  color: white;
 }
 
 .primary {
   background: $primary;
-  color: white;
 }
 .primary:hover {
   background: $primaryBright;
-  color: white;
 }
 .primary__disabled {
-  background: $primaryBright;
-  color: white;
+  background: $disabled;
 }
 
 .danger {
   background: $error;
-  color: white;
 }
 .danger:hover {
-  background: $errorMuted;
-  color: white;
+  background: $errorBright;
 }
 .danger__disabled {
-  background: $errorMuted;
-  color: white;
+  background: $disabled;
+}
+
+.circle {
+  height: 30px;
+  width: 30px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.option_selected {
+  font-weight: 800;
+  background: $primaryBright;
+}
+.option_unselected {
+  background: $disabled;
+  font-weight: 800;
+  &:hover {
+    background: $primaryBright;
+    font-size: initial;
+  }
 }
