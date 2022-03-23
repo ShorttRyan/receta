@@ -52,9 +52,12 @@ const IngredientComponent: React.FunctionComponent<IngredientCompProps> = ({
             !activeSection && styles.disabledInput
           }`}
           name="ingredient name"
+          type="input"
+          id="ingredientName"
           value={name}
           onChange={(e) => onNameChange(e.target.value)}
           disabled={!activeSection}
+          aria-label="Ingredient Name"
         />
       </td>
       <td className={styles.amount}>
@@ -63,9 +66,12 @@ const IngredientComponent: React.FunctionComponent<IngredientCompProps> = ({
             !activeSection && styles.disabledInput
           }`}
           name="amount"
+          type="input"
+          id="ingredientAmount"
           value={amount}
           onChange={(e) => onAmountChange(e.target.value)}
           disabled={!activeSection}
+          aria-label="Ingredient Amount"
         />
       </td>
       <td className={styles.unit}>

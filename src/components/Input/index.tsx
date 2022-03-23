@@ -41,6 +41,7 @@ const Input: React.FunctionComponent<InputProps> = ({
           error && styles.form__field__error
         } ${title && styles.removeMargin}`}
         placeholder={placeholder}
+        aria-label={name}
         name={name}
         id={id}
         value={value}

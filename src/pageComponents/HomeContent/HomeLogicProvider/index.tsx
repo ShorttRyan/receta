@@ -8,7 +8,7 @@ interface HomeLogicInterface {
 export const HomeLogicContext = React.createContext({} as HomeLogicInterface)
 
 export const HomeLogicProvider: React.FunctionComponent = ({ children }) => {
-  const [addingRecipe, setAddingRecipe] = useState<boolean>(false)
+  const [addingRecipe, setAddingRecipe] = useState<boolean>(true)
   return (
     <HomeLogicContext.Provider value={{ addingRecipe, setAddingRecipe }}>
       {children}
