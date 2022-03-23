@@ -23,6 +23,7 @@ const HomeContent: React.FunctionComponent<HomePageProps> = (props) => {
             ${content === HomeTabs.MyRecipes && styles.activeTab}
             `}
             onClick={() => switchContent(HomeTabs.MyRecipes)}
+            aria-label="My Recipes"
           >
             My Recipes
           </button>
@@ -32,6 +33,7 @@ const HomeContent: React.FunctionComponent<HomePageProps> = (props) => {
             ${content === HomeTabs.LikedRecipes && styles.activeTab}
             `}
             onClick={() => switchContent(HomeTabs.LikedRecipes)}
+            aria-label="Liked Recipes"
           >
             Liked Recipes
           </button>

@@ -84,6 +84,7 @@ const Login: React.FunctionComponent<LoginProps> = ({ hide }) => {
           type="submit"
           disabled={disabled}
           style="primary"
+          name="Log in"
         />
       </div>
     </form>

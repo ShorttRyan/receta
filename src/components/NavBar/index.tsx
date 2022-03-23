@@ -14,7 +14,7 @@ const NavBar: React.FunctionComponent = () => {
           </a>
         </Link>
         <Link href={'/profile'}>
-          <a>
+          <a aria-label="Profile Page Link">
             <NavLink icon={<IoPersonCircleOutline />} />
           </a>
         </Link>

@@ -24,6 +24,7 @@ const EmptySectionComponent: React.FunctionComponent<EmptySectionProps> = ({
             disabled={false}
             style="primary"
             size="large"
+            name="Upload a Recipe"
           />
         </div>
       )}

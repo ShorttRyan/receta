@@ -8,6 +8,7 @@ interface IconButtonProps {
   disabled: boolean
   style: 'primary' | 'danger'
   size: 'small' | 'medium' | 'large'
+  name: string
 }
 
 const IconButton: React.FunctionComponent<IconButtonProps> = ({
@@ -16,6 +17,7 @@ const IconButton: React.FunctionComponent<IconButtonProps> = ({
   disabled,
   size,
   style,
+  name,
 }) => {
   let buttonClassNames
   let wrapperClassNames = `${styles.iconWrapper}`
@@ -43,6 +45,7 @@ const IconButton: React.FunctionComponent<IconButtonProps> = ({
       onClick={() => onClick()}
       className={buttonClassNames}
       disabled={disabled}
+      aria-label={name}
     >
       <div className={wrapperClassNames}>
         <Icon className={styles.icon} />

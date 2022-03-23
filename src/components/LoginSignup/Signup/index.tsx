@@ -174,6 +174,7 @@ const Signup: React.FunctionComponent<SignupProps> = ({ hide }) => {
           type="submit"
           disabled={disabled}
           style="primary"
+          name="Sign Up"
         />
       </div>
     </form>
