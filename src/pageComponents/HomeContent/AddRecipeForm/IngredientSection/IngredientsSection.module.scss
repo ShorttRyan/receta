@@ -44,20 +44,21 @@
 }
 
 .list_wrapper {
-  margin-top: 30px;
+  margin: 10px 0;
   width: 100%;
   display: flex;
   justify-content: center;
   padding-bottom: 20px;
   .list {
-    max-width: 450px;
     width: 100%;
     padding: 0;
     border-spacing: 0;
     .title {
+      min-width: 31px;
       color: $primary;
       border-bottom: 2px solid $primary;
       padding-bottom: 5px;
+      text-align: left;
     }
   }
 }

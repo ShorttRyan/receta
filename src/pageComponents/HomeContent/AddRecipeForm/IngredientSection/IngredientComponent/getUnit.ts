@@ -1,8 +1,6 @@
+import { UnitPluralToSingular } from '../types'
+
 export const getUnit = (unit: string, amount: string) => {
-  const plural = ['Cup']
-  console.log({ amount })
-  if (plural.includes(unit) && amount !== '1') {
-    return `${unit}s`
-  }
-  return unit
+  const pluralUnit = UnitPluralToSingular?.[unit]
+  return amount == '1' && pluralUnit !== undefined ? pluralUnit : unit
 }

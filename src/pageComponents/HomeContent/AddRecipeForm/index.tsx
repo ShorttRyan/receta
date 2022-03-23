@@ -5,12 +5,15 @@ import { AddRecipeForm, initialValue } from './types'
 import Timer from './Timer'
 import IngredientSection from './IngredientSection'
 import { Ingredient } from './IngredientSection/types'
+import { uuid } from '../../../utils'
 
 const AddRecipe: React.FunctionComponent = () => {
   const [form, setForm] = useState<AddRecipeForm>(initialValue)
   const [hours, setHours] = useState<number>(0)
   const [minutes, setMinutes] = useState<number>(0)
-  const [ingredients, setIngredients] = useState<Ingredient[]>([])
+  const [ingredients, setIngredients] = useState<Ingredient[]>([
+    { name: '', amount: '', unit: 'N/A', id: uuid() },
+  ])
   return (
     <div className={styles.form_wrapper}>
       <div className={styles.section_meta}>

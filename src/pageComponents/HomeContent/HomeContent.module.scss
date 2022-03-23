@@ -13,7 +13,7 @@ $containerHeight: 52px;
     width: 100%;
     position: absolute;
     height: $borderWidth;
-    background: $primary;
+    background: $disabledDark;
   }
   .subNavLinkWrapper {
     position: relative;
@@ -21,25 +21,24 @@ $containerHeight: 52px;
   }
   .subNavLink {
     all: unset;
-    color: $primary;
+    color: $disabledDark;
     font-weight: bold;
     padding: $buttonPadding/2 30px $buttonPadding/2 30px;
     border: none;
     &:hover {
-      color: $primaryBright;
       cursor: pointer;
       box-shadow: 0 30px 60px rgb(0,0,0,0.15);
     }
     &.activeTab {
-      color: $primaryBright !important;
+      color: $primary !important;
     }
   }
 }
 .subNavLinkWrapper .activeTab {
   border-width: 0;
-  border-bottom: $borderWidth solid $primaryBright
+  border-bottom: $borderWidth solid $primary
 }
 .subNavLinkWrapper .activeTab:hover {
   border-width: 0;
-  border-bottom: $borderWidth solid $primaryBright
+  border-bottom: $borderWidth solid $primary
 }

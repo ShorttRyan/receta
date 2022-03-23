@@ -2,29 +2,21 @@ import React from 'react'
 import styles from './DropDown.module.scss'
 
 interface DropDownProps {
-  id: string
-  label: string
-  name: string
   options: string[]
+  value: string
   onChange: (newVal: string) => void
 }
 
 const DropDown: React.FunctionComponent<DropDownProps> = ({
-  id,
-  label,
-  name,
   options,
+  value,
   onChange,
 }) => {
   return (
     <div className={styles.dd_wrapper}>
-      <label className={styles.label} htmlFor={id}>
-        {label}:
-      </label>
       <select
         className={styles.select}
-        id={id}
-        name={name}
+        value={value}
         onChange={(e) => onChange(e.target.value)}
       >
         {options.map((option) => (

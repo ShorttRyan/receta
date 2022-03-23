@@ -1,20 +1,51 @@
 import React from 'react'
 import styles from './IconButton.module.scss'
-import { FiEdit } from 'react-icons/fi'
+import { IconType } from 'react-icons'
 
 interface IconButtonProps {
   onClick: () => void
+  Icon: IconType
+  disabled: boolean
+  style: 'primary' | 'danger'
+  size: 'small' | 'medium' | 'large'
 }
 
-const IconButton: React.FunctionComponent<IconButtonProps> = ({ onClick }) => {
+const IconButton: React.FunctionComponent<IconButtonProps> = ({
+  onClick,
+  Icon,
+  disabled,
+  size,
+  style,
+}) => {
+  let buttonClassNames
+  let wrapperClassNames = `${styles.iconWrapper}`
+  switch (size) {
+    case 'small':
+      buttonClassNames = styles.small_button
+      wrapperClassNames += ` ${disabled ? styles.disabled : styles[style]}`
+      wrapperClassNames += ` ${styles[size]}`
+      break
+    case 'large':
+      buttonClassNames = styles.large_button
+      wrapperClassNames += ` ${disabled ? styles.disabled : styles[style]}`
+      wrapperClassNames += ` ${styles[size]}`
+      break
+    case 'medium':
+    default:
+      buttonClassNames = styles.medium_button
+      wrapperClassNames += ` ${disabled ? styles.disabled : styles[style]}`
+      wrapperClassNames += ` ${styles[size]}`
+      break
+  }
   return (
     <button
       type="button"
       onClick={() => onClick()}
-      className={styles.buttonWrapper}
+      className={buttonClassNames}
+      disabled={disabled}
     >
-      <div className={`${styles.iconWrapper} ${styles.iconFill}`}>
-        <FiEdit className={styles.icon} />
+      <div className={wrapperClassNames}>
+        <Icon className={styles.icon} />
       </div>
     </button>
   )

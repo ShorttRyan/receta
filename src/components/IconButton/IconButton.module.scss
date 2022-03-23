@@ -1,15 +1,31 @@
 @import'../src/styles/variables';
 $border-radius: 0.5;
-.buttonWrapper{
+.small_button{
   all: unset;
+  height: $iconSizeSm;
+}
+.medium_button{
+  all: unset;
+  height: $iconSizeSm;
+}
+.large_button{
+  all: unset;
+  height: $iconSize;
+}
+.disabled {
+  .icon{
+    color: $disabled !important;
+  }
+  &:hover{
+    .icon {
+      color: $disabled !important;
+    }
+  }
 }
 .iconWrapper{
   cursor: pointer;
   position: relative;
   display: inline-block;
-  width: $iconSize;
-  height: $iconSize;
-  border-radius: $iconSize*$border-radius;
   overflow: hidden;
   &::before, &::after{
     content: '';
@@ -19,29 +35,120 @@ $border-radius: 0.5;
     height: 100%;
     width: 100%;
     transition: all 0.25s ease;
-    border-radius: $iconSize*$border-radius;
   }
   .icon{
     position: relative;
     color: $primary;
+    transition: all 0.25s ease;
+  }
+  &:focus {
+    border: 5px solid $primaryBright;
+  }
+}
+.medium{
+  width: $iconSize;
+  height: $iconSize;
+  &::before, &::after{
+    border-radius: $iconSize*$border-radius;
+  }
+  .icon{
     font-size: $iconSize/2;
     margin-top: $iconSize/4;
     margin-left: $iconSize/4;
-    transition: all 0.25s ease;
   }
-  &:hover{
-    .icon {
-      color: white;
-    }
+}
+.small{
+  width: $iconSizeSm;
+  height: $iconSizeSm;
+  &::before, &::after{
+    border-radius: $iconSizeSm*$border-radius;
+  }
+  .icon{
+    font-size: $iconSizeSm/2;
+    margin-top: $iconSizeSm/4;
+    margin-left: $iconSizeSm/4;
+  }
+}
+.large{
+  width: $iconSizeLg;
+  height: $iconSizeLg;
+  &::before, &::after{
+    border-radius: $iconSizeLg*$border-radius;
+  }
+  .icon{
+    font-size: $iconSizeLg/2;
+    margin-top: $iconSizeLg/4;
+    margin-left: $iconSizeLg/4;
   }
 }
 
-.iconFill{
+.primary{
   &::before{
     transition-duration: 0.5s;
     box-shadow: inset 0 0 0 1px $primary;
   }
+  @media(min-width: $mobile) {
+    &.medium {
+      &:hover::before{
+        box-shadow: inset 0 0 0 $iconSize $primary;
+      }
+    }
+    &.small {
+      &:hover::before{
+        box-shadow: inset 0 0 0 $iconSizeSm $primary;
+      }
+    }
+    &.large {
+      &:hover::before{
+        box-shadow: inset 0 0 0 $iconSizeLg $primary;
+      }
+    }
+    &:hover {
+      .icon {
+        color: white;
+      }
+    }
+  }
+}
+
+.danger{
+  &::before{
+    transition-duration: 0.5s;
+    box-shadow: inset 0 0 0 1px $error;
+  }
+  @media(min-width: $mobile) {
+    &.medium {
+      &:hover::before{
+        box-shadow: inset 0 0 0 $iconSize $error;
+      }
+    }
+    &.small {
+      &:hover::before{
+        box-shadow: inset 0 0 0 $iconSizeSm $error;
+      }
+    }
+    &.large {
+      &:hover::before{
+        box-shadow: inset 0 0 0 $iconSizeLg $error;
+      }
+    }
+    &:hover {
+      .icon {
+        color: white !important;
+      }
+    }
+  }
+  .icon {
+    color: $error;
+  }
+}
+
+.disabled{
+  &::before{
+    transition-duration: 0.5s;
+    box-shadow: inset 0 0 0 1px $disabled !important;
+  }
   &:hover::before{
-    box-shadow: inset 0 0 0 $iconSize $primary;
+    box-shadow: inset 0 0 0 1px $disabled !important;
   }
 }
