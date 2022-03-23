@@ -1,27 +1,14 @@
-import React, { useState } from 'react'
-import { Ingredient } from './types'
+import React, { useContext, useState } from 'react'
 import IngredientComponent from './IngredientComponent'
 import styles from './IngredientsSection.module.scss'
 import { uuid } from '../../../../utils'
+import { AddRecipeContext } from '../../AddRecipeContext'
 
-interface IngredientSectionProps {
-  ingredients: Ingredient[]
-  setIngredients: React.Dispatch<React.SetStateAction<Ingredient[]>>
-}
-
-const IngredientSection: React.FunctionComponent<IngredientSectionProps> = ({
-  ingredients,
-  setIngredients,
-}) => {
+const IngredientSection: React.FunctionComponent = () => {
   const [editingIndex, setEditing] = useState<number>(-1)
+  const { ingredients, setIngredients } = useContext(AddRecipeContext)
   return (
-    <form
-      className={styles.section_wrapper}
-      onSubmit={(e) => {
-        e.preventDefault()
-        console.log('hello there')
-      }}
-    >
+    <div className={styles.section_wrapper}>
       <div className={styles.section_title}>Ingredients</div>
       <div className={styles.list_wrapper}>
         {ingredients.length > 0 && (
@@ -82,7 +69,7 @@ const IngredientSection: React.FunctionComponent<IngredientSectionProps> = ({
           </table>
         )}
       </div>
-    </form>
+    </div>
   )
 }
 
