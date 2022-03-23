@@ -15,6 +15,7 @@ interface ButtonProps {
   disabled?: boolean
   onClick?: () => void
   muted?: boolean
+  name: string
 }
 
 const LoginButton: React.FunctionComponent<ButtonProps> = ({
@@ -25,6 +26,7 @@ const LoginButton: React.FunctionComponent<ButtonProps> = ({
   muted,
   style,
   children,
+  name,
 }) => {
   let buttonStyle
   switch (style) {
@@ -68,6 +70,7 @@ const LoginButton: React.FunctionComponent<ButtonProps> = ({
       onClick={onClick ? () => onClick() : undefined}
       type={type}
       disabled={disabled}
+      aria-label={name}
     >
       {label}
       {children}

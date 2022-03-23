@@ -3,7 +3,7 @@ import styles from './HomeContent.module.scss'
 import MyRecipes from './MyRecipes'
 import LikedRecipes from './LikedRecipes'
 import { HomePageProps } from '../../pages'
-import { HomeLogicProvider } from './HomeLogicProvider'
+import { AddRecipeProvider } from './AddRecipeContext'
 
 enum HomeTabs {
   MyRecipes = 'myRecipes',
@@ -13,7 +13,7 @@ enum HomeTabs {
 const HomeContent: React.FunctionComponent<HomePageProps> = (props) => {
   const [content, switchContent] = useState<HomeTabs>(HomeTabs.MyRecipes)
   return (
-    <HomeLogicProvider>
+    <AddRecipeProvider>
       <div className={styles.subNavWrapper}>
         <div className={styles.bottomBar} />
         <div className={styles.subNavLinkWrapper}>
@@ -23,6 +23,7 @@ const HomeContent: React.FunctionComponent<HomePageProps> = (props) => {
             ${content === HomeTabs.MyRecipes && styles.activeTab}
             `}
             onClick={() => switchContent(HomeTabs.MyRecipes)}
+            aria-label="My Recipes"
           >
             My Recipes
           </button>
@@ -32,6 +33,7 @@ const HomeContent: React.FunctionComponent<HomePageProps> = (props) => {
             ${content === HomeTabs.LikedRecipes && styles.activeTab}
             `}
             onClick={() => switchContent(HomeTabs.LikedRecipes)}
+            aria-label="Liked Recipes"
           >
             Liked Recipes
           </button>
@@ -43,7 +45,7 @@ const HomeContent: React.FunctionComponent<HomePageProps> = (props) => {
       {content === HomeTabs.LikedRecipes && (
         <LikedRecipes recipes={props.likedRecipes} />
       )}
-    </HomeLogicProvider>
+    </AddRecipeProvider>
   )
 }
 

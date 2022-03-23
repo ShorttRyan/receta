@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Recipe } from '@prisma/client'
 import styles from '../HomeContent.module.scss'
-import { HomeLogicContext } from '../HomeLogicProvider'
+import { AddRecipeContext } from '../AddRecipeContext'
 import AddRecipe from '../AddRecipeForm'
 import EmptySectionComponent from '../EmptySectionComponent'
 
@@ -10,7 +10,7 @@ interface MyRecipesProps {
 }
 
 const MyRecipes: React.FunctionComponent<MyRecipesProps> = ({ recipes }) => {
-  const { addingRecipe } = useContext(HomeLogicContext)
+  const { addingRecipe } = useContext(AddRecipeContext)
   return (
     <div
       className={

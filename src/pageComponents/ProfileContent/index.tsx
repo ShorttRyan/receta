@@ -30,6 +30,7 @@ const ProfileContent: React.FunctionComponent<ProfilePageProps> = (props) => {
               }
               setDisabled(false)
             }}
+            name="Sign Out"
           />
         </div>
       </div>

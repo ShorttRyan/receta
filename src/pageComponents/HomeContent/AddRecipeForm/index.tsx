@@ -1,30 +1,26 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import styles from './AddRecipeForm.module.scss'
 import Input from '../../../components/Input'
-import { AddRecipeForm, initialValue } from './types'
 import Timer from './Timer'
 import IngredientSection from './IngredientSection'
-import { Ingredient } from './IngredientSection/types'
-import { uuid } from '../../../utils'
+import { AddRecipeContext } from '../AddRecipeContext'
 
 const AddRecipe: React.FunctionComponent = () => {
-  const [form, setForm] = useState<AddRecipeForm>(initialValue)
-  const [hours, setHours] = useState<number>(0)
-  const [minutes, setMinutes] = useState<number>(0)
-  const [ingredients, setIngredients] = useState<Ingredient[]>([
-    { name: '', amount: '', unit: 'N/A', id: uuid() },
-  ])
+  const { form, title, setTitle, hours, setHours, minutes, setMinutes } =
+    useContext(AddRecipeContext)
   return (
-    <div className={styles.form_wrapper}>
+    <form
+      className={styles.form_wrapper}
+      onSubmit={(e) => {
+        e.preventDefault()
+        console.log('submitted')
+      }}
+    >
       <div className={styles.section_meta}>
         <Input
           name="Title"
-          value={form.title.value}
-          setValue={(newVal: string) => {
-            const newForm = { ...form }
-            newForm.title.value = newVal
-            setForm(newForm)
-          }}
+          value={title}
+          setValue={setTitle}
           type="input"
           placeholder="Title"
           id="title"
@@ -49,12 +45,9 @@ const AddRecipe: React.FunctionComponent = () => {
             />
           </div>
         </div>
-        <IngredientSection
-          ingredients={ingredients}
-          setIngredients={setIngredients}
-        />
+        <IngredientSection />
       </div>
-    </div>
+    </form>
   )
 }
 

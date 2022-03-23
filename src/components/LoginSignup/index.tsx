@@ -19,6 +19,7 @@ const LoginSignup: React.FunctionComponent = () => {
                 muted={!showLogin}
                 style="login"
                 type="button"
+                name="Show Log In Prompt"
               />
               <Button
                 onClick={() => setShowLogin(false)}
@@ -26,6 +27,7 @@ const LoginSignup: React.FunctionComponent = () => {
                 muted={showLogin}
                 style="login"
                 type="button"
+                name="Show Sign Up Prompt"
               />
             </div>
           </div>

@@ -23,6 +23,7 @@ const Timer: React.FunctionComponent<TimerProps> = ({
           onClick={() => setValue(value - increment)}
           style="dangerCircle"
           disabled={value === 0}
+          name={`decrease total for ${label}`}
         >
           <div className={styles.buttonOffset}>-</div>
         </Button>
@@ -36,6 +37,7 @@ const Timer: React.FunctionComponent<TimerProps> = ({
           onClick={() => setValue(value + increment)}
           style="primaryCircle"
           disabled={increment === 5 && value === 55}
+          name={`increase total for ${label}`}
         >
           <div className={styles.buttonOffset2}>+</div>
         </Button>

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import styles from './EmptySectionComponent.module.scss'
 import IconButton from '../../../components/IconButton'
-import { HomeLogicContext } from '../HomeLogicProvider'
+import { AddRecipeContext } from '../AddRecipeContext'
 import { FiEdit } from 'react-icons/fi'
 
 interface EmptySectionProps {
@@ -13,7 +13,7 @@ const EmptySectionComponent: React.FunctionComponent<EmptySectionProps> = ({
   message,
   showAddRecipeButton,
 }) => {
-  const { setAddingRecipe } = useContext(HomeLogicContext)
+  const { setAddingRecipe } = useContext(AddRecipeContext)
   return (
     <div className={styles.contentWrapper_Empty}>
       {showAddRecipeButton && (
@@ -24,6 +24,7 @@ const EmptySectionComponent: React.FunctionComponent<EmptySectionProps> = ({
             disabled={false}
             style="primary"
             size="large"
+            name="Upload a Recipe"
           />
         </div>
       )}
