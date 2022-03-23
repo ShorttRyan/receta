@@ -3,7 +3,6 @@ import {
   checkBody,
   logPrismaError,
   prisma,
-  serialize,
   validateAccessToken,
 } from '../../../utils/Server'
 import { Prisma } from '@prisma/client'
@@ -14,6 +13,7 @@ export default async function handler(
 ) {
   switch (req.method) {
     case 'POST':
+      // noinspection JSUnusedLocalSymbols
       const [token, error] = validateAccessToken(
         req.cookies?.auth,
         '/recipes/create',

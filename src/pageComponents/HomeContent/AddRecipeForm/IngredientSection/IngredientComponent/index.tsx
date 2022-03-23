@@ -45,7 +45,7 @@ const IngredientComponent: React.FunctionComponent<IngredientCompProps> = ({
     return <></>
   }
   return (
-    <tr className={styles.row}>
+    <tr>
       <td className={styles.name}>
         <input
           className={`${styles.input} ${
@@ -77,7 +77,7 @@ const IngredientComponent: React.FunctionComponent<IngredientCompProps> = ({
               onChange={(newVal) => onUnitChange(newVal)}
             />
           ) : (
-            <div className={styles.disabledColor}>{getUnit(unit, amount)}</div>
+            <div className={styles.disabled_unit}>{getUnit(unit, amount)}</div>
           )}
         </div>
       </td>

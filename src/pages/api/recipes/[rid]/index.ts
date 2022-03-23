@@ -7,6 +7,7 @@ import {
 } from '../../../../utils/Server'
 import { Prisma } from '@prisma/client'
 
+// noinspection JSUnusedGlobalSymbols
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
@@ -15,6 +16,7 @@ export default async function handler(
   const RID = rid as string
   switch (req.method) {
     case 'DELETE':
+      // noinspection JSUnusedLocalSymbols
       const [token, error] = validateAccessToken(
         req.cookies?.auth,
         `POST /recipes/[${RID}]/like`,

@@ -1,7 +1,9 @@
+// noinspection HtmlUnknownTarget
+
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { GetServerSideProps } from 'next'
-import { prisma, serialize, validateAccessToken } from '../utils/Server'
+import { prisma, validateAccessToken } from '../utils/Server'
 import MainTemplate from '../templates/Main'
 import HomeContent from '../pageComponents/HomeContent'
 import { Recipe } from '@prisma/client'
@@ -40,8 +42,10 @@ const Home: NextPage<HomePageProps> = (props) => {
 }
 
 // @ts-ignore
+// noinspection JSUnusedGlobalSymbols
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const cookies = req.cookies
+  // noinspection JSUnusedLocalSymbols
   const [token, error] = validateAccessToken(cookies?.auth)
   if (token === undefined) {
     res.writeHead(303, { Location: '/login' })
