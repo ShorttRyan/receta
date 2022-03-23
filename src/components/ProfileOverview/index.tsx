@@ -132,11 +132,17 @@ const ProfileOverview: React.FunctionComponent<ProfileOverviewProps> = ({
               message={info.email.message}
             />
             <div className={styles.buttonSection}>
-              <Button label="Submit" type="submit" disabled={disabled} />
+              <Button
+                label="Submit"
+                type="submit"
+                disabled={disabled}
+                name="Submit Changes"
+              />
               <Button
                 label="Cancel"
                 type="button"
                 style="danger"
+                name="Cancel Changes"
                 onClick={() => setEditing(false)}
               />
             </div>
@@ -150,6 +156,7 @@ const ProfileOverview: React.FunctionComponent<ProfileOverviewProps> = ({
                 disabled={false}
                 style="primary"
                 size="medium"
+                name="Edit Profile Info"
               />
             </div>
             <div className={styles.infoSection}>

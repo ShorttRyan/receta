@@ -51,10 +51,13 @@ const IngredientComponent: React.FunctionComponent<IngredientCompProps> = ({
           className={`${styles.input} ${
             !activeSection && styles.disabledInput
           }`}
-          name="name"
+          name="ingredient name"
+          type="input"
+          id="ingredientName"
           value={name}
           onChange={(e) => onNameChange(e.target.value)}
           disabled={!activeSection}
+          aria-label="Ingredient Name"
         />
       </td>
       <td className={styles.amount}>
@@ -63,9 +66,12 @@ const IngredientComponent: React.FunctionComponent<IngredientCompProps> = ({
             !activeSection && styles.disabledInput
           }`}
           name="amount"
+          type="input"
+          id="ingredientAmount"
           value={amount}
           onChange={(e) => onAmountChange(e.target.value)}
           disabled={!activeSection}
+          aria-label="Ingredient Amount"
         />
       </td>
       <td className={styles.unit}>
@@ -90,6 +96,7 @@ const IngredientComponent: React.FunctionComponent<IngredientCompProps> = ({
               disabled={name === '' || amount === ''}
               size="small"
               style="primary"
+              name="Save Ingredient"
             />
           )}
           {showEdit && (
@@ -99,6 +106,7 @@ const IngredientComponent: React.FunctionComponent<IngredientCompProps> = ({
               disabled={isEditing}
               size="small"
               style="primary"
+              name="Edit Ingredient"
             />
           )}
         </div>
@@ -112,6 +120,7 @@ const IngredientComponent: React.FunctionComponent<IngredientCompProps> = ({
               disabled={name === '' || amount === '' || isEditing}
               size="small"
               style="primary"
+              name="Add Ingredient"
             />
           )}
           {showRemove && (
@@ -121,6 +130,7 @@ const IngredientComponent: React.FunctionComponent<IngredientCompProps> = ({
               disabled={isEditing}
               size="small"
               style="danger"
+              name="Remove Ingredient"
             />
           )}
         </div>
