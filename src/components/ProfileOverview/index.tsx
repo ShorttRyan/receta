@@ -50,6 +50,7 @@ const ProfileOverview: React.FunctionComponent<ProfileOverviewProps> = ({
               e.preventDefault()
               if (!preUpdateProfileSubmit(info, setInfo)) return
               setDisabled(true)
+              // noinspection JSUnusedLocalSymbols
               const [response, error] = await updateProfileInfo({
                 firstName: info.firstName.value,
                 lastName: info.lastName.value,

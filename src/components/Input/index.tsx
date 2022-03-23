@@ -31,9 +31,9 @@ const Input: React.FunctionComponent<InputProps> = ({
 }) => {
   return (
     <div
-      className={`${styles.form__group} ${styles.field}  ${
-        error && useShake && styles.form__group__shake
-      }`}
+      className={`${styles.form__group} ${styles.field} ${
+        title && styles.shadow
+      } ${error && useShake && styles.form__group__shake}`}
     >
       <input
         type={type}
@@ -60,7 +60,9 @@ const Input: React.FunctionComponent<InputProps> = ({
       >
         {name}
       </label>
-      <div className={styles.form__error_message}>{error && message}</div>
+      {!title && (
+        <div className={styles.form__error_message}>{error && message}</div>
+      )}
     </div>
   )
 }

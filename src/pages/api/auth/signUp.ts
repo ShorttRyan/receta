@@ -10,6 +10,7 @@ import { Prisma } from '@prisma/client'
 import { serialize } from 'cookie'
 import { cookieOptions } from '../../../constants'
 
+// noinspection JSUnusedGlobalSymbols
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,

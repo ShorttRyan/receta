@@ -1,10 +1,11 @@
-// BREAKPOINTS
+//////////////////////////////////////// BREAKPOINTS
 $mobile: 500px;
 $medium: 800px;
 $large: 1240px;
-// BOX SHADOW
+//////////////////////////////////////// BOX SHADOW
 $boxShadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
-// COLOURS
+$underShadow: 0 12px 10px -10px rgb(0,0,0, 0.1);
+//////////////////////////////////////// COLOURS
 $primary: #228B22;
   $primaryBright: #32CD32;
 //$primaryBright: #4CAF50;
@@ -26,11 +27,19 @@ $errorBright: #FF0101;
 $errorDisabled: #ff9292;
 
 $white: #FBFCEB;
-// SIZES
+//////////////////////////////////////// SIZES
+$navBarHeight: 74px;
+$subNavHeight: 52px;
+
 $iconSize: 30px;
 $iconSizeSm: 25px;
 $iconSizeLg: 40px;
+
 $contentPadding: 20px;
-$navBarHeight: 74px;
-$subNavHeight: 52px;
+
 $extraPadding: 22px;
+//////////////////////////////////////// FONTS
+$sectionTitleFontSize: 19px;
+$sectionTitleFontWeight: 400;
+//////////////////////////////////////// MARGINS
+$sectionMargin: 20px 0 10px 0;

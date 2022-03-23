@@ -21,6 +21,7 @@ const Signup: React.FunctionComponent<SignupProps> = ({ hide }) => {
         e.preventDefault()
         if (!preSignupSubmit(credentials, setCredentials)) return
         setDisabled(true)
+        // noinspection JSUnusedLocalSymbols
         const [response, error] = await signUp({
           email: credentials.email.value,
           username: credentials.username.value,

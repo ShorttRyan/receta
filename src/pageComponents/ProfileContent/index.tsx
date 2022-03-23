@@ -21,6 +21,7 @@ const ProfileContent: React.FunctionComponent<ProfilePageProps> = (props) => {
             disabled={disabled}
             onClick={async () => {
               setDisabled(true)
+              // noinspection JSUnusedLocalSymbols
               const [response, error] = await logOut()
               if (error === undefined) {
                 await router.replace(router.asPath)

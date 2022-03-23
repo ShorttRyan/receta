@@ -10,12 +10,14 @@ import { Prisma } from '@prisma/client'
 import { serialize } from 'cookie'
 import { cookieOptions } from '../../../constants'
 
+// noinspection JSUnusedGlobalSymbols
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
   switch (req.method) {
     case 'PUT':
+      // noinspection JSUnusedLocalSymbols
       const [token, error] = validateAccessToken(
         req.cookies?.auth,
         '/user/updateProfileInfo',

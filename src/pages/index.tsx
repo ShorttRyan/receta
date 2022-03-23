@@ -1,3 +1,5 @@
+// noinspection HtmlUnknownTarget
+
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { GetServerSideProps } from 'next'
@@ -40,8 +42,10 @@ const Home: NextPage<HomePageProps> = (props) => {
 }
 
 // @ts-ignore
+// noinspection JSUnusedGlobalSymbols
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const cookies = req.cookies
+  // noinspection JSUnusedLocalSymbols
   const [token, error] = validateAccessToken(cookies?.auth)
   if (token === undefined) {
     res.writeHead(303, { Location: '/login' })

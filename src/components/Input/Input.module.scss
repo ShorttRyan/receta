@@ -3,6 +3,9 @@
   position: relative;
   padding: 15px 0 0;
   width: 100%;
+  &.shadow {
+    box-shadow: $underShadow;
+  }
 }
 .form__group__shake {
   animation: shake 0.8s;
@@ -24,6 +27,7 @@
     color: transparent;
   }
 
+  //noinspection ALL
   &:placeholder-shown ~ .form__label {
     font-size: 1.1rem;
     cursor: text;
@@ -42,8 +46,8 @@
     color: $primary;
     font-weight:700;
     &.title {
-      font-weight: 700;
-      font-size: 16px;
+      font-size: $sectionTitleFontSize;
+      font-weight: $sectionTitleFontWeight;
       padding-bottom: 5px;
     }
   }
@@ -71,7 +75,6 @@
 .form__error_message {
   color: $error;
   font-size: 10px;
-  min-height: 16px;
 }
 
 .form__label {
@@ -83,8 +86,8 @@
   color: $primaryBright;
   &.title {
     color: $primary;
-    font-weight: 600;
-    font-size: 16px;
+    font-size: $sectionTitleFontSize;
+    font-weight: $sectionTitleFontWeight;
     padding-bottom: 5px;
   }
 }
