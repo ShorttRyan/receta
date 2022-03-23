@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './Input.module.scss'
+import { number } from '../../utils'
 
 interface InputProps {
   name: string
@@ -12,6 +13,7 @@ interface InputProps {
   useShake?: boolean
   message?: string
   onBlur?: () => void
+  title?: boolean
 }
 
 const Input: React.FunctionComponent<InputProps> = ({
@@ -25,10 +27,11 @@ const Input: React.FunctionComponent<InputProps> = ({
   useShake,
   message,
   onBlur,
+  title,
 }) => {
   return (
     <div
-      className={`${styles.form__group} ${styles.field} ${
+      className={`${styles.form__group} ${styles.field}  ${
         error && useShake && styles.form__group__shake
       }`}
     >
@@ -42,11 +45,16 @@ const Input: React.FunctionComponent<InputProps> = ({
         id={id}
         value={value}
         onChange={(e) => setValue(e.target.value)}
+        onKeyDown={(e) =>
+          type === 'number' &&
+          ['e', 'E', '+', '-'].includes(e.key) &&
+          e.preventDefault()
+        }
         onBlur={onBlur ? () => onBlur() : undefined}
       />
       <label
         htmlFor={id}
-        className={`${styles.form__label} ${
+        className={`${styles.form__label} ${title && styles.title} ${
           error && styles.form__label__error
         }`}
       >

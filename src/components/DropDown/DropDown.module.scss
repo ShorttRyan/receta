@@ -1,0 +1,33 @@
+@import './src/styles/variables';
+
+.dd_wrapper {
+  border-bottom: 1px solid $primaryBright;
+  margin-right: 2px;
+  &:focus-within {
+    border-bottom: 2px solid $primaryBright;
+  }
+}
+.label {
+  color: $primaryBright;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.select {
+  border: none;
+  color: $primary;
+  font-weight: 600;
+  padding: 5px 15px 5px 5px;
+  outline: none;
+
+
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%23228B22'><polygon points='0,0 100,0 50,50'/></svg>") no-repeat calc(100% - 2px) 70%;
+  background-size: 10px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.disabled::-ms-expand {
+  display: none;
+}

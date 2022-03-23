@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Recipe } from '@prisma/client'
 import styles from '../HomeContent.module.scss'
-import IconButton from '../../../components/IconButton'
+import { HomeLogicContext } from '../HomeLogicProvider'
+import AddRecipe from '../AddRecipeForm'
+import EmptySectionComponent from '../EmptySectionComponent'
 
 interface MyRecipesProps {
   recipes: Recipe[]
 }
 
 const MyRecipes: React.FunctionComponent<MyRecipesProps> = ({ recipes }) => {
+  const { addingRecipe } = useContext(HomeLogicContext)
   return (
     <div
       className={
@@ -16,19 +19,21 @@ const MyRecipes: React.FunctionComponent<MyRecipesProps> = ({ recipes }) => {
           : styles.recipes_Wrapper_Empty
       }
     >
-      {recipes.length > 0 ? (
-        <div className={styles.contentWrapper_Full}>
-          Display Published Recipes
-        </div>
+      {addingRecipe ? (
+        <AddRecipe />
       ) : (
-        <div className={styles.contentWrapper_Empty}>
-          <div className={styles.add_recipe_empty}>
-            <IconButton onClick={() => console.log('HI')} />
-          </div>
-          <div className={styles.empty_title}>
-            Looks like you haven{`'`}t published any recipes yet!
-          </div>
-        </div>
+        <>
+          {recipes.length > 0 ? (
+            <div className={styles.contentWrapper_Full}>
+              Display Published Recipes
+            </div>
+          ) : (
+            <EmptySectionComponent
+              message={`Looks like you haven't published any recipes yet!`}
+              showAddRecipeButton={true}
+            />
+          )}
+        </>
       )}
     </div>
   )
