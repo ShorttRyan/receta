@@ -39,7 +39,7 @@ const Input: React.FunctionComponent<InputProps> = ({
         type={type}
         className={`${styles.form__field} ${
           error && styles.form__field__error
-        }`}
+        } ${title && styles.removeMargin}`}
         placeholder={placeholder}
         name={name}
         id={id}
