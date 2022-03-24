@@ -1,8 +1,9 @@
 import React from 'react'
 import styles from './NavBar.module.scss'
 import NavLink from './NavLink'
-import { IoPersonCircleOutline } from 'react-icons/io5'
 import Link from 'next/link'
+import Horizontal from '../Logos/Horizontal'
+import ChefHat from '../Logos/ChefHat'
 
 const NavBar: React.FunctionComponent = () => {
   return (
@@ -10,12 +11,12 @@ const NavBar: React.FunctionComponent = () => {
       <div className={styles.navbarContent}>
         <Link href={'/'}>
           <a>
-            <div className={styles.titleWrapper}>🍔 Receta</div>
+            <Horizontal />
           </a>
         </Link>
         <Link href={'/profile'}>
           <a aria-label="Profile Page Link">
-            <NavLink icon={<IoPersonCircleOutline />} />
+            <NavLink icon={<ChefHat />} />
           </a>
         </Link>
       </div>
