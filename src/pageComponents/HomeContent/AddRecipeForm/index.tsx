@@ -4,6 +4,7 @@ import Input from '../../../components/Input'
 import Timer from './Timer'
 import IngredientSection from './IngredientSection'
 import { AddRecipeContext } from '../AddRecipeContext'
+import InstructionSection from './InstructionsSection'
 
 const AddRecipe: React.FunctionComponent = () => {
   const { form, title, setTitle, hours, setHours, minutes, setMinutes } =
@@ -46,6 +47,7 @@ const AddRecipe: React.FunctionComponent = () => {
           </div>
         </div>
         <IngredientSection />
+        <InstructionSection />
       </div>
     </form>
   )

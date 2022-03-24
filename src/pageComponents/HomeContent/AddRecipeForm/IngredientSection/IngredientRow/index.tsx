@@ -1,12 +1,12 @@
 import React from 'react'
-import styles from './IngredientComponent.module.scss'
+import styles from './IngredientRow.module.scss'
 import DropDown from '../../../../../components/DropDown'
 import { Units } from '../types'
 import IconButton from '../../../../../components/IconButton'
 import { FiEdit, FiSave, FiPlus, FiMinus } from 'react-icons/fi'
 import { getUnit } from './getUnit'
 
-interface IngredientCompProps {
+interface IngredientRowProps {
   name: string
   onNameChange: (newVal: string) => void
   amount: string
@@ -21,7 +21,7 @@ interface IngredientCompProps {
   stopEditing: () => void
   onRemove: () => void
 }
-const IngredientComponent: React.FunctionComponent<IngredientCompProps> = ({
+const IngredientRow: React.FunctionComponent<IngredientRowProps> = ({
   name,
   amount,
   unit,
@@ -139,4 +139,4 @@ const IngredientComponent: React.FunctionComponent<IngredientCompProps> = ({
   )
 }
 
-export default IngredientComponent
+export default IngredientRow

@@ -1,0 +1,9 @@
+@import './src/styles/variables';
+
+.svgFill {
+  fill: $primary;
+  cursor: pointer;
+  &:hover {
+    fill: $primaryBright;
+  }
+}

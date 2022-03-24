@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import IngredientComponent from './IngredientComponent'
+import IngredientRow from './IngredientRow'
 import styles from './IngredientsSection.module.scss'
 import { uuid } from '../../../../utils'
 import { AddRecipeContext } from '../../AddRecipeContext'
@@ -22,7 +22,7 @@ const IngredientSection: React.FunctionComponent = () => {
                 <th className={styles.title} />
               </tr>
               {ingredients.map(({ name, amount, unit, id }, index) => (
-                <IngredientComponent
+                <IngredientRow
                   key={id}
                   name={name}
                   amount={amount}
