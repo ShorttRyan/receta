@@ -1,0 +1,50 @@
+@import './src/styles/variables';
+
+.col_index {
+  border-right: 1px solid $primary;
+  text-align: center;
+  padding: 7px 4px;
+  color: $primary;
+}
+
+.col_instruction {
+  border-left: 1px solid $primary;
+  border-right: 1px solid $primary;
+  padding: 7px 4px;
+  position: relative;
+  .ellipses {
+    position: absolute;
+    bottom: 2px;
+    right: 4px;
+    color: $primaryBright;
+    &.disabled {
+      display: none;
+    }
+  }
+}
+.col_button_1 {
+  border-left: 1px solid $primary;
+  padding: 7px 4px;
+}
+
+.textarea {
+  width: 100%;
+  resize: none;
+  outline: none;
+  border: none;
+  background: none !important;
+  border-radius: 0 !important;
+  padding: 1px 2px 5px 2px;
+  font-size: 18px;
+  border-bottom: 1px solid $primaryBright;
+  overflow-y: hidden;
+  &:focus {
+    padding-bottom: 4px;
+    border-bottom: 2px solid $primaryBright
+  }
+  &.disabled {
+    padding-bottom: 6px;
+    border-bottom: none;
+    color: $disabledInput
+  }
+}

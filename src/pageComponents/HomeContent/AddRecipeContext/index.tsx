@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Ingredient } from '../AddRecipeForm/IngredientSection/types'
 import { AddRecipeForm, initialValue } from '../AddRecipeForm/types'
+import { Instruction } from '../AddRecipeForm/InstructionsSection/types'
 
 interface AddRecipeInterface {
   addingRecipe: boolean
@@ -16,6 +17,8 @@ interface AddRecipeInterface {
   timeToComplete: number
   ingredients: Ingredient[]
   setIngredients: (newIngredients: Ingredient[]) => void
+  instructions: Instruction[]
+  setInstructions: (newInstructions: Instruction[]) => void
 }
 
 export const AddRecipeContext = React.createContext({} as AddRecipeInterface)
@@ -41,6 +44,13 @@ export const AddRecipeProvider: React.FunctionComponent = ({ children }) => {
     newForm.ingredients.value = newIngredients
     setForm(newForm)
   }
+
+  const instructions = form.instructions.value
+  const setInstructions = (newInstructions: Instruction[]) => {
+    const newForm = { ...form }
+    newForm.instructions.value = newInstructions
+    setForm(newForm)
+  }
   return (
     <AddRecipeContext.Provider
       value={{
@@ -57,6 +67,8 @@ export const AddRecipeProvider: React.FunctionComponent = ({ children }) => {
         timeToComplete,
         ingredients,
         setIngredients,
+        instructions,
+        setInstructions,
       }}
     >
       {children}
