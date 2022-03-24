@@ -1,8 +1,6 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Recipe } from '@prisma/client'
 import styles from '../HomeContent.module.scss'
-import { AddRecipeContext } from '../AddRecipeContext'
-import AddRecipe from '../AddRecipeForm'
 import EmptySectionComponent from '../EmptySectionComponent'
 
 interface MyRecipesProps {
@@ -10,7 +8,6 @@ interface MyRecipesProps {
 }
 
 const MyRecipes: React.FunctionComponent<MyRecipesProps> = ({ recipes }) => {
-  const { addingRecipe } = useContext(AddRecipeContext)
   return (
     <div
       className={
@@ -19,21 +16,15 @@ const MyRecipes: React.FunctionComponent<MyRecipesProps> = ({ recipes }) => {
           : styles.recipes_Wrapper_Empty
       }
     >
-      {addingRecipe ? (
-        <AddRecipe />
+      {recipes.length > 0 ? (
+        <div className={styles.contentWrapper_Full}>
+          Display Published Recipes
+        </div>
       ) : (
-        <>
-          {recipes.length > 0 ? (
-            <div className={styles.contentWrapper_Full}>
-              Display Published Recipes
-            </div>
-          ) : (
-            <EmptySectionComponent
-              message={`Looks like you haven't published any recipes yet!`}
-              showAddRecipeButton={true}
-            />
-          )}
-        </>
+        <EmptySectionComponent
+          message={`Looks like you haven't published any recipes yet!`}
+          showAddRecipeButton={true}
+        />
       )}
     </div>
   )
