@@ -3,6 +3,7 @@ import styles from './LoginSignup.module.scss'
 import Signup from './Signup'
 import Login from './Login'
 import Button from '../Button'
+import Stacked from '../Logos/Stacked'
 
 const LoginSignup: React.FunctionComponent = () => {
   const [showLogin, setShowLogin] = useState<boolean>(true)
@@ -10,7 +11,9 @@ const LoginSignup: React.FunctionComponent = () => {
     <div className={styles.loginWrapper}>
       <div className={styles.loginContainer}>
         <div className={styles.loginHeader}>
-          <div className={styles.title}>Receta</div>
+          <div className={styles.title}>
+            <Stacked />
+          </div>
           <div className={styles.buttonContainer}>
             <div className={styles.buttonWrapper}>
               <Button

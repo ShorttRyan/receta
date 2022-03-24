@@ -1,0 +1,21 @@
+@import'./src/styles/variables';
+
+.number_title {
+  width: 25px;
+  color: $primary;
+  border-bottom: 2px solid $primary;
+  padding-bottom: 5px;
+  text-align: left;
+}
+
+.instruction_title {
+  color: $primary;
+  border-bottom: 2px solid $primary;
+  padding-bottom: 5px;
+  text-align: left;
+}
+
+.control_title {
+  width: 31px;
+  border-bottom: 2px solid $primary;
+}

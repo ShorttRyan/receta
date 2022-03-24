@@ -19,22 +19,22 @@ const IconButton: React.FunctionComponent<IconButtonProps> = ({
   style,
   name,
 }) => {
-  let buttonClassNames
+  let buttonClassNames = `${styles.button}`
   let wrapperClassNames = `${styles.iconWrapper}`
   switch (size) {
     case 'small':
-      buttonClassNames = styles.small_button
+      buttonClassNames += ` ${styles.small_button}`
       wrapperClassNames += ` ${disabled ? styles.disabled : styles[style]}`
       wrapperClassNames += ` ${styles[size]}`
       break
     case 'large':
-      buttonClassNames = styles.large_button
+      buttonClassNames += ` ${styles.large_button}`
       wrapperClassNames += ` ${disabled ? styles.disabled : styles[style]}`
       wrapperClassNames += ` ${styles[size]}`
       break
     case 'medium':
     default:
-      buttonClassNames = styles.medium_button
+      buttonClassNames += ` ${styles.medium_button}`
       wrapperClassNames += ` ${disabled ? styles.disabled : styles[style]}`
       wrapperClassNames += ` ${styles[size]}`
       break

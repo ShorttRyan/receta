@@ -1,16 +1,24 @@
 @import'../src/styles/variables';
 $border-radius: 0.5;
-.small_button{
+.button {
   all: unset;
+  border-radius: 50%;
+  &:focus {
+    box-shadow: 0 0 3px $disabledInput !important;
+  }
+}
+
+.small_button{
   height: $iconSizeSm;
+  width: $iconSizeSm;
 }
 .medium_button{
-  all: unset;
-  height: $iconSizeSm;
+  height: $iconSize;
+  width: $iconSize;
 }
 .large_button{
-  all: unset;
-  height: $iconSize;
+  height: $iconSizeLg;
+  width: $iconSizeLg;
 }
 .disabled {
   .icon{
@@ -27,6 +35,9 @@ $border-radius: 0.5;
   position: relative;
   display: inline-block;
   overflow: hidden;
+  &:focus {
+    margin-top: 20px;
+  }
   &::before, &::after{
     content: '';
     position: absolute;
@@ -40,9 +51,6 @@ $border-radius: 0.5;
     position: relative;
     color: $primary;
     transition: all 0.25s ease;
-  }
-  &:focus {
-    border: 5px solid $primaryBright;
   }
 }
 .medium{
