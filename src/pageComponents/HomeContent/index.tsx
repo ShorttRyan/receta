@@ -4,6 +4,7 @@ import MyRecipes from './MyRecipes'
 import LikedRecipes from './LikedRecipes'
 import { HomePageProps } from '../../pages'
 import { AddRecipeContext } from './AddRecipeContext'
+import AddRecipe from './AddRecipeForm'
 
 enum HomeTabs {
   MyRecipes = 'myRecipes',
@@ -14,50 +15,55 @@ enum HomeTabs {
 const HomeContent: React.FunctionComponent<HomePageProps> = (props) => {
   const [content, switchContent] = useState<HomeTabs>(HomeTabs.MyRecipes)
   const { addingRecipe } = useContext(AddRecipeContext)
+  console.log(addingRecipe)
   return (
     <div>
-      {!addingRecipe && (
-        <div className={styles.subNavWrapper}>
-          <div className={styles.bottomBar} />
-          <div className={styles.subNavLinkWrapper}>
-            <button
-              className={`
+      {!addingRecipe ? (
+        <>
+          <div className={styles.subNavWrapper}>
+            <div className={styles.bottomBar} />
+            <div className={styles.subNavLinkWrapper}>
+              <button
+                className={`
             ${styles.subNavLink} 
             ${content === HomeTabs.MyRecipes && styles.activeTab}
             `}
-              onClick={() => switchContent(HomeTabs.MyRecipes)}
-              aria-label="My Recipes"
-            >
-              My Recipes
-            </button>
-            <button
-              className={`
+                onClick={() => switchContent(HomeTabs.MyRecipes)}
+                aria-label="My Recipes"
+              >
+                My Recipes
+              </button>
+              <button
+                className={`
             ${styles.subNavLink} 
             ${content === HomeTabs.LikedRecipes && styles.activeTab}
             `}
-              onClick={() => switchContent(HomeTabs.LikedRecipes)}
-              aria-label="Liked Recipes"
-            >
-              Liked Recipes
-            </button>
-            <button
-              className={`
+                onClick={() => switchContent(HomeTabs.LikedRecipes)}
+                aria-label="Liked Recipes"
+              >
+                Liked Recipes
+              </button>
+              <button
+                className={`
             ${styles.subNavLink} 
             ${content === HomeTabs.MyDrafts && styles.activeTab}
             `}
-              onClick={() => switchContent(HomeTabs.MyDrafts)}
-              aria-label="My Drafts"
-            >
-              My Drafts
-            </button>
+                onClick={() => switchContent(HomeTabs.MyDrafts)}
+                aria-label="My Drafts"
+              >
+                My Drafts
+              </button>
+            </div>
           </div>
-        </div>
-      )}
-      {content === HomeTabs.MyRecipes && (
-        <MyRecipes recipes={props.publishedRecipes} />
-      )}
-      {content === HomeTabs.LikedRecipes && (
-        <LikedRecipes recipes={props.likedRecipes} />
+          {content === HomeTabs.MyRecipes && (
+            <MyRecipes recipes={props.publishedRecipes} />
+          )}
+          {content === HomeTabs.LikedRecipes && (
+            <LikedRecipes recipes={props.likedRecipes} />
+          )}
+        </>
+      ) : (
+        <AddRecipe />
       )}
     </div>
   )
