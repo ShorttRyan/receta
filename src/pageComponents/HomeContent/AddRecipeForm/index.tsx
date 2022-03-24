@@ -5,10 +5,20 @@ import Timer from './Timer'
 import IngredientSection from './IngredientSection'
 import { AddRecipeContext } from '../AddRecipeContext'
 import InstructionSection from './InstructionsSection'
+import IconButton from '../../../components/IconButton'
+import { FiSave, FiUploadCloud, FiArrowLeft } from 'react-icons/fi'
 
 const AddRecipe: React.FunctionComponent = () => {
-  const { form, title, setTitle, hours, setHours, minutes, setMinutes } =
-    useContext(AddRecipeContext)
+  const {
+    form,
+    title,
+    setTitle,
+    hours,
+    setHours,
+    minutes,
+    setMinutes,
+    setAddingRecipe,
+  } = useContext(AddRecipeContext)
   return (
     <form
       className={styles.form_wrapper}
@@ -17,6 +27,38 @@ const AddRecipe: React.FunctionComponent = () => {
         console.log('submitted')
       }}
     >
+      <div className={styles.controls}>
+        <IconButton
+          onClick={() => setAddingRecipe(false)}
+          Icon={FiArrowLeft}
+          disabled={false}
+          style="danger"
+          size="medium"
+          name="Save and Exit"
+        />
+        <div className={styles.save_buttons_wrapper}>
+          <div className={styles.save_button}>
+            <IconButton
+              onClick={() => setAddingRecipe(false)}
+              Icon={FiSave}
+              disabled={false}
+              style="primary"
+              size="medium"
+              name="Save and Exit"
+            />
+          </div>
+          <div>
+            <IconButton
+              onClick={() => setAddingRecipe(false)}
+              Icon={FiUploadCloud}
+              disabled={false}
+              style="primary"
+              size="medium"
+              name="Save and Exit"
+            />
+          </div>
+        </div>
+      </div>
       <div className={styles.section_meta}>
         <Input
           name="Title"
