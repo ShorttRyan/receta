@@ -45,6 +45,9 @@
   &.disabled {
     padding-bottom: 6px;
     border-bottom: none;
-    color: $disabledInput
+    -webkit-appearance: none;
+    color: $disabledInput !important;
+    opacity: 1;
+    -webkit-text-fill-color: $disabledInput;
   }
 }
