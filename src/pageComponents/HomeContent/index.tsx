@@ -15,7 +15,6 @@ enum HomeTabs {
 const HomeContent: React.FunctionComponent<HomePageProps> = (props) => {
   const [content, switchContent] = useState<HomeTabs>(HomeTabs.MyRecipes)
   const { addingRecipe } = useContext(AddRecipeContext)
-  console.log(addingRecipe)
   return (
     <div>
       {!addingRecipe ? (
