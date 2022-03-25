@@ -9,6 +9,7 @@ import IconButton from '../../../components/IconButton'
 import { FiSave, FiUploadCloud, FiArrowLeft } from 'react-icons/fi'
 import NotesSection from './NotesSection'
 import IsPrivateSection from './IsPrivateSection'
+import { addRecipe } from '../../../API/recipes/addRecipe'
 
 const AddRecipe: React.FunctionComponent = () => {
   const {
@@ -20,6 +21,10 @@ const AddRecipe: React.FunctionComponent = () => {
     minutes,
     setMinutes,
     setAddingRecipe,
+    ingredients,
+    instructions,
+    notes,
+    isPrivate,
   } = useContext(AddRecipeContext)
   return (
     <form
@@ -51,7 +56,22 @@ const AddRecipe: React.FunctionComponent = () => {
           </div>
           <div>
             <IconButton
-              onClick={() => setAddingRecipe(false)}
+              onClick={async () => {
+                try {
+                  const recipeResponse = await addRecipe({
+                    title,
+                    timeToComplete: hours * 60 + minutes,
+                    ingredients,
+                    instructions,
+                    notes,
+                    isPrivate,
+                    isDraft: false,
+                  })
+                  console.log(recipeResponse)
+                } catch (e) {
+                  console.log(e)
+                }
+              }}
               Icon={FiUploadCloud}
               disabled={false}
               style="primary"

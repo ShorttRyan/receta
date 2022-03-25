@@ -34,7 +34,7 @@ model Recipe {
   title             String
   timeToComplete    Int
   ingredients       Json[]
-  steps             String[]
-  notes             String[]
+  instructions      Json[]
+  notes             Json[]
   likedBy           User[]
 }

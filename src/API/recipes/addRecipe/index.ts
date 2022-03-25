@@ -10,7 +10,7 @@ export type AddRecipe = (
 export const addRecipe: AddRecipe = async (recipe) => {
   try {
     console.log(recipe)
-    const response = await axios.post('/api/recipe/create', recipe)
+    const response = await axios.post('/api/recipes/create', recipe)
     return [response, undefined]
   } catch (e) {
     return [undefined, e]

@@ -22,12 +22,12 @@ export default async function handler(
       if (token === undefined) break
       const requiredFields: string[] = [
         'title',
-        'private',
+        'isPrivate',
+        'isDraft',
         'timeToComplete',
         'ingredients',
-        'steps',
+        'instructions',
         'notes',
-        'isDraft',
       ]
       if (checkBody(req.body, requiredFields, res)) {
         try {
@@ -40,13 +40,13 @@ export default async function handler(
               },
               authorUsername: token.username,
               authorName: `${token.firstName} ${token.lastName}`,
-              isPrivate: req.body.private,
+              isPrivate: req.body.isPrivate,
               isDraft: req.body.isDraft,
               publishedAt: `${Date.now()}`,
               title: req.body.title,
               timeToComplete: req.body.timeToComplete,
               ingredients: req.body.ingredients,
-              steps: req.body.steps,
+              instructions: req.body.instructions,
               notes: req.body.notes,
             },
           })
@@ -57,6 +57,7 @@ export default async function handler(
           })
           res.json(userRecipes)
         } catch (e) {
+          console.log(e)
           const errorResponse: {
             message: string
             prismaError?: Prisma.PrismaClientKnownRequestError
