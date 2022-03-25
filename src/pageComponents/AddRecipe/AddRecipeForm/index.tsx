@@ -7,6 +7,8 @@ import { AddRecipeContext } from '../AddRecipeContext'
 import InstructionSection from './InstructionsSection'
 import IconButton from '../../../components/IconButton'
 import { FiSave, FiUploadCloud, FiArrowLeft } from 'react-icons/fi'
+import NotesSection from './NotesSection'
+import IsPrivateSection from './IsPrivateSection'
 
 const AddRecipe: React.FunctionComponent = () => {
   const {
@@ -90,6 +92,8 @@ const AddRecipe: React.FunctionComponent = () => {
         </div>
         <IngredientSection />
         <InstructionSection />
+        <NotesSection />
+        <IsPrivateSection />
       </div>
     </form>
   )

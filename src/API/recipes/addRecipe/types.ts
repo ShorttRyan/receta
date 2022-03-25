@@ -1,14 +1,17 @@
 import { AxiosResponse } from 'axios'
 import { Ingredient } from '../../../pageComponents/AddRecipe/AddRecipeForm/IngredientSection/types'
-import { Instruction } from '../../../pageComponents/AddRecipe/AddRecipeForm/InstructionsSection/types'
+import {
+  Instruction,
+  Note,
+} from '../../../pageComponents/AddRecipe/AddRecipeForm/InstructionsSection/types'
 
 export interface AddRecipeBody {
   title: string
   timeToComplete: number
   ingredients: Ingredient[]
   instructions: Instruction[]
-  // notes: Notes[]
-  private: boolean
+  notes: Note[]
+  isPrivate: boolean
   isDraft: boolean
 }
 

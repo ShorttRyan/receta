@@ -40,14 +40,14 @@ export default async function handler(
               },
               authorUsername: token.username,
               authorName: `${token.firstName} ${token.lastName}`,
-              private: req.body.private,
+              isPrivate: req.body.private,
+              isDraft: req.body.isDraft,
               publishedAt: `${Date.now()}`,
               title: req.body.title,
               timeToComplete: req.body.timeToComplete,
               ingredients: req.body.ingredients,
               steps: req.body.steps,
               notes: req.body.notes,
-              isDraft: req.body.isDraft,
             },
           })
           const userRecipes = await prisma.recipe.findMany({

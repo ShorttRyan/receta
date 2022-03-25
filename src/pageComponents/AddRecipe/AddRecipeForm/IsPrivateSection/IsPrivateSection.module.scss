@@ -1,0 +1,19 @@
+@import'./src/styles/variables';
+
+.section_wrapper {
+  width: 100%;
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.description_section {
+  margin-left: 20px;
+  .title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .subTitle {
+
+  }
+}
