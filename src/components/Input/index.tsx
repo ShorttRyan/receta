@@ -31,9 +31,11 @@ const Input: React.FunctionComponent<InputProps> = ({
 }) => {
   return (
     <div
-      className={`${styles.form__group} ${styles.field} ${
-        title && styles.shadow
-      } ${error && useShake && styles.form__group__shake}`}
+      className={`${styles.form__group} ${styles.field}
+       ${title && styles.title}
+       ${!title && error && styles.form__group__error}${
+        error && useShake && styles.form__group__shake
+      }`}
     >
       <input
         type={type}
