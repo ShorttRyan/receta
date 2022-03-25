@@ -3,8 +3,8 @@ import styles from './HomeContent.module.scss'
 import MyRecipes from './MyRecipes'
 import LikedRecipes from './LikedRecipes'
 import { HomePageProps } from '../../pages'
-import { AddRecipeContext } from './AddRecipeContext'
-import AddRecipe from './AddRecipeForm'
+import { AddRecipeContext } from '../AddRecipe/AddRecipeContext'
+import AddRecipe from '../AddRecipe/AddRecipeForm'
 
 enum HomeTabs {
   MyRecipes = 'myRecipes',

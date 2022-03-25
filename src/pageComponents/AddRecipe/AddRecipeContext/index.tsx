@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Ingredient } from '../AddRecipeForm/IngredientSection/types'
 import { AddRecipeForm, initialValue } from '../AddRecipeForm/types'
-import { Instruction } from '../AddRecipeForm/InstructionsSection/types'
+import { Instruction, Note } from '../AddRecipeForm/InstructionsSection/types'
 
 interface AddRecipeInterface {
   addingRecipe: boolean
@@ -19,6 +19,10 @@ interface AddRecipeInterface {
   setIngredients: (newIngredients: Ingredient[]) => void
   instructions: Instruction[]
   setInstructions: (newInstructions: Instruction[]) => void
+  notes: Note[]
+  setNotes: (newNotes: Note[]) => void
+  isPrivate: boolean
+  setIsPrivate: (newVal: boolean) => void
 }
 
 export const AddRecipeContext = React.createContext({} as AddRecipeInterface)
@@ -51,6 +55,20 @@ export const AddRecipeProvider: React.FunctionComponent = ({ children }) => {
     newForm.instructions.value = newInstructions
     setForm(newForm)
   }
+
+  const notes = form.notes.value
+  const setNotes = (newNotes: Instruction[]) => {
+    const newForm = { ...form }
+    newForm.notes.value = newNotes
+    setForm(newForm)
+  }
+
+  const isPrivate = form.private.value
+  const setIsPrivate = (newVal: boolean) => {
+    const newForm = { ...form }
+    newForm.private.value = newVal
+    setForm(newForm)
+  }
   return (
     <AddRecipeContext.Provider
       value={{
@@ -69,6 +87,10 @@ export const AddRecipeProvider: React.FunctionComponent = ({ children }) => {
         setIngredients,
         instructions,
         setInstructions,
+        notes,
+        setNotes,
+        isPrivate,
+        setIsPrivate,
       }}
     >
       {children}

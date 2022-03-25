@@ -27,6 +27,7 @@ export default async function handler(
         'ingredients',
         'steps',
         'notes',
+        'isDraft',
       ]
       if (checkBody(req.body, requiredFields, res)) {
         try {
@@ -46,6 +47,7 @@ export default async function handler(
               ingredients: req.body.ingredients,
               steps: req.body.steps,
               notes: req.body.notes,
+              isDraft: req.body.isDraft,
             },
           })
           const userRecipes = await prisma.recipe.findMany({

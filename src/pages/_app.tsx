@@ -1,6 +1,6 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import { AddRecipeProvider } from '../pageComponents/HomeContent/AddRecipeContext'
+import { AddRecipeProvider } from '../pageComponents/AddRecipe/AddRecipeContext'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
