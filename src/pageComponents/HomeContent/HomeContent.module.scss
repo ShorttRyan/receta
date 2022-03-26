@@ -45,6 +45,18 @@ $containerHeight: 52px;
   border-bottom: $borderWidth solid $primary
 }
 
+.controls {
+  width: 100%;
+  min-height: 70px;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  .sortingWrapper {
+    display: flex;
+    align-items: center;
+  }
+}
+
 .recipe_results_wrapper {
   padding: 20px;
   width: 100%;

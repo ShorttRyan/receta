@@ -15,6 +15,7 @@ import { UserDataContext } from '../../../contexts/UserDataContext'
 const AddRecipe: React.FunctionComponent = () => {
   const {
     form,
+    resetForm,
     title,
     setTitle,
     hours,
@@ -29,13 +30,7 @@ const AddRecipe: React.FunctionComponent = () => {
   } = useContext(AddRecipeContext)
   const { setAllRecipes } = useContext(UserDataContext)
   return (
-    <form
-      className={styles.form_wrapper}
-      onSubmit={(e) => {
-        e.preventDefault()
-        console.log('submitted')
-      }}
-    >
+    <div className={styles.form_wrapper}>
       <div className={styles.controls}>
         <IconButton
           onClick={() => setAddingRecipe(false)}
@@ -48,7 +43,30 @@ const AddRecipe: React.FunctionComponent = () => {
         <div className={styles.save_buttons_wrapper}>
           <div className={styles.save_button}>
             <IconButton
-              onClick={() => setAddingRecipe(false)}
+              onClick={async () => {
+                const trimIngredients = [...ingredients]
+                const trimInstructions = [...instructions]
+                const trimNotes = [...notes]
+                trimIngredients.pop()
+                trimInstructions.pop()
+                trimNotes.pop()
+                const [userRecipes, error] = await addRecipe({
+                  title,
+                  timeToComplete: hours * 60 + minutes,
+                  ingredients,
+                  instructions,
+                  notes,
+                  isPrivate,
+                  isDraft: true,
+                })
+                if (userRecipes !== undefined) {
+                  setAllRecipes(userRecipes.data)
+                  resetForm()
+                  setHours(0)
+                  setMinutes(0)
+                  setAddingRecipe(false)
+                }
+              }}
               Icon={FiSave}
               disabled={false}
               style="primary"
@@ -76,6 +94,9 @@ const AddRecipe: React.FunctionComponent = () => {
                 })
                 if (userRecipes !== undefined) {
                   setAllRecipes(userRecipes.data)
+                  resetForm()
+                  setHours(0)
+                  setMinutes(0)
                   setAddingRecipe(false)
                 }
               }}
@@ -122,7 +143,7 @@ const AddRecipe: React.FunctionComponent = () => {
         <NotesSection />
         <IsPrivateSection />
       </div>
-    </form>
+    </div>
   )
 }
 

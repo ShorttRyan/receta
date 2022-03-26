@@ -1,7 +1,7 @@
 import React from 'react'
 import { Recipe } from '@prisma/client'
 import styles from './RecipeCard.module.scss'
-import { FiClock, FiUser, FiCalendar } from 'react-icons/fi'
+import { FiClock, FiUser, FiCalendar, FiLock, FiAtSign } from 'react-icons/fi'
 import { toDate, toTime } from '../../utils/Client'
 
 export interface RecipeCardProps {
@@ -11,15 +11,15 @@ export interface RecipeCardProps {
 const RecipeCard: React.FunctionComponent<RecipeCardProps> = ({ recipe }) => {
   const {
     title,
-    ingredients,
-    instructions,
-    notes,
+    // ingredients,
+    // instructions,
+    // notes,
     isPrivate,
-    isDraft,
+    // isDraft,
     authorUsername,
     publishedAt,
     authorName,
-    authorId,
+    // authorId,
     timeToComplete,
   } = recipe
   return (
@@ -30,13 +30,21 @@ const RecipeCard: React.FunctionComponent<RecipeCardProps> = ({ recipe }) => {
           <FiUser className={styles.icons} />
           <div className={styles.label}>{authorName}</div>
         </div>
-        <div className={styles.time_stamp}>
-          <FiCalendar className={styles.icons} />
-          <div className={styles.label}>{toDate(publishedAt)}</div>
+        <div className={styles.author}>
+          <FiAtSign className={styles.icons} />
+          <div className={styles.label}>{authorUsername}</div>
         </div>
         <div className={styles.time_stamp}>
           <FiClock className={styles.icons} />
           <div className={styles.label}>{toTime(timeToComplete)}</div>
+        </div>
+        <div className={styles.time_stamp}>
+          <FiLock className={styles.icons} />
+          <div className={styles.label}>{isPrivate ? 'Private' : 'Public'}</div>
+        </div>
+        <div className={styles.time_stamp}>
+          <FiCalendar className={styles.icons} />
+          <div className={styles.label}>{toDate(publishedAt)}</div>
         </div>
       </div>
     </div>

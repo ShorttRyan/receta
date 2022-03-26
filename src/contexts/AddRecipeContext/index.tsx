@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import {
   AddRecipeForm,
   initialValue,
@@ -8,12 +8,14 @@ import {
   Instruction,
   Note,
 } from '../../pageComponents/AddRecipe/AddRecipeForm/InstructionsSection/types'
+import { uuid } from '../../utils'
 
 interface AddRecipeInterface {
   addingRecipe: boolean
   setAddingRecipe: (newState: boolean) => void
   form: AddRecipeForm
   setForm: (newForm: AddRecipeForm) => void
+  resetForm: () => void
   title: string
   setTitle: (newTitle: string) => void
   hours: number
@@ -36,6 +38,33 @@ export const AddRecipeContext = React.createContext({} as AddRecipeInterface)
 export const AddRecipeProvider: React.FunctionComponent = ({ children }) => {
   const [addingRecipe, setAddingRecipe] = useState<boolean>(false)
   const [form, setForm] = useState<AddRecipeForm>(initialValue)
+  const resetForm = useCallback(
+    () =>
+      setForm({
+        title: { value: '', error: false, required: true, message: '' },
+        timeToComplete: { value: 0, error: false, required: true, message: '' },
+        private: { value: false, error: false, required: true, message: '' },
+        ingredients: {
+          value: [{ name: '', amount: '', unit: '', id: uuid() }],
+          error: false,
+          required: true,
+          message: '',
+        },
+        instructions: {
+          value: [{ value: '', id: uuid() }],
+          error: false,
+          required: true,
+          message: '',
+        },
+        notes: {
+          value: [{ value: '', id: uuid() }],
+          error: false,
+          required: true,
+          message: '',
+        },
+      }),
+    [],
+  )
   const [hours, setHours] = useState<number>(0)
   const [minutes, setMinutes] = useState<number>(0)
 
@@ -82,6 +111,7 @@ export const AddRecipeProvider: React.FunctionComponent = ({ children }) => {
         setAddingRecipe,
         form,
         setForm,
+        resetForm,
         title,
         setTitle,
         hours,
