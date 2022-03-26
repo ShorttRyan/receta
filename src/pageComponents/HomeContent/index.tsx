@@ -2,9 +2,10 @@ import React, { useContext, useState } from 'react'
 import styles from './HomeContent.module.scss'
 import MyRecipes from './MyRecipes'
 import LikedRecipes from './LikedRecipes'
-import { HomePageProps } from '../../pages'
 import AddRecipe from '../AddRecipe/AddRecipeForm'
 import { AddRecipeContext } from '../../contexts/AddRecipeContext'
+import { UserDataContext } from '../../contexts/UserDataContext'
+import MyDrafts from './MyDrafts'
 
 enum HomeTabs {
   MyRecipes = 'myRecipes',
@@ -12,9 +13,10 @@ enum HomeTabs {
   MyDrafts = 'myDrafts',
 }
 
-const HomeContent: React.FunctionComponent<HomePageProps> = (props) => {
+const HomeContent: React.FunctionComponent = () => {
   const [content, switchContent] = useState<HomeTabs>(HomeTabs.MyRecipes)
   const { addingRecipe } = useContext(AddRecipeContext)
+  const { published, liked, drafts } = useContext(UserDataContext)
   return (
     <div>
       {!addingRecipe ? (
@@ -54,12 +56,11 @@ const HomeContent: React.FunctionComponent<HomePageProps> = (props) => {
               </button>
             </div>
           </div>
-          {content === HomeTabs.MyRecipes && (
-            <MyRecipes recipes={props.publishedRecipes} />
-          )}
+          {content === HomeTabs.MyRecipes && <MyRecipes recipes={published} />}
           {content === HomeTabs.LikedRecipes && (
-            <LikedRecipes recipes={props.likedRecipes} />
+            <LikedRecipes recipes={liked} />
           )}
+          {content === HomeTabs.MyDrafts && <MyDrafts recipes={drafts} />}
         </>
       ) : (
         <AddRecipe />

@@ -10,6 +10,7 @@ import NotesSection from './NotesSection'
 import IsPrivateSection from './IsPrivateSection'
 import { addRecipe } from '../../../API/recipes/addRecipe'
 import { AddRecipeContext } from '../../../contexts/AddRecipeContext'
+import { UserDataContext } from '../../../contexts/UserDataContext'
 
 const AddRecipe: React.FunctionComponent = () => {
   const {
@@ -26,6 +27,7 @@ const AddRecipe: React.FunctionComponent = () => {
     notes,
     isPrivate,
   } = useContext(AddRecipeContext)
+  const { setAllRecipes } = useContext(UserDataContext)
   return (
     <form
       className={styles.form_wrapper}
@@ -46,23 +48,7 @@ const AddRecipe: React.FunctionComponent = () => {
         <div className={styles.save_buttons_wrapper}>
           <div className={styles.save_button}>
             <IconButton
-              onClick={async () => {
-                try {
-                  const recipeResponse = await addRecipe({
-                    title,
-                    timeToComplete: hours * 60 + minutes,
-                    ingredients,
-                    instructions,
-                    notes,
-                    isPrivate,
-                    isDraft: true,
-                  })
-
-                  console.log(recipeResponse)
-                } catch (e) {
-                  console.log(e)
-                }
-              }}
+              onClick={() => setAddingRecipe(false)}
               Icon={FiSave}
               disabled={false}
               style="primary"
@@ -73,19 +59,24 @@ const AddRecipe: React.FunctionComponent = () => {
           <div>
             <IconButton
               onClick={async () => {
-                try {
-                  const recipeResponse = await addRecipe({
-                    title,
-                    timeToComplete: hours * 60 + minutes,
-                    ingredients,
-                    instructions,
-                    notes,
-                    isPrivate,
-                    isDraft: false,
-                  })
-                  console.log(recipeResponse)
-                } catch (e) {
-                  console.log(e)
+                const trimIngredients = [...ingredients]
+                const trimInstructions = [...instructions]
+                const trimNotes = [...notes]
+                trimIngredients.pop()
+                trimInstructions.pop()
+                trimNotes.pop()
+                const [userRecipes, error] = await addRecipe({
+                  title,
+                  timeToComplete: hours * 60 + minutes,
+                  ingredients,
+                  instructions,
+                  notes,
+                  isPrivate,
+                  isDraft: false,
+                })
+                if (userRecipes !== undefined) {
+                  setAllRecipes(userRecipes.data)
+                  setAddingRecipe(false)
                 }
               }}
               Icon={FiUploadCloud}
