@@ -29,11 +29,12 @@ model Recipe {
   authorId          Int
   authorUsername    String
   authorName        String
-  private           Boolean
+  isPrivate         Boolean
+  isDraft           Boolean
   title             String
   timeToComplete    Int
   ingredients       Json[]
-  steps             String[]
-  notes             String[]
+  instructions      Json[]
+  notes             Json[]
   likedBy           User[]
 }

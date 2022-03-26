@@ -1,20 +1,16 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { Recipe } from '@prisma/client'
 import styles from '../HomeContent.module.scss'
 import EmptySectionComponent from '../EmptySectionComponent'
 import RecipeCard from '../../../components/RecipeCard'
-import IconButton from '../../../components/IconButton'
-import { AddRecipeContext } from '../../../contexts/AddRecipeContext'
-import { FiPlus } from 'react-icons/fi'
+import { SortingFunctions, SortingTypes } from '../MyRecipes/types'
 import DropDown from '../../../components/DropDown'
-import { SortingTypes, SortingFunctions } from './types'
 
-interface MyRecipesProps {
+interface MyDraftsProps {
   recipes: Recipe[]
 }
 
-const MyRecipes: React.FunctionComponent<MyRecipesProps> = ({ recipes }) => {
-  const { setAddingRecipe } = useContext(AddRecipeContext)
+const MyDrafts: React.FunctionComponent<MyDraftsProps> = ({ recipes }) => {
   const [sortingVal, setSortingVal] = useState<string>(SortingTypes.newest)
   return (
     <div
@@ -34,14 +30,6 @@ const MyRecipes: React.FunctionComponent<MyRecipesProps> = ({ recipes }) => {
                 onChange={(newVal) => setSortingVal(newVal)}
               />
             </div>
-            <IconButton
-              onClick={() => setAddingRecipe(true)}
-              Icon={FiPlus}
-              disabled={false}
-              style={'primary'}
-              size={'large'}
-              name={'Add Recipe'}
-            />
           </div>
           <div className={styles.recipe_results_wrapper}>
             {recipes
@@ -55,12 +43,12 @@ const MyRecipes: React.FunctionComponent<MyRecipesProps> = ({ recipes }) => {
         </div>
       ) : (
         <EmptySectionComponent
-          message={`Looks like you haven't published any recipes yet!`}
-          showAddRecipeButton={true}
+          message={`Looks like you don't have any drafts yet!`}
+          showAddRecipeButton={false}
         />
       )}
     </div>
   )
 }
 
-export default MyRecipes
+export default MyDrafts
