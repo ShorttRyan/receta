@@ -1,10 +1,12 @@
 //////////////////////////////////////// BREAKPOINTS
 $mobile: 500px;
-$medium: 800px;
+$tablet: 800px;
+$medium: 1100px;
 $large: 1240px;
 //////////////////////////////////////// BOX SHADOW
 $boxShadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
 $underShadow: 0 12px 10px -10px rgb(0,0,0, 0.1);
+$underShadowBig: 0 12px 10px 0px rgb(0,0,0, 0.1);
 //////////////////////////////////////// COLOURS
 $primary: #086E08;
 $primaryBright: #3DA833;
@@ -18,6 +20,8 @@ $disabledInput: rgb(84,84,84);
 $error: #E03174;
 $errorBright: #EC6189;
 $errorDisabled: #FBADB3;
+
+$info: #037ABA;
 
 $white: #FBFCEB;
 //////////////////////////////////////// SIZES

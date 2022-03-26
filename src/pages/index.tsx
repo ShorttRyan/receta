@@ -7,6 +7,7 @@ import { prisma, validateAccessToken } from '../utils/Server'
 import MainTemplate from '../templates/Main'
 import HomeContent from '../pageComponents/HomeContent'
 import { Recipe } from '@prisma/client'
+import { UserDataProvider } from '../contexts/UserDataContext'
 
 export interface HomePageProps {
   username: string
@@ -35,7 +36,12 @@ const Home: NextPage<HomePageProps> = (props) => {
         />
       </Head>
       <MainTemplate>
-        <HomeContent {...props} />
+        <UserDataProvider
+          publishedRecipes={props.publishedRecipes}
+          likedRecipes={props.likedRecipes}
+        >
+          <HomeContent />
+        </UserDataProvider>
       </MainTemplate>
     </>
   )

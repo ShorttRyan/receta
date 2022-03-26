@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import IngredientRow from './IngredientRow'
 import styles from './IngredientsSection.module.scss'
 import { uuid } from '../../../../utils'
-import { AddRecipeContext } from '../../AddRecipeContext'
+import { AddRecipeContext } from '../../../../contexts/AddRecipeContext'
 
 const IngredientSection: React.FunctionComponent = () => {
   const [editingIndex, setEditing] = useState<number>(-1)

@@ -1,13 +1,15 @@
 import { FormInput } from '../../../components/Input/type'
 import { Ingredient } from './IngredientSection/types'
 import { uuid } from '../../../utils'
-import { Instruction } from './InstructionsSection/types'
+import { Instruction, Note } from './InstructionsSection/types'
 
 export interface AddRecipeForm {
   title: FormInput<string>
   timeToComplete: FormInput<number>
   ingredients: FormInput<Ingredient[]>
   instructions: FormInput<Instruction[]>
+  notes: FormInput<Note[]>
+  private: FormInput<boolean>
 }
 
 export const initialValue: AddRecipeForm = {
@@ -31,6 +33,18 @@ export const initialValue: AddRecipeForm = {
   },
   instructions: {
     value: [{ value: '', id: uuid() }],
+    required: true,
+    error: false,
+    message: '',
+  },
+  notes: {
+    value: [{ value: '', id: uuid() }],
+    required: true,
+    error: false,
+    message: '',
+  },
+  private: {
+    value: false,
     required: true,
     error: false,
     message: '',

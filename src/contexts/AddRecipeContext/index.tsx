@@ -1,13 +1,21 @@
-import React, { useState } from 'react'
-import { Ingredient } from '../AddRecipeForm/IngredientSection/types'
-import { AddRecipeForm, initialValue } from '../AddRecipeForm/types'
-import { Instruction } from '../AddRecipeForm/InstructionsSection/types'
+import React, { useCallback, useState } from 'react'
+import {
+  AddRecipeForm,
+  initialValue,
+} from '../../pageComponents/AddRecipe/AddRecipeForm/types'
+import { Ingredient } from '../../pageComponents/AddRecipe/AddRecipeForm/IngredientSection/types'
+import {
+  Instruction,
+  Note,
+} from '../../pageComponents/AddRecipe/AddRecipeForm/InstructionsSection/types'
+import { uuid } from '../../utils'
 
 interface AddRecipeInterface {
   addingRecipe: boolean
   setAddingRecipe: (newState: boolean) => void
   form: AddRecipeForm
   setForm: (newForm: AddRecipeForm) => void
+  resetForm: () => void
   title: string
   setTitle: (newTitle: string) => void
   hours: number
@@ -19,6 +27,10 @@ interface AddRecipeInterface {
   setIngredients: (newIngredients: Ingredient[]) => void
   instructions: Instruction[]
   setInstructions: (newInstructions: Instruction[]) => void
+  notes: Note[]
+  setNotes: (newNotes: Note[]) => void
+  isPrivate: boolean
+  setIsPrivate: (newVal: boolean) => void
 }
 
 export const AddRecipeContext = React.createContext({} as AddRecipeInterface)
@@ -26,6 +38,33 @@ export const AddRecipeContext = React.createContext({} as AddRecipeInterface)
 export const AddRecipeProvider: React.FunctionComponent = ({ children }) => {
   const [addingRecipe, setAddingRecipe] = useState<boolean>(false)
   const [form, setForm] = useState<AddRecipeForm>(initialValue)
+  const resetForm = useCallback(
+    () =>
+      setForm({
+        title: { value: '', error: false, required: true, message: '' },
+        timeToComplete: { value: 0, error: false, required: true, message: '' },
+        private: { value: false, error: false, required: true, message: '' },
+        ingredients: {
+          value: [{ name: '', amount: '', unit: '', id: uuid() }],
+          error: false,
+          required: true,
+          message: '',
+        },
+        instructions: {
+          value: [{ value: '', id: uuid() }],
+          error: false,
+          required: true,
+          message: '',
+        },
+        notes: {
+          value: [{ value: '', id: uuid() }],
+          error: false,
+          required: true,
+          message: '',
+        },
+      }),
+    [],
+  )
   const [hours, setHours] = useState<number>(0)
   const [minutes, setMinutes] = useState<number>(0)
 
@@ -51,6 +90,20 @@ export const AddRecipeProvider: React.FunctionComponent = ({ children }) => {
     newForm.instructions.value = newInstructions
     setForm(newForm)
   }
+
+  const notes = form.notes.value
+  const setNotes = (newNotes: Instruction[]) => {
+    const newForm = { ...form }
+    newForm.notes.value = newNotes
+    setForm(newForm)
+  }
+
+  const isPrivate = form.private.value
+  const setIsPrivate = (newVal: boolean) => {
+    const newForm = { ...form }
+    newForm.private.value = newVal
+    setForm(newForm)
+  }
   return (
     <AddRecipeContext.Provider
       value={{
@@ -58,6 +111,7 @@ export const AddRecipeProvider: React.FunctionComponent = ({ children }) => {
         setAddingRecipe,
         form,
         setForm,
+        resetForm,
         title,
         setTitle,
         hours,
@@ -69,6 +123,10 @@ export const AddRecipeProvider: React.FunctionComponent = ({ children }) => {
         setIngredients,
         instructions,
         setInstructions,
+        notes,
+        setNotes,
+        isPrivate,
+        setIsPrivate,
       }}
     >
       {children}

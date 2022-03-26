@@ -3,14 +3,19 @@ import styles from './AddRecipeForm.module.scss'
 import Input from '../../../components/Input'
 import Timer from './Timer'
 import IngredientSection from './IngredientSection'
-import { AddRecipeContext } from '../AddRecipeContext'
 import InstructionSection from './InstructionsSection'
 import IconButton from '../../../components/IconButton'
 import { FiSave, FiUploadCloud, FiArrowLeft } from 'react-icons/fi'
+import NotesSection from './NotesSection'
+import IsPrivateSection from './IsPrivateSection'
+import { addRecipe } from '../../../API/recipes/addRecipe'
+import { AddRecipeContext } from '../../../contexts/AddRecipeContext'
+import { UserDataContext } from '../../../contexts/UserDataContext'
 
 const AddRecipe: React.FunctionComponent = () => {
   const {
     form,
+    resetForm,
     title,
     setTitle,
     hours,
@@ -18,15 +23,14 @@ const AddRecipe: React.FunctionComponent = () => {
     minutes,
     setMinutes,
     setAddingRecipe,
+    ingredients,
+    instructions,
+    notes,
+    isPrivate,
   } = useContext(AddRecipeContext)
+  const { setAllRecipes } = useContext(UserDataContext)
   return (
-    <form
-      className={styles.form_wrapper}
-      onSubmit={(e) => {
-        e.preventDefault()
-        console.log('submitted')
-      }}
-    >
+    <div className={styles.form_wrapper}>
       <div className={styles.controls}>
         <IconButton
           onClick={() => setAddingRecipe(false)}
@@ -39,7 +43,30 @@ const AddRecipe: React.FunctionComponent = () => {
         <div className={styles.save_buttons_wrapper}>
           <div className={styles.save_button}>
             <IconButton
-              onClick={() => setAddingRecipe(false)}
+              onClick={async () => {
+                const trimIngredients = [...ingredients]
+                const trimInstructions = [...instructions]
+                const trimNotes = [...notes]
+                trimIngredients.pop()
+                trimInstructions.pop()
+                trimNotes.pop()
+                const [userRecipes, error] = await addRecipe({
+                  title,
+                  timeToComplete: hours * 60 + minutes,
+                  ingredients,
+                  instructions,
+                  notes,
+                  isPrivate,
+                  isDraft: true,
+                })
+                if (userRecipes !== undefined) {
+                  setAllRecipes(userRecipes.data)
+                  resetForm()
+                  setHours(0)
+                  setMinutes(0)
+                  setAddingRecipe(false)
+                }
+              }}
               Icon={FiSave}
               disabled={false}
               style="primary"
@@ -49,7 +76,30 @@ const AddRecipe: React.FunctionComponent = () => {
           </div>
           <div>
             <IconButton
-              onClick={() => setAddingRecipe(false)}
+              onClick={async () => {
+                const trimIngredients = [...ingredients]
+                const trimInstructions = [...instructions]
+                const trimNotes = [...notes]
+                trimIngredients.pop()
+                trimInstructions.pop()
+                trimNotes.pop()
+                const [userRecipes, error] = await addRecipe({
+                  title,
+                  timeToComplete: hours * 60 + minutes,
+                  ingredients,
+                  instructions,
+                  notes,
+                  isPrivate,
+                  isDraft: false,
+                })
+                if (userRecipes !== undefined) {
+                  setAllRecipes(userRecipes.data)
+                  resetForm()
+                  setHours(0)
+                  setMinutes(0)
+                  setAddingRecipe(false)
+                }
+              }}
               Icon={FiUploadCloud}
               disabled={false}
               style="primary"
@@ -90,8 +140,10 @@ const AddRecipe: React.FunctionComponent = () => {
         </div>
         <IngredientSection />
         <InstructionSection />
+        <NotesSection />
+        <IsPrivateSection />
       </div>
-    </form>
+    </div>
   )
 }
 

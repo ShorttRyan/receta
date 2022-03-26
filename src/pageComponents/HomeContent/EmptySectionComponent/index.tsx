@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import styles from './EmptySectionComponent.module.scss'
 import IconButton from '../../../components/IconButton'
-import { AddRecipeContext } from '../AddRecipeContext'
 import { FiEdit } from 'react-icons/fi'
+import { AddRecipeContext } from '../../../contexts/AddRecipeContext'
 
 interface EmptySectionProps {
   message: string
