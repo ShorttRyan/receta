@@ -23,7 +23,7 @@ const MyDrafts: React.FunctionComponent<MyDraftsProps> = ({ recipes }) => {
       ) : (
         <EmptySectionComponent
           message={`Looks like you don't have any drafts yet!`}
-          showAddRecipeButton={true}
+          showAddRecipeButton={false}
         />
       )}
     </div>
