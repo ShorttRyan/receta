@@ -49,5 +49,15 @@ $containerHeight: 52px;
   padding: 20px;
   width: 100%;
   display: grid;
-  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1rem;
+  @media(max-width: $medium) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media(max-width: $tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media(max-width: $mobile) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

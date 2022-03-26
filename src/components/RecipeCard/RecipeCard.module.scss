@@ -1,0 +1,47 @@
+@import'./src/styles/variables';
+
+.card_container {
+  //border: 1px solid $disabledInput;
+  margin: 0;
+  box-shadow: 0 0 10px 3px rgb(0,0,0,0.1);
+  border-radius: 10px;
+  padding: 10px;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 0 10px 6px rgb(0,0,0,0.1);
+  }
+}
+
+.title {
+  color: $primary;
+  font-size: 30px;
+  font-weight: 200;
+  border-bottom: 1px solid $disabled;
+  padding: 0 0 4px 0;
+}
+
+.card_info {
+  margin-top: 10px;
+}
+
+.icons {
+  color: $primary;
+  font-weight: 100;
+}
+
+.label {
+  color: $disabledInput;
+  margin-left: 5px;
+}
+.time_stamp {
+  margin: 5px;
+  color: $disabledInput;
+  display: flex;
+  align-items: center;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  margin: 5px;
+}
