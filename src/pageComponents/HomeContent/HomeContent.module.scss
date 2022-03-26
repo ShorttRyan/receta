@@ -44,3 +44,10 @@ $containerHeight: 52px;
   border-width: 0;
   border-bottom: $borderWidth solid $primary
 }
+
+.recipe_results_wrapper {
+  padding: 20px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+}

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
-import { AddRecipeContext } from '../../AddRecipeContext'
 import styles from './IsPrivateSection.module.scss'
 import Checkbox from '../../../../components/Checkbox'
+import { AddRecipeContext } from '../../../../contexts/AddRecipeContext'
 
 const IsPrivateSection: React.FunctionComponent = () => {
   const { isPrivate, setIsPrivate } = useContext(AddRecipeContext)

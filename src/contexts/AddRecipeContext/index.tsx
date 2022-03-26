@@ -1,7 +1,13 @@
 import React, { useState } from 'react'
-import { Ingredient } from '../AddRecipeForm/IngredientSection/types'
-import { AddRecipeForm, initialValue } from '../AddRecipeForm/types'
-import { Instruction, Note } from '../AddRecipeForm/InstructionsSection/types'
+import {
+  AddRecipeForm,
+  initialValue,
+} from '../../pageComponents/AddRecipe/AddRecipeForm/types'
+import { Ingredient } from '../../pageComponents/AddRecipe/AddRecipeForm/IngredientSection/types'
+import {
+  Instruction,
+  Note,
+} from '../../pageComponents/AddRecipe/AddRecipeForm/InstructionsSection/types'
 
 interface AddRecipeInterface {
   addingRecipe: boolean

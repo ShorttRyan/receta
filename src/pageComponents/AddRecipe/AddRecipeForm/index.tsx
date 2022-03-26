@@ -3,13 +3,13 @@ import styles from './AddRecipeForm.module.scss'
 import Input from '../../../components/Input'
 import Timer from './Timer'
 import IngredientSection from './IngredientSection'
-import { AddRecipeContext } from '../AddRecipeContext'
 import InstructionSection from './InstructionsSection'
 import IconButton from '../../../components/IconButton'
 import { FiSave, FiUploadCloud, FiArrowLeft } from 'react-icons/fi'
 import NotesSection from './NotesSection'
 import IsPrivateSection from './IsPrivateSection'
 import { addRecipe } from '../../../API/recipes/addRecipe'
+import { AddRecipeContext } from '../../../contexts/AddRecipeContext'
 
 const AddRecipe: React.FunctionComponent = () => {
   const {
@@ -46,7 +46,23 @@ const AddRecipe: React.FunctionComponent = () => {
         <div className={styles.save_buttons_wrapper}>
           <div className={styles.save_button}>
             <IconButton
-              onClick={() => setAddingRecipe(false)}
+              onClick={async () => {
+                try {
+                  const recipeResponse = await addRecipe({
+                    title,
+                    timeToComplete: hours * 60 + minutes,
+                    ingredients,
+                    instructions,
+                    notes,
+                    isPrivate,
+                    isDraft: true,
+                  })
+
+                  console.log(recipeResponse)
+                } catch (e) {
+                  console.log(e)
+                }
+              }}
               Icon={FiSave}
               disabled={false}
               style="primary"

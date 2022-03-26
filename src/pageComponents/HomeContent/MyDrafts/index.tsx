@@ -2,13 +2,12 @@ import React from 'react'
 import { Recipe } from '@prisma/client'
 import styles from '../HomeContent.module.scss'
 import EmptySectionComponent from '../EmptySectionComponent'
-import RecipeCard from '../../../components/RecipeCard'
 
-interface MyRecipesProps {
+interface MyDraftsProps {
   recipes: Recipe[]
 }
 
-const MyRecipes: React.FunctionComponent<MyRecipesProps> = ({ recipes }) => {
+const MyDrafts: React.FunctionComponent<MyDraftsProps> = ({ recipes }) => {
   return (
     <div
       className={
@@ -19,15 +18,11 @@ const MyRecipes: React.FunctionComponent<MyRecipesProps> = ({ recipes }) => {
     >
       {recipes.length > 0 ? (
         <div className={styles.contentWrapper_Full}>
-          <div className={styles.recipe_results_wrapper}>
-            {recipes.map((recipe) => (
-              <RecipeCard key={recipe.id} recipe={recipe} />
-            ))}
-          </div>
+          Display Published Recipes
         </div>
       ) : (
         <EmptySectionComponent
-          message={`Looks like you haven't published any recipes yet!`}
+          message={`Looks like you don't have any drafts yet!`}
           showAddRecipeButton={true}
         />
       )}
@@ -35,4 +30,4 @@ const MyRecipes: React.FunctionComponent<MyRecipesProps> = ({ recipes }) => {
   )
 }
 
-export default MyRecipes
+export default MyDrafts

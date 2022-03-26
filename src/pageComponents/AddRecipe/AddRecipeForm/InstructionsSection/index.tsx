@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react'
 import SharedStyles from '../IngredientSection/IngredientsSection.module.scss'
 import styles from './InstructionsSection.module.scss'
-import { AddRecipeContext } from '../../AddRecipeContext'
 import InstructionRow from './InstructionRow'
 import { uuid } from '../../../../utils'
+import { AddRecipeContext } from '../../../../contexts/AddRecipeContext'
 
 const InstructionSection: React.FunctionComponent = () => {
   const { instructions, setInstructions } = useContext(AddRecipeContext)
