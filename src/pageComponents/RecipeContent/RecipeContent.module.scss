@@ -1,0 +1,112 @@
+@import 'src/styles/variables';
+
+.container {
+  width: 100%;
+  padding: 30px;
+}
+
+.header {
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid $primary;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: #222222;
+}
+
+.user_info_wrapper {
+  display: flex;
+  margin: 10px 0;
+  @media(max-width: $mobile) {
+    display: block;
+  }
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+  &:first-child {
+    margin: 0 10px 0 0;
+  }
+  color: $disabledInput;
+  @media(max-width: $mobile) {
+    margin: 10px 0;
+  }
+  .icon_wrapper {
+    height: 24px;
+    width: 24px;
+    .icon {
+      color: $primary;
+      font-size: 24px;
+    }
+  }
+  .label {
+    font-size: 18px;
+    margin-left: 5px;
+  }
+}
+
+.section_container {
+  display: block;
+  width: 100%;
+  padding: 20px;
+  border-bottom: 1px solid $primary;
+}
+
+.section_title {
+  font-size: 32px;
+  color: $primary;
+  margin-bottom: 10px;
+}
+
+
+.ingredient_section {
+  margin-top: 30px;
+
+  .ingredients_wrapper {
+    width: 100%;
+    margin-left: 10px;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
+    @media(max-width: $medium) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media(max-width: $tablet) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+
+    .ingredient {
+      display: flex;
+      align-items: center;
+
+      .ingredient_icon_wrapper {
+        .icon {
+          font-size: 12px;
+          color: $primary;
+        }
+      }
+      .ingredient_name {
+        margin-left: 5px;
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+.instruction_wrapper {
+  width: 100%;
+  margin-left: 10px;
+  margin-top: 20px;
+
+  .instruction {
+
+  }
+
+}

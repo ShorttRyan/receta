@@ -47,18 +47,15 @@ const AddRecipe: React.FunctionComponent = () => {
             <IconButton
               onClick={async () => {
                 setDisableNav(true)
-                const trimIngredients = [...ingredients]
-                const trimInstructions = [...instructions]
-                const trimNotes = [...notes]
-                trimIngredients.pop()
-                trimInstructions.pop()
-                trimNotes.pop()
+                const trimIngredients = [...ingredients].slice(0, -1)
+                const trimInstructions = [...instructions].slice(0, -1)
+                const trimNotes = [...notes].slice(0, -1)
                 const [userRecipes, error] = await addRecipe({
                   title,
                   timeToComplete: hours * 60 + minutes,
-                  ingredients,
-                  instructions,
-                  notes,
+                  ingredients: trimIngredients,
+                  instructions: trimInstructions,
+                  notes: trimNotes,
                   isPrivate,
                   isDraft: true,
                 })
@@ -82,12 +79,9 @@ const AddRecipe: React.FunctionComponent = () => {
             <IconButton
               onClick={async () => {
                 setDisableNav(true)
-                const trimIngredients = [...ingredients]
-                const trimInstructions = [...instructions]
-                const trimNotes = [...notes]
-                trimIngredients.pop()
-                trimInstructions.pop()
-                trimNotes.pop()
+                const trimIngredients = [...ingredients].slice(0, -1)
+                const trimInstructions = [...instructions].slice(0, -1)
+                const trimNotes = [...notes].slice(0, -1)
                 const newForm = { ...form }
                 if (!(title.length > 0)) {
                   newForm.title.error = true
@@ -97,9 +91,9 @@ const AddRecipe: React.FunctionComponent = () => {
                   const [userRecipes, error] = await addRecipe({
                     title,
                     timeToComplete: hours * 60 + minutes,
-                    ingredients,
-                    instructions,
-                    notes,
+                    ingredients: trimIngredients,
+                    instructions: trimInstructions,
+                    notes: trimNotes,
                     isPrivate,
                     isDraft: false,
                   })
