@@ -39,7 +39,6 @@ const IconButton: React.FunctionComponent<IconButtonProps> = ({
       wrapperClassNames += ` ${styles[size]}`
       break
   }
-  console.log(disabled)
   return (
     <button
       type="button"

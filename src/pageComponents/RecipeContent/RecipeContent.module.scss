@@ -87,26 +87,49 @@
       align-items: center;
 
       .ingredient_icon_wrapper {
+        height: 18px;
+        width: 18px;
         .icon {
-          font-size: 12px;
+          font-size: 18px;
           color: $primary;
         }
       }
       .ingredient_name {
-        margin-left: 5px;
+        margin-left: 10px;
         font-size: 18px;
       }
     }
   }
 }
 
-.instruction_wrapper {
+.instructions_wrapper {
   width: 100%;
-  margin-left: 10px;
   margin-top: 20px;
 
   .instruction {
+    display: flex;
+    padding: 15px 10px;
+    line-height: 26px;
+    &.align {
+      align-items: center;
+    }
+    font-size: 18px;
+    &:nth-child(2n+0) {
+      background: #F8F8F8;
+    }
 
+    .number {
+      color: $primary;
+      font-size: 22px;
+      font-weight: 800;
+      display: flex;
+    }
+    .icon {
+      color: $primary;
+    }
+    .content {
+      margin-left: 10px;
+      font-size: 18px;
+    }
   }
-
 }
