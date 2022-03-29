@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import styles from './AddRecipeForm.module.scss'
 import Input from '../../../components/Input'
 import Timer from './Timer'
@@ -15,6 +15,7 @@ import { UserDataContext } from '../../../contexts/UserDataContext'
 const AddRecipe: React.FunctionComponent = () => {
   const {
     form,
+    setForm,
     resetForm,
     title,
     setTitle,
@@ -29,13 +30,14 @@ const AddRecipe: React.FunctionComponent = () => {
     isPrivate,
   } = useContext(AddRecipeContext)
   const { setAllRecipes } = useContext(UserDataContext)
+  const [disabledNav, setDisableNav] = useState<boolean>(false)
   return (
     <div className={styles.form_wrapper}>
       <div className={styles.controls}>
         <IconButton
           onClick={() => setAddingRecipe(false)}
           Icon={FiArrowLeft}
-          disabled={false}
+          disabled={disabledNav}
           style="danger"
           size="medium"
           name="Save and Exit"
@@ -44,18 +46,16 @@ const AddRecipe: React.FunctionComponent = () => {
           <div className={styles.save_button}>
             <IconButton
               onClick={async () => {
-                const trimIngredients = [...ingredients]
-                const trimInstructions = [...instructions]
-                const trimNotes = [...notes]
-                trimIngredients.pop()
-                trimInstructions.pop()
-                trimNotes.pop()
+                setDisableNav(true)
+                const trimIngredients = [...ingredients].slice(0, -1)
+                const trimInstructions = [...instructions].slice(0, -1)
+                const trimNotes = [...notes].slice(0, -1)
                 const [userRecipes, error] = await addRecipe({
                   title,
                   timeToComplete: hours * 60 + minutes,
-                  ingredients,
-                  instructions,
-                  notes,
+                  ingredients: trimIngredients,
+                  instructions: trimInstructions,
+                  notes: trimNotes,
                   isPrivate,
                   isDraft: true,
                 })
@@ -66,9 +66,10 @@ const AddRecipe: React.FunctionComponent = () => {
                   setMinutes(0)
                   setAddingRecipe(false)
                 }
+                setDisableNav(false)
               }}
               Icon={FiSave}
-              disabled={false}
+              disabled={disabledNav}
               style="primary"
               size="medium"
               name="Save and Exit"
@@ -77,34 +78,40 @@ const AddRecipe: React.FunctionComponent = () => {
           <div>
             <IconButton
               onClick={async () => {
-                const trimIngredients = [...ingredients]
-                const trimInstructions = [...instructions]
-                const trimNotes = [...notes]
-                trimIngredients.pop()
-                trimInstructions.pop()
-                trimNotes.pop()
-                const [userRecipes, error] = await addRecipe({
-                  title,
-                  timeToComplete: hours * 60 + minutes,
-                  ingredients,
-                  instructions,
-                  notes,
-                  isPrivate,
-                  isDraft: false,
-                })
-                if (userRecipes !== undefined) {
-                  setAllRecipes(userRecipes.data)
-                  resetForm()
-                  setHours(0)
-                  setMinutes(0)
-                  setAddingRecipe(false)
+                setDisableNav(true)
+                const trimIngredients = [...ingredients].slice(0, -1)
+                const trimInstructions = [...instructions].slice(0, -1)
+                const trimNotes = [...notes].slice(0, -1)
+                const newForm = { ...form }
+                if (!(title.length > 0)) {
+                  newForm.title.error = true
+                  newForm.title.message = 'This field can not be left blank.'
+                  setForm(newForm)
+                } else {
+                  const [userRecipes, error] = await addRecipe({
+                    title,
+                    timeToComplete: hours * 60 + minutes,
+                    ingredients: trimIngredients,
+                    instructions: trimInstructions,
+                    notes: trimNotes,
+                    isPrivate,
+                    isDraft: false,
+                  })
+                  if (userRecipes !== undefined) {
+                    setAllRecipes(userRecipes.data)
+                    resetForm()
+                    setHours(0)
+                    setMinutes(0)
+                    setAddingRecipe(false)
+                  }
                 }
+                setDisableNav(false)
               }}
               Icon={FiUploadCloud}
-              disabled={false}
+              disabled={disabledNav}
               style="primary"
               size="medium"
-              name="Save and Exit"
+              name="Upload Recipe"
             />
           </div>
         </div>
@@ -114,6 +121,11 @@ const AddRecipe: React.FunctionComponent = () => {
           name="Title"
           value={title}
           setValue={setTitle}
+          onBlur={() => {
+            const newForm = { ...form }
+            newForm.title.error = false
+            setForm(newForm)
+          }}
           type="input"
           placeholder="Title"
           id="title"

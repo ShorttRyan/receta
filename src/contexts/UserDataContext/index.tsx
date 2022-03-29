@@ -26,9 +26,6 @@ export const UserDataProvider: React.FunctionComponent<
   const published = allRecipes.filter((r) => !r.isDraft)
   const [liked, setLiked] = useState<Recipe[]>(likedRecipes)
 
-  console.log(allRecipes)
-  console.log(published)
-  console.log(drafts)
   return (
     <UserDataContext.Provider
       value={{

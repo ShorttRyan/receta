@@ -81,6 +81,7 @@
   color: $errorBright !important;
 }
 .form__error_message {
+  position: absolute;
   color: $error;
   font-size: 10px;
 }
