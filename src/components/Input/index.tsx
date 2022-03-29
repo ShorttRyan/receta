@@ -63,9 +63,7 @@ const Input: React.FunctionComponent<InputProps> = ({
       >
         {name}
       </label>
-      {!title && (
-        <div className={styles.form__error_message}>{error && message}</div>
-      )}
+      <div className={styles.form__error_message}>{error && message}</div>
     </div>
   )
 }
