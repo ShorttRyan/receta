@@ -4,6 +4,15 @@
   width: 100%;
   padding: 30px;
 }
+.restrict {
+  height: calc(100vh - #{$navBarHeight});
+  overflow: hidden;
+  -webkit-filter: blur(6px);
+  -moz-filter: blur(6px);
+  -o-filter: blur(6px);
+  -ms-filter: blur(6px);
+  filter: blur(6px);
+}
 
 .header {
   display: block;
@@ -130,6 +139,36 @@
     .content {
       margin-left: 10px;
       font-size: 18px;
+    }
+  }
+}
+
+.restricted_modal {
+  position: absolute;
+  background: white;
+  width: 100%;
+  max-width: 600px;
+  z-index: 10;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 50px;
+  box-shadow: 0 0 15px rgb(0,0,0,0.1);
+  .restricted_content {
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    .icon {
+      font-size: 48px;
+      height: 48px;
+      width: 48px;
+      margin-right: 24px;
+      color: $info;
+    }
+    .label {
+      color: $info;
+      text-align: center;
+      font-weight: 700;
     }
   }
 }
