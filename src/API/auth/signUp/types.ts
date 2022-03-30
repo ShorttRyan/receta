@@ -14,6 +14,6 @@ export type SignupFailure = {
   field: keyof SignupCredentials
   message: string
 }
-export function isPrismaFailure(failure: any): failure is SignupFailure {
+export function isSignUpPrismaFailure(failure: any): failure is SignupFailure {
   return (failure as SignupFailure).prismaCode !== undefined
 }

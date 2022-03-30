@@ -3,11 +3,11 @@ import { UpdateProfileBody, UpdateProfileSuccess } from './types'
 
 export * from './types'
 
-export type SignUpPost = (
+export type UpdateProfileInfo = (
   credentials: UpdateProfileBody,
 ) => Promise<[AxiosResponse<UpdateProfileSuccess>?, any?]>
 
-export const updateProfileInfo: SignUpPost = async (newProfile) => {
+export const updateProfileInfo: UpdateProfileInfo = async (newProfile) => {
   try {
     const response = await axios.put('/api/user/updateProfileInfo', {
       firstName: newProfile.firstName,

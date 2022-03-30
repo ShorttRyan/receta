@@ -8,12 +8,10 @@ import IconButton from '../../../components/IconButton'
 import { FiSave, FiUploadCloud, FiArrowLeft, FiTrash2 } from 'react-icons/fi'
 import NotesSection from './NotesSection'
 import IsPrivateSection from './IsPrivateSection'
-import { addRecipe } from '../../../API/recipes/addRecipe'
+import { addRecipe, deleteRecipe, updateRecipe } from '../../../API'
 import { AddRecipeContext } from '../../../contexts/AddRecipeContext'
 import { UserDataContext } from '../../../contexts/UserDataContext'
-import { deleteRecipe } from '../../../API/recipes/[rid]/deleteRecipe'
 import { useRouter } from 'next/router'
-import { updateRecipe } from '../../../API/recipes/[rid]/updateRecipe'
 
 const AddRecipe: React.FunctionComponent = () => {
   const {
