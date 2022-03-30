@@ -7,6 +7,7 @@ import { Recipe } from '@prisma/client'
 import MainTemplate from '../../../templates/Main'
 import { prisma, validateAccessToken } from '../../../utils/Server'
 import RecipeContent from '../../../pageComponents/RecipeContent'
+import { fakeRecipe } from '../../../utils/fakeRecipe'
 
 export interface RecipePageProps {
   id: number
@@ -15,9 +16,12 @@ export interface RecipePageProps {
   lastName: string
   email: string
   recipe: Recipe
+  isOwner: boolean
+  permitted: boolean
 }
 
 const Recipe: NextPage<RecipePageProps> = (props) => {
+  console.log(props)
   return (
     <>
       <Head>
@@ -37,7 +41,8 @@ const Recipe: NextPage<RecipePageProps> = (props) => {
       <MainTemplate>
         <RecipeContent
           recipe={props.recipe}
-          isOwner={props.recipe.authorId === props.id}
+          isOwner={props.isOwner}
+          permitted={props.permitted}
         />
       </MainTemplate>
     </>
@@ -67,12 +72,17 @@ export const getServerSideProps: GetServerSideProps = async ({
         id: rid as string,
       },
     })
-    console.log(recipe)
   } catch (e) {
     console.log('### Error on Index.tsx ###')
     console.log('### Finding Liked Recipes ###')
     console.log('user token: ', token)
     console.log(e)
+  }
+  const isOwner = recipe?.authorId === token.id
+  let permitted = true
+  if ((recipe?.isPrivate || recipe?.isDraft) && !isOwner) {
+    recipe = fakeRecipe
+    permitted = false
   }
   return {
     props: {
@@ -82,6 +92,8 @@ export const getServerSideProps: GetServerSideProps = async ({
       firstName: token.firstName,
       lastName: token.lastName,
       recipe,
+      isOwner,
+      permitted,
     },
   }
 }
