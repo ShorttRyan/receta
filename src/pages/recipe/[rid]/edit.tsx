@@ -8,6 +8,13 @@ import MainTemplate from '../../../templates/Main'
 import { prisma, validateAccessToken } from '../../../utils/Server'
 import { AddRecipeProvider } from '../../../contexts/AddRecipeContext'
 import AddRecipe from '../../../pageComponents/AddRecipe/AddRecipeForm'
+import { JsonObject } from 'type-fest'
+import {
+  Instruction,
+  Note,
+} from '../../../pageComponents/AddRecipe/AddRecipeForm/InstructionsSection/types'
+import { Ingredient } from '../../../pageComponents/AddRecipe/AddRecipeForm/IngredientSection/types'
+import { uuid } from '../../../utils'
 
 export interface RecipePageProps {
   id: number
@@ -19,6 +26,69 @@ export interface RecipePageProps {
 }
 
 const EditRecipe: NextPage<RecipePageProps> = ({ recipe }) => {
+  const instructions = recipe?.instructions as JsonObject[]
+  const mappedInstructions: Instruction[] = instructions.map(
+    ({ value, id }) => ({
+      value: value as string,
+      id: id as string,
+    }),
+  )
+  const notes = recipe?.instructions as JsonObject[]
+  const mappedNotes: Note[] = notes.map(({ value, id }) => ({
+    value: value as string,
+    id: id as string,
+  }))
+  const ingredients = recipe?.ingredients as JsonObject[]
+  const mappedIngredients: Ingredient[] = ingredients.map(
+    ({ name, amount, unit, id }) => ({
+      name: name as string,
+      amount: amount as string,
+      unit: unit as string,
+      id: id as string,
+    }),
+  )
+
+  const seedForm = {
+    title: {
+      value: recipe?.title,
+      required: true,
+      error: false,
+      message: '',
+    },
+    timeToComplete: {
+      value: recipe?.timeToComplete,
+      required: true,
+      error: false,
+      message: '',
+    },
+    ingredients: {
+      value: [
+        ...mappedIngredients,
+        { name: '', amount: '', unit: 'N/A', id: uuid() },
+      ],
+      required: true,
+      error: false,
+      message: '',
+    },
+    instructions: {
+      value: [...mappedInstructions, { value: '', id: uuid() }],
+      required: true,
+      error: false,
+      message: '',
+    },
+    notes: {
+      value: [...mappedNotes, { value: '', id: uuid() }],
+      required: true,
+      error: false,
+      message: '',
+    },
+    private: {
+      value: recipe?.isPrivate,
+      required: true,
+      error: false,
+      message: '',
+    },
+  }
   return (
     <>
       <Head>
@@ -36,7 +106,7 @@ const EditRecipe: NextPage<RecipePageProps> = ({ recipe }) => {
         />
       </Head>
       <MainTemplate>
-        <AddRecipeProvider seedRecipe={recipe}>
+        <AddRecipeProvider seedForm={seedForm} recipeId={recipe?.id}>
           <AddRecipe />
         </AddRecipeProvider>
       </MainTemplate>
