@@ -6,8 +6,8 @@ import { GetServerSideProps } from 'next'
 import { Recipe } from '@prisma/client'
 import MainTemplate from '../../../templates/Main'
 import { prisma, validateAccessToken } from '../../../utils/Server'
-import RecipeContent from '../../../pageComponents/RecipeContent'
-import { fakeRecipe } from '../../../utils/fakeRecipe'
+import { AddRecipeProvider } from '../../../contexts/AddRecipeContext'
+import AddRecipe from '../../../pageComponents/AddRecipe/AddRecipeForm'
 
 export interface RecipePageProps {
   id: number
@@ -16,11 +16,9 @@ export interface RecipePageProps {
   lastName: string
   email: string
   recipe: Recipe
-  isOwner: boolean
-  permitted: boolean
 }
 
-const Recipe: NextPage<RecipePageProps> = (props) => {
+const EditRecipe: NextPage<RecipePageProps> = ({ recipe }) => {
   return (
     <>
       <Head>
@@ -38,11 +36,9 @@ const Recipe: NextPage<RecipePageProps> = (props) => {
         />
       </Head>
       <MainTemplate>
-        <RecipeContent
-          recipe={props.recipe}
-          isOwner={props.isOwner}
-          permitted={props.permitted}
-        />
+        <AddRecipeProvider seedRecipe={recipe}>
+          <AddRecipe />
+        </AddRecipeProvider>
       </MainTemplate>
     </>
   )
@@ -72,15 +68,15 @@ export const getServerSideProps: GetServerSideProps = async ({
       },
     })
   } catch (e) {
-    console.log(`### Error on /recipe/${rid} ###`)
+    console.log(`### Error on /recipe/${rid}/edit ###`)
     console.log('user token: ', token)
     console.log(e)
   }
   const isOwner = recipe?.authorId === token.id
-  let permitted = true
-  if ((recipe?.isPrivate || recipe?.isDraft) && !isOwner) {
-    recipe = fakeRecipe
-    permitted = false
+  if (!isOwner) {
+    res.writeHead(303, { Location: `/recipe/${rid}` })
+    res.end()
+    return
   }
   return {
     props: {
@@ -90,10 +86,8 @@ export const getServerSideProps: GetServerSideProps = async ({
       firstName: token.firstName,
       lastName: token.lastName,
       recipe,
-      isOwner,
-      permitted,
     },
   }
 }
 
-export default Recipe
+export default EditRecipe

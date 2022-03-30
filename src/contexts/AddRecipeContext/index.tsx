@@ -9,6 +9,8 @@ import {
   Note,
 } from '../../pageComponents/AddRecipe/AddRecipeForm/InstructionsSection/types'
 import { uuid } from '../../utils'
+import { Recipe } from '@prisma/client'
+import { JsonObject } from 'type-fest'
 
 interface AddRecipeInterface {
   addingRecipe: boolean
@@ -31,13 +33,59 @@ interface AddRecipeInterface {
   setNotes: (newNotes: Note[]) => void
   isPrivate: boolean
   setIsPrivate: (newVal: boolean) => void
+  recipeId?: string
 }
 
 export const AddRecipeContext = React.createContext({} as AddRecipeInterface)
 
-export const AddRecipeProvider: React.FunctionComponent = ({ children }) => {
+export interface AddRecipeProviderProps {
+  seedRecipe?: Recipe
+}
+
+export const AddRecipeProvider: React.FunctionComponent<
+  AddRecipeProviderProps
+> = ({ children, seedRecipe }) => {
   const [addingRecipe, setAddingRecipe] = useState<boolean>(false)
-  const [form, setForm] = useState<AddRecipeForm>(initialValue)
+  const seedForm = { ...initialValue }
+  let seedHours = 0
+  let seedMinutes = 0
+  if (seedRecipe) {
+    const instructions = seedRecipe?.instructions as JsonObject[]
+    const mappedInstructions: Instruction[] = instructions.map(
+      ({ value, id }) => ({
+        value: value as string,
+        id: id as string,
+      }),
+    )
+    const notes = seedRecipe?.instructions as JsonObject[]
+    const mappedNotes: Note[] = notes.map(({ value, id }) => ({
+      value: value as string,
+      id: id as string,
+    }))
+    const ingredients = seedRecipe?.ingredients as JsonObject[]
+    const mappedIngredients: Ingredient[] = ingredients.map(
+      ({ name, amount, unit, id }) => ({
+        name: name as string,
+        amount: amount as string,
+        unit: unit as string,
+        id: id as string,
+      }),
+    )
+    seedForm.title.value = seedRecipe.title
+    seedForm.private.value = seedRecipe.isPrivate
+    seedForm.instructions.value = [
+      ...mappedInstructions,
+      { value: '', id: uuid() },
+    ]
+    seedForm.notes.value = [...mappedNotes, { value: '', id: uuid() }]
+    seedForm.ingredients.value = [
+      ...mappedIngredients,
+      { name: '', amount: '', unit: 'N/A', id: uuid() },
+    ]
+    seedHours = Math.floor(seedRecipe.timeToComplete / 60)
+    seedMinutes = seedRecipe.timeToComplete % 60
+  }
+  const [form, setForm] = useState<AddRecipeForm>(seedForm)
   const resetForm = useCallback(
     () =>
       setForm({
@@ -65,8 +113,8 @@ export const AddRecipeProvider: React.FunctionComponent = ({ children }) => {
       }),
     [],
   )
-  const [hours, setHours] = useState<number>(0)
-  const [minutes, setMinutes] = useState<number>(0)
+  const [hours, setHours] = useState<number>(seedHours)
+  const [minutes, setMinutes] = useState<number>(seedMinutes)
 
   const title = form.title.value
   const setTitle = (newTitle: string) => {
@@ -127,6 +175,7 @@ export const AddRecipeProvider: React.FunctionComponent = ({ children }) => {
         setNotes,
         isPrivate,
         setIsPrivate,
+        recipeId: seedRecipe?.id,
       }}
     >
       {children}

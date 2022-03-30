@@ -8,6 +8,7 @@ import MainTemplate from '../templates/Main'
 import HomeContent from '../pageComponents/HomeContent'
 import { Recipe } from '@prisma/client'
 import { UserDataProvider } from '../contexts/UserDataContext'
+import { AddRecipeProvider } from '../contexts/AddRecipeContext'
 
 export interface HomePageProps {
   username: string
@@ -36,12 +37,14 @@ const Home: NextPage<HomePageProps> = (props) => {
         />
       </Head>
       <MainTemplate>
-        <UserDataProvider
-          publishedRecipes={props.publishedRecipes}
-          likedRecipes={props.likedRecipes}
-        >
-          <HomeContent />
-        </UserDataProvider>
+        <AddRecipeProvider>
+          <UserDataProvider
+            publishedRecipes={props.publishedRecipes}
+            likedRecipes={props.likedRecipes}
+          >
+            <HomeContent />
+          </UserDataProvider>
+        </AddRecipeProvider>
       </MainTemplate>
     </>
   )

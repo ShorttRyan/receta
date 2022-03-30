@@ -14,14 +14,14 @@ export default async function handler(
 ) {
   const { rid } = req.query
   const RID = rid as string
+  const [token, error] = validateAccessToken(
+    req.cookies?.auth,
+    `POST /recipes/[${RID}]/like`,
+    res,
+  )
   switch (req.method) {
     case 'DELETE':
       // noinspection JSUnusedLocalSymbols
-      const [token, error] = validateAccessToken(
-        req.cookies?.auth,
-        `POST /recipes/[${RID}]/like`,
-        res,
-      )
       if (token === undefined) break
       const isOwner = await checkOwner(RID, token.id)
       if (!isOwner) {
@@ -47,14 +47,18 @@ export default async function handler(
           message: string
           prismaError?: Prisma.PrismaClientKnownRequestError
         } = {
-          message: 'Failed to like recipe',
+          message: 'Failed to delete recipe',
         }
         if (e instanceof Prisma.PrismaClientKnownRequestError) {
-          logPrismaError(e, `POST /recipes/[${RID}]/like`)
+          logPrismaError(e, `DELETE /recipes/[${RID}]`)
           errorResponse.prismaError = e
         }
         res.json(errorResponse)
       }
+      break
+    case 'PUT':
+      if (token === undefined) break
+
       break
     default:
       res.status(405).json({
