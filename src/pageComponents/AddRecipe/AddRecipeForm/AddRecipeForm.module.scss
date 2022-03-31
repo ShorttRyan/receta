@@ -20,6 +20,13 @@
   border-bottom: 1px solid $primary;
 }
 
+.delete_buttons_wrapper {
+  display: flex;
+  .trash_button {
+    margin-left: 20px;
+  }
+}
+
 .save_buttons_wrapper {
   display: flex;
   .save_button {

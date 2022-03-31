@@ -5,12 +5,13 @@ import Timer from './Timer'
 import IngredientSection from './IngredientSection'
 import InstructionSection from './InstructionsSection'
 import IconButton from '../../../components/IconButton'
-import { FiSave, FiUploadCloud, FiArrowLeft } from 'react-icons/fi'
+import { FiSave, FiUploadCloud, FiArrowLeft, FiTrash2 } from 'react-icons/fi'
 import NotesSection from './NotesSection'
 import IsPrivateSection from './IsPrivateSection'
-import { addRecipe } from '../../../API/recipes/addRecipe'
+import { addRecipe, deleteRecipe, updateRecipe } from '../../../API'
 import { AddRecipeContext } from '../../../contexts/AddRecipeContext'
 import { UserDataContext } from '../../../contexts/UserDataContext'
+import { useRouter } from 'next/router'
 
 const AddRecipe: React.FunctionComponent = () => {
   const {
@@ -28,43 +29,80 @@ const AddRecipe: React.FunctionComponent = () => {
     instructions,
     notes,
     isPrivate,
+    recipeId,
   } = useContext(AddRecipeContext)
   const { setAllRecipes } = useContext(UserDataContext)
   const [disabledNav, setDisableNav] = useState<boolean>(false)
+  const router = useRouter()
   return (
     <div className={styles.form_wrapper}>
       <div className={styles.controls}>
-        <IconButton
-          onClick={() => setAddingRecipe(false)}
-          Icon={FiArrowLeft}
-          disabled={disabledNav}
-          style="danger"
-          size="medium"
-          name="Save and Exit"
-        />
+        <div className={styles.delete_buttons_wrapper}>
+          <IconButton
+            onClick={async () => {
+              if (!recipeId) {
+                setAddingRecipe(false)
+              } else {
+                await router.push(`/recipe/${recipeId}`)
+              }
+            }}
+            Icon={FiArrowLeft}
+            disabled={disabledNav}
+            style="danger"
+            size="medium"
+            name="Save and Exit"
+          />
+          {recipeId && (
+            <div className={styles.trash_button}>
+              <IconButton
+                onClick={async () => {
+                  setDisableNav(true)
+                  const [response, error] = await deleteRecipe(recipeId)
+                  if (error) {
+                    setDisableNav(false)
+                  } else {
+                    await router.prefetch(`/`)
+                    await router.push('/')
+                  }
+                }}
+                Icon={FiTrash2}
+                disabled={disabledNav}
+                style="danger"
+                size="medium"
+                name={'Delete Recipe'}
+              />
+            </div>
+          )}
+        </div>
         <div className={styles.save_buttons_wrapper}>
           <div className={styles.save_button}>
             <IconButton
               onClick={async () => {
                 setDisableNav(true)
-                const trimIngredients = [...ingredients].slice(0, -1)
-                const trimInstructions = [...instructions].slice(0, -1)
-                const trimNotes = [...notes].slice(0, -1)
-                const [userRecipes, error] = await addRecipe({
+                const recipe = {
                   title,
                   timeToComplete: hours * 60 + minutes,
-                  ingredients: trimIngredients,
-                  instructions: trimInstructions,
-                  notes: trimNotes,
+                  ingredients: [...ingredients].slice(0, -1),
+                  instructions: [...instructions].slice(0, -1),
+                  notes: [...notes].slice(0, -1),
                   isPrivate,
                   isDraft: true,
-                })
-                if (userRecipes !== undefined) {
-                  setAllRecipes(userRecipes.data)
-                  resetForm()
-                  setHours(0)
-                  setMinutes(0)
-                  setAddingRecipe(false)
+                }
+                if (!recipeId) {
+                  const [userRecipes, error] = await addRecipe(recipe)
+                  if (userRecipes !== undefined) {
+                    setAllRecipes(userRecipes.data)
+                    resetForm()
+                    setHours(0)
+                    setMinutes(0)
+                    setAddingRecipe(false)
+                  }
+                } else {
+                  const [response, error] = await updateRecipe(recipe, recipeId)
+                  if (!error) {
+                    await router.prefetch(`/recipe/${recipeId}`)
+                    await router.push(`/recipe/${recipeId}`)
+                  }
                 }
                 setDisableNav(false)
               }}
@@ -79,30 +117,39 @@ const AddRecipe: React.FunctionComponent = () => {
             <IconButton
               onClick={async () => {
                 setDisableNav(true)
-                const trimIngredients = [...ingredients].slice(0, -1)
-                const trimInstructions = [...instructions].slice(0, -1)
-                const trimNotes = [...notes].slice(0, -1)
                 const newForm = { ...form }
+                const recipe = {
+                  title,
+                  timeToComplete: hours * 60 + minutes,
+                  ingredients: [...ingredients].slice(0, -1),
+                  instructions: [...instructions].slice(0, -1),
+                  notes: [...notes].slice(0, -1),
+                  isPrivate,
+                  isDraft: false,
+                }
                 if (!(title.length > 0)) {
                   newForm.title.error = true
                   newForm.title.message = 'This field can not be left blank.'
                   setForm(newForm)
                 } else {
-                  const [userRecipes, error] = await addRecipe({
-                    title,
-                    timeToComplete: hours * 60 + minutes,
-                    ingredients: trimIngredients,
-                    instructions: trimInstructions,
-                    notes: trimNotes,
-                    isPrivate,
-                    isDraft: false,
-                  })
-                  if (userRecipes !== undefined) {
-                    setAllRecipes(userRecipes.data)
-                    resetForm()
-                    setHours(0)
-                    setMinutes(0)
-                    setAddingRecipe(false)
+                  if (!recipeId) {
+                    const [userRecipes, error] = await addRecipe(recipe)
+                    if (userRecipes !== undefined) {
+                      setAllRecipes(userRecipes.data)
+                      resetForm()
+                      setHours(0)
+                      setMinutes(0)
+                      setAddingRecipe(false)
+                    }
+                  } else {
+                    const [response, error] = await updateRecipe(
+                      recipe,
+                      recipeId,
+                    )
+                    if (!error) {
+                      await router.prefetch(`/recipe/${recipeId}`)
+                      await router.push(`/recipe/${recipeId}`)
+                    }
                   }
                 }
                 setDisableNav(false)

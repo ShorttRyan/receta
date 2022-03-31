@@ -3,7 +3,7 @@ import styles from '../Login/Login.module.scss'
 import Input from '../../Input'
 import { initialValue, SignupForm } from './type'
 import { preSignupSubmit } from '../../../utils/Client'
-import { isPrismaFailure, signUp } from '../../../API/auth/signUp'
+import { isSignUpPrismaFailure, signUp } from '../../../API'
 import { useRouter } from 'next/router'
 import Button from '../../Button'
 interface SignupProps {
@@ -36,7 +36,7 @@ const Signup: React.FunctionComponent<SignupProps> = ({ hide }) => {
         }
         const newCredentials: SignupForm = { ...credentials }
         const errorData = error.response.data
-        if (!isPrismaFailure(errorData)) return
+        if (!isSignUpPrismaFailure(errorData)) return
         if (error.response.data.prismaCode === 'P2002') {
           newCredentials[errorData.field].error = true
           newCredentials[

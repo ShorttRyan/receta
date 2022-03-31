@@ -3,12 +3,13 @@ import styles from './IconButton.module.scss'
 import { IconType } from 'react-icons'
 
 interface IconButtonProps {
-  onClick: () => void
+  onClick?: () => void
   Icon: IconType
   disabled: boolean
   style: 'primary' | 'danger'
   size: 'small' | 'medium' | 'large'
   name: string
+  useDiv?: boolean
 }
 
 const IconButton: React.FunctionComponent<IconButtonProps> = ({
@@ -18,6 +19,7 @@ const IconButton: React.FunctionComponent<IconButtonProps> = ({
   size,
   style,
   name,
+  useDiv,
 }) => {
   let buttonClassNames = `${styles.button}`
   let wrapperClassNames = `${styles.iconWrapper}`
@@ -39,10 +41,16 @@ const IconButton: React.FunctionComponent<IconButtonProps> = ({
       wrapperClassNames += ` ${styles[size]}`
       break
   }
-  return (
+  return useDiv ? (
+    <div className={buttonClassNames}>
+      <div className={wrapperClassNames}>
+        <Icon className={styles.icon} />
+      </div>
+    </div>
+  ) : (
     <button
       type="button"
-      onClick={() => onClick()}
+      onClick={() => onClick !== undefined && onClick()}
       className={buttonClassNames}
       disabled={disabled}
       aria-label={name}
