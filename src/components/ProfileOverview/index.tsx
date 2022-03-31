@@ -5,8 +5,7 @@ import Input from '../Input'
 import { UpdateProfileForm } from './type'
 import Button from '../Button'
 import { preUpdateProfileSubmit } from '../../utils/Client'
-import { isPrismaFailure } from '../../API/user/updateProfileInfo'
-import { updateProfileInfo } from '../../API/user/updateProfileInfo'
+import { isUpdateProfilePrismaFailure, updateProfileInfo } from '../../API'
 import { useRouter } from 'next/router'
 import { FiEdit } from 'react-icons/fi'
 
@@ -64,7 +63,7 @@ const ProfileOverview: React.FunctionComponent<ProfileOverviewProps> = ({
               }
               const newInfo: UpdateProfileForm = { ...info }
               const errorData = error.response.data
-              if (!isPrismaFailure(errorData)) return
+              if (!isUpdateProfilePrismaFailure(errorData)) return
               if (error.response.data.prismaCode === 'P2002') {
                 newInfo[errorData.field].error = true
                 newInfo[

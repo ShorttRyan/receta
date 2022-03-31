@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styles from './Login.module.scss'
 import Input from '../../Input'
-import { logIn } from '../../../API/auth/logIn'
+import { logIn } from '../../../API'
 import { useRouter } from 'next/router'
 import { initialValue, LoginForm } from './type'
 import Button from '../../Button'

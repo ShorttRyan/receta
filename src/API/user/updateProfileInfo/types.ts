@@ -12,6 +12,8 @@ export type UpdateProfileFailure = {
   field: keyof UpdateProfileBody
   message: string
 }
-export function isPrismaFailure(failure: any): failure is UpdateProfileFailure {
+export function isUpdateProfilePrismaFailure(
+  failure: any,
+): failure is UpdateProfileFailure {
   return (failure as UpdateProfileFailure).prismaCode !== undefined
 }

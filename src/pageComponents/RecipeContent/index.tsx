@@ -1,10 +1,19 @@
 import React from 'react'
 import { Recipe } from '@prisma/client'
 import styles from './RecipeContent.module.scss'
-import { FiAtSign, FiCalendar, FiLock, FiTarget, FiUser } from 'react-icons/fi'
+import {
+  FiAtSign,
+  FiCalendar,
+  FiEdit,
+  FiLock,
+  FiTarget,
+  FiUser,
+} from 'react-icons/fi'
 import { toDate } from '../../utils/Client'
 import { Prisma } from '@prisma/client'
 import { getUnit } from '../AddRecipe/AddRecipeForm/IngredientSection/IngredientRow/getUnit'
+import Link from 'next/link'
+import IconButton from '../../components/IconButton'
 
 interface RecipeContentProps {
   recipe: Recipe
@@ -46,6 +55,23 @@ const RecipeContent: React.FunctionComponent<RecipeContentProps> = ({
               <div className={styles.label}>{toDate(publishedAt)}</div>
             </div>
           </div>
+          {isOwner && (
+            <div className={styles.edit_button}>
+              <Link href={`/recipe/${recipe.id}/edit`}>
+                <a>
+                  <IconButton
+                    Icon={FiEdit}
+                    disabled={false}
+                    style={'primary'}
+                    size={'large'}
+                    name={'Edit this recipe'}
+                    useDiv={true}
+                    onClick={() => null}
+                  />
+                </a>
+              </Link>
+            </div>
+          )}
         </div>
         <div className={styles.recipe_content}>
           {ingredients?.length > 0 && (

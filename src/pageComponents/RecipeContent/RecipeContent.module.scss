@@ -18,12 +18,27 @@
   display: block;
   width: 100%;
   border-bottom: 1px solid $primary;
+  position: relative;
+}
+
+.edit_button {
+  position: absolute;
+  right: 0;
+  top: 6px;
+  @media(max-width: $mobile) {
+    top: unset;
+    bottom: 10px;
+  }
 }
 
 .title {
   font-weight: 700;
   font-size: 2.5rem;
   color: #222222;
+  padding-right: calc(#{$iconSizeLg} + 4px);
+  @media(max-width: $mobile) {
+    padding-right: 0;
+  }
 }
 
 .user_info_wrapper {

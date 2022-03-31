@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styles from './ProfileContent.module.scss'
 import { ProfilePageProps } from '../../pages/profile'
 import Button from '../../components/Button'
-import { logOut } from '../../API/auth/logOut'
+import { logOut } from '../../API'
 import { useRouter } from 'next/router'
 import ProfileOverview from '../../components/ProfileOverview'
 

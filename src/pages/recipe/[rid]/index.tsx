@@ -21,7 +21,6 @@ export interface RecipePageProps {
 }
 
 const Recipe: NextPage<RecipePageProps> = (props) => {
-  console.log(props)
   return (
     <>
       <Head>
@@ -73,8 +72,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       },
     })
   } catch (e) {
-    console.log('### Error on Index.tsx ###')
-    console.log('### Finding Liked Recipes ###')
+    console.log(`### Error on /recipe/${rid} ###`)
     console.log('user token: ', token)
     console.log(e)
   }

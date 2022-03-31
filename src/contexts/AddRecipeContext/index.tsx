@@ -31,13 +31,27 @@ interface AddRecipeInterface {
   setNotes: (newNotes: Note[]) => void
   isPrivate: boolean
   setIsPrivate: (newVal: boolean) => void
+  recipeId?: string
 }
 
 export const AddRecipeContext = React.createContext({} as AddRecipeInterface)
 
-export const AddRecipeProvider: React.FunctionComponent = ({ children }) => {
+export interface AddRecipeProviderProps {
+  seedForm?: AddRecipeForm
+  recipeId?: string
+}
+
+export const AddRecipeProvider: React.FunctionComponent<
+  AddRecipeProviderProps
+> = ({ children, seedForm, recipeId }) => {
   const [addingRecipe, setAddingRecipe] = useState<boolean>(false)
-  const [form, setForm] = useState<AddRecipeForm>(initialValue)
+  const seedHours = seedForm
+    ? Math.floor(seedForm.timeToComplete.value / 60)
+    : 0
+  const seedMinutes = seedForm ? seedForm.timeToComplete.value % 60 : 0
+  const [form, setForm] = useState<AddRecipeForm>(
+    seedForm ? seedForm : initialValue,
+  )
   const resetForm = useCallback(
     () =>
       setForm({
@@ -65,8 +79,8 @@ export const AddRecipeProvider: React.FunctionComponent = ({ children }) => {
       }),
     [],
   )
-  const [hours, setHours] = useState<number>(0)
-  const [minutes, setMinutes] = useState<number>(0)
+  const [hours, setHours] = useState<number>(seedHours)
+  const [minutes, setMinutes] = useState<number>(seedMinutes)
 
   const title = form.title.value
   const setTitle = (newTitle: string) => {
@@ -127,6 +141,7 @@ export const AddRecipeProvider: React.FunctionComponent = ({ children }) => {
         setNotes,
         isPrivate,
         setIsPrivate,
+        recipeId,
       }}
     >
       {children}
