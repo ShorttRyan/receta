@@ -86,7 +86,7 @@ const RecipeContent: React.FunctionComponent<RecipeContentProps> = ({
             </div>
           </div>
           <div className={styles.edit_button}>
-            {!isOwner ? (
+            {isOwner ? (
               <Link href={`/recipe/${recipe.id}/edit`}>
                 <a>
                   <IconButton
@@ -104,6 +104,7 @@ const RecipeContent: React.FunctionComponent<RecipeContentProps> = ({
               <LikeButton
                 isLiked={isLiked}
                 onClick={() => setIsLiked(!isLiked)}
+                recipeId={recipe.id}
               />
             )}
           </div>

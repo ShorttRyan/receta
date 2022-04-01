@@ -13,9 +13,9 @@
     background: white;
   }
   &:hover {
-    box-shadow: 0 0 10px $likedBright;
+    box-shadow: 0 0 3px $likedBright;
   }
-  transition: all ease-in-out .25s
+  transition: all ease-in-out
 }
 
 .icon {
@@ -31,5 +31,5 @@
   &.unliked {
     color: $liked;
   }
-  transition: all ease-in-out .25s
+  transition: all ease-in-out
 }
