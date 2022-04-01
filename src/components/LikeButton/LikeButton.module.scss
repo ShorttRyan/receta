@@ -1,0 +1,35 @@
+@import './src/styles/variables';
+
+.heartWrapper {
+  height: $iconSizeLg;
+  width: $iconSizeLg;
+  border-radius: 50%;
+  border: 1px solid $liked;
+  position: relative;
+  &.liked {
+    background: $liked
+  }
+  &.unliked {
+    background: white;
+  }
+  &:hover {
+    box-shadow: 0 0 3px $likedBright;
+  }
+  transition: all ease-in-out
+}
+
+.icon {
+  height: $iconSizeSm;
+  width: $iconSizeSm;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  &.liked {
+    color: white;
+  }
+  &.unliked {
+    color: $liked;
+  }
+  transition: all ease-in-out
+}

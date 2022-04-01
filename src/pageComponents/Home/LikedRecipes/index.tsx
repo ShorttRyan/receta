@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
-import { Recipe } from '@prisma/client'
 import styles from '../HomeContent.module.scss'
 import EmptySectionComponent from '../EmptySectionComponent'
 import RecipeCard from '../../../components/RecipeCard'
-import { SortingFunctions, SortingTypes } from '../MyRecipes/types'
 import DropDown from '../../../components/DropDown'
+import { SortingFunctions, SortingTypes } from '../MyRecipes/types'
+import { ExtendedRecipe } from '../../../utils/extendedRecipe'
 
-interface MyDraftsProps {
-  recipes: Recipe[]
+interface LikedRecipes {
+  recipes: ExtendedRecipe[]
 }
 
-const MyDrafts: React.FunctionComponent<MyDraftsProps> = ({ recipes }) => {
+const LikedRecipes: React.FunctionComponent<LikedRecipes> = ({ recipes }) => {
   const [sortingVal, setSortingVal] = useState<string>(SortingTypes.newest)
   return (
     <div
@@ -43,12 +43,12 @@ const MyDrafts: React.FunctionComponent<MyDraftsProps> = ({ recipes }) => {
         </div>
       ) : (
         <EmptySectionComponent
-          message={`Looks like you don't have any drafts yet!`}
-          showAddRecipeButton={false}
+          message={`Looks like you haven't liked any recipes yet!`}
+          showAddRecipeButton={true}
         />
       )}
     </div>
   )
 }
 
-export default MyDrafts
+export default LikedRecipes
