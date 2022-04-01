@@ -6,7 +6,7 @@ import { GetServerSideProps } from 'next'
 import { Recipe } from '@prisma/client'
 import MainTemplate from '../../../templates/Main'
 import { prisma, validateAccessToken } from '../../../utils/Server'
-import RecipeContent from '../../../pageComponents/RecipeContent'
+import RecipeContent from '../../../pageComponents/Recipe'
 import { fakeRecipe } from '../../../utils/fakeRecipe'
 
 export interface RecipePageProps {
@@ -21,6 +21,7 @@ export interface RecipePageProps {
 }
 
 const Recipe: NextPage<RecipePageProps> = (props) => {
+  console.log(props.recipe)
   return (
     <>
       <Head>

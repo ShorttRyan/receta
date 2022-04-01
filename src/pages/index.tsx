@@ -5,7 +5,7 @@ import Head from 'next/head'
 import { GetServerSideProps } from 'next'
 import { prisma, validateAccessToken } from '../utils/Server'
 import MainTemplate from '../templates/Main'
-import HomeContent from '../pageComponents/HomeContent'
+import HomeContent from '../pageComponents/Home'
 import { Recipe } from '@prisma/client'
 import { UserDataProvider } from '../contexts/UserDataContext'
 import { AddRecipeProvider } from '../contexts/AddRecipeContext'
@@ -20,6 +20,7 @@ export interface HomePageProps {
 }
 
 const Home: NextPage<HomePageProps> = (props) => {
+  console.log(props.likedRecipes)
   return (
     <>
       <Head>
@@ -68,6 +69,13 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
       where: {
         authorUsername: token.username,
       },
+      include: {
+        _count: {
+          select: {
+            likedBy: true,
+          },
+        },
+      },
     })
   } catch (e) {
     console.log('### Error on Index.tsx ###')
@@ -83,6 +91,13 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
         likedBy: {
           some: {
             id: token.id,
+          },
+        },
+      },
+      include: {
+        _count: {
+          select: {
+            likedBy: true,
           },
         },
       },

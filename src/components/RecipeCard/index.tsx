@@ -1,7 +1,14 @@
 import React from 'react'
 import { Recipe } from '@prisma/client'
 import styles from './RecipeCard.module.scss'
-import { FiClock, FiUser, FiCalendar, FiLock, FiAtSign } from 'react-icons/fi'
+import {
+  FiClock,
+  FiUser,
+  FiCalendar,
+  FiLock,
+  FiAtSign,
+  FiUnlock,
+} from 'react-icons/fi'
 import { toDate, toTime } from '../../utils/Client'
 import Link from 'next/link'
 
@@ -37,7 +44,11 @@ const RecipeCard: React.FunctionComponent<RecipeCardProps> = ({ recipe }) => {
             <div className={styles.label}>{toTime(timeToComplete)}</div>
           </div>
           <div className={styles.time_stamp}>
-            <FiLock className={styles.icons} />
+            {isPrivate ? (
+              <FiLock className={styles.icons} />
+            ) : (
+              <FiUnlock className={styles.icons} />
+            )}
             <div className={styles.label}>
               {isPrivate ? 'Private' : 'Public'}
             </div>
