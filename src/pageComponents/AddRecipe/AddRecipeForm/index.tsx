@@ -91,7 +91,7 @@ const AddRecipe: React.FunctionComponent = () => {
                 if (!recipeId) {
                   const [userRecipes, error] = await addRecipe(recipe)
                   if (userRecipes !== undefined) {
-                    setAllRecipes(userRecipes.data)
+                    setAllRecipes(userRecipes?.data)
                     resetForm()
                     setHours(0)
                     setMinutes(0)

@@ -1,7 +1,25 @@
-import { Recipe } from '@prisma/client'
+import { Prisma } from '@prisma/client'
 
-export interface ExtendedRecipe extends Recipe {
-  _count: {
-    likedBy: number
+export type ExtendedRecipe = Prisma.RecipeGetPayload<{
+  include: {
+    _count: {
+      select: {
+        likedBy: true
+      }
+    }
   }
-}
+}>
+export type RecipeWithLikedBy = Prisma.RecipeGetPayload<{
+  include: {
+    _count: {
+      select: {
+        likedBy: true
+      }
+    }
+    likedBy: {
+      select: {
+        id: true
+      }
+    }
+  }
+}>

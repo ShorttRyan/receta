@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import { Recipe } from '@prisma/client'
 import styles from '../HomeContent.module.scss'
 import EmptySectionComponent from '../EmptySectionComponent'
 import RecipeCard from '../../../components/RecipeCard'
 import { SortingFunctions, SortingTypes } from '../MyRecipes/types'
 import DropDown from '../../../components/DropDown'
+import { ExtendedRecipe } from '../../../utils/extendedRecipe'
 
 interface MyDraftsProps {
-  recipes: Recipe[]
+  recipes: ExtendedRecipe[]
 }
 
 const MyDrafts: React.FunctionComponent<MyDraftsProps> = ({ recipes }) => {

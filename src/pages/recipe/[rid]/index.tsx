@@ -7,11 +7,7 @@ import MainTemplate from '../../../templates/Main'
 import { prisma, validateAccessToken } from '../../../utils/Server'
 import RecipeContent from '../../../pageComponents/Recipe'
 import { fakeRecipe } from '../../../utils/fakeRecipe'
-import { ExtendedRecipe } from '../../../utils/extendedRecipe'
-
-export interface RecipePageRecipe extends ExtendedRecipe {
-  likedBy: { id: number }[]
-}
+import { RecipeWithLikedBy } from '../../../utils/extendedRecipe'
 
 export interface RecipePageProps {
   id: number
@@ -19,7 +15,7 @@ export interface RecipePageProps {
   firstName: string
   lastName: string
   email: string
-  recipe: RecipePageRecipe
+  recipe: RecipeWithLikedBy
   isOwner: boolean
   permitted: boolean
 }

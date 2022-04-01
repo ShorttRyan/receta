@@ -60,7 +60,7 @@ const RecipeCard: React.FunctionComponent<RecipeCardProps> = ({ recipe }) => {
           </div>
           <div className={styles.time_stamp}>
             <FiHeart className={styles.icons} />
-            <div className={styles.label}>{recipe._count.likedBy}</div>
+            <div className={styles.label}>{recipe?._count?.likedBy}</div>
           </div>
         </div>
       </div>

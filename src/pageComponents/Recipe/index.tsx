@@ -16,10 +16,10 @@ import { getUnit } from '../AddRecipe/AddRecipeForm/IngredientSection/Ingredient
 import Link from 'next/link'
 import IconButton from '../../components/IconButton'
 import LikeButton from '../../components/LikeButton'
-import { RecipePageRecipe } from '../../pages/recipe/[rid]'
+import { RecipeWithLikedBy } from '../../utils/extendedRecipe'
 
 interface RecipeContentProps {
-  recipe: RecipePageRecipe
+  recipe: RecipeWithLikedBy
   isOwner: boolean
   permitted: boolean
 }
@@ -81,7 +81,7 @@ const RecipeContent: React.FunctionComponent<RecipeContentProps> = ({
                 <FiHeart className={styles.icon} />
               </div>
               <div className={styles.label}>
-                {recipe?._count?.likedBy + change}
+                {(recipe?._count?.likedBy || 0) + change}
               </div>
             </div>
           </div>
