@@ -21,7 +21,6 @@ export interface RecipePageProps {
 }
 
 const Recipe: NextPage<RecipePageProps> = (props) => {
-  console.log(props.recipe)
   return (
     <>
       <Head>
@@ -70,6 +69,13 @@ export const getServerSideProps: GetServerSideProps = async ({
     recipe = await prisma.recipe.findUnique({
       where: {
         id: rid as string,
+      },
+      include: {
+        _count: {
+          select: {
+            likedBy: true,
+          },
+        },
       },
     })
   } catch (e) {
