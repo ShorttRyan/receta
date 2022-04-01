@@ -25,7 +25,6 @@ export interface RecipePageProps {
 }
 
 const Recipe: NextPage<RecipePageProps> = (props) => {
-  console.log(props.recipe)
   return (
     <>
       <Head>
