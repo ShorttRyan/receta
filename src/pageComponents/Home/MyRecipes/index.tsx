@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react'
-import { Recipe } from '@prisma/client'
 import styles from '../HomeContent.module.scss'
 import EmptySectionComponent from '../EmptySectionComponent'
 import RecipeCard from '../../../components/RecipeCard'
@@ -8,9 +7,10 @@ import { AddRecipeContext } from '../../../contexts/AddRecipeContext'
 import { FiPlus } from 'react-icons/fi'
 import DropDown from '../../../components/DropDown'
 import { SortingTypes, SortingFunctions } from './types'
+import { ExtendedRecipe } from '../../../utils/extendedRecipe'
 
 interface MyRecipesProps {
-  recipes: Recipe[]
+  recipes: ExtendedRecipe[]
 }
 
 const MyRecipes: React.FunctionComponent<MyRecipesProps> = ({ recipes }) => {

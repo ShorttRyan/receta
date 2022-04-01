@@ -3,11 +3,11 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { GetServerSideProps } from 'next'
-import { Recipe } from '@prisma/client'
 import MainTemplate from '../../../templates/Main'
 import { prisma, validateAccessToken } from '../../../utils/Server'
-import RecipeContent from '../../../pageComponents/RecipeContent'
+import RecipeContent from '../../../pageComponents/Recipe'
 import { fakeRecipe } from '../../../utils/fakeRecipe'
+import { RecipeWithLikedBy } from '../../../utils/extendedRecipe'
 
 export interface RecipePageProps {
   id: number
@@ -15,7 +15,7 @@ export interface RecipePageProps {
   firstName: string
   lastName: string
   email: string
-  recipe: Recipe
+  recipe: RecipeWithLikedBy
   isOwner: boolean
   permitted: boolean
 }
@@ -69,6 +69,21 @@ export const getServerSideProps: GetServerSideProps = async ({
     recipe = await prisma.recipe.findUnique({
       where: {
         id: rid as string,
+      },
+      include: {
+        _count: {
+          select: {
+            likedBy: true,
+          },
+        },
+        likedBy: {
+          where: {
+            id: token.id,
+          },
+          select: {
+            id: true,
+          },
+        },
       },
     })
   } catch (e) {

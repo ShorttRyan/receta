@@ -5,7 +5,7 @@ import Head from 'next/head'
 import { GetServerSideProps } from 'next'
 import { validateAccessToken } from '../utils/Server'
 import MainTemplate from '../templates/Main'
-import ProfileContent from '../pageComponents/ProfileContent'
+import ProfileContent from '../pageComponents/Profile'
 
 export interface ProfilePageProps {
   username: string

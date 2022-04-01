@@ -4,7 +4,7 @@ import {
   Instruction,
   Note,
 } from '../../../pageComponents/AddRecipe/AddRecipeForm/InstructionsSection/types'
-import { Recipe } from '@prisma/client'
+import { ExtendedRecipe } from '../../../utils/extendedRecipe'
 
 export interface AddRecipeBody {
   title: string
@@ -16,7 +16,7 @@ export interface AddRecipeBody {
   isDraft: boolean
 }
 
-export type AddRecipeSuccess = Recipe[]
+export type AddRecipeSuccess = ExtendedRecipe[]
 export type AddRecipeFailure = {
   message: string
   code?: string

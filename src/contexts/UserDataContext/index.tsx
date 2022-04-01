@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
-import { Recipe } from '@prisma/client'
+import { ExtendedRecipe } from '../../utils/extendedRecipe'
 
 interface UserDataContextInterface {
-  allRecipes: Recipe[]
-  setAllRecipes: (recipes: Recipe[]) => void
-  published: Recipe[]
-  drafts: Recipe[]
-  liked: Recipe[]
-  setLiked: (newArr: Recipe[]) => void
+  allRecipes: ExtendedRecipe[]
+  setAllRecipes: (recipes: ExtendedRecipe[]) => void
+  published: ExtendedRecipe[]
+  drafts: ExtendedRecipe[]
+  liked: ExtendedRecipe[]
+  setLiked: (newArr: ExtendedRecipe[]) => void
 }
 interface UserDataProviderProps {
-  publishedRecipes: Recipe[]
-  likedRecipes: Recipe[]
+  publishedRecipes: ExtendedRecipe[]
+  likedRecipes: ExtendedRecipe[]
 }
 
 export const UserDataContext = React.createContext(
@@ -21,10 +21,11 @@ export const UserDataContext = React.createContext(
 export const UserDataProvider: React.FunctionComponent<
   UserDataProviderProps
 > = ({ children, publishedRecipes, likedRecipes }) => {
-  const [allRecipes, setAllRecipes] = useState<Recipe[]>(publishedRecipes)
+  const [allRecipes, setAllRecipes] =
+    useState<ExtendedRecipe[]>(publishedRecipes)
   const drafts = allRecipes.filter((r) => r.isDraft)
   const published = allRecipes.filter((r) => !r.isDraft)
-  const [liked, setLiked] = useState<Recipe[]>(likedRecipes)
+  const [liked, setLiked] = useState<ExtendedRecipe[]>(likedRecipes)
 
   return (
     <UserDataContext.Provider

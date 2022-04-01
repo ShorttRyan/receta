@@ -1,12 +1,13 @@
-import React from 'react'
-import { Recipe } from '@prisma/client'
+import React, { useState } from 'react'
 import styles from './RecipeContent.module.scss'
 import {
   FiAtSign,
   FiCalendar,
   FiEdit,
+  FiHeart,
   FiLock,
   FiTarget,
+  FiUnlock,
   FiUser,
 } from 'react-icons/fi'
 import { toDate } from '../../utils/Client'
@@ -14,9 +15,11 @@ import { Prisma } from '@prisma/client'
 import { getUnit } from '../AddRecipe/AddRecipeForm/IngredientSection/IngredientRow/getUnit'
 import Link from 'next/link'
 import IconButton from '../../components/IconButton'
+import LikeButton from '../../components/LikeButton'
+import { RecipeWithLikedBy } from '../../utils/extendedRecipe'
 
 interface RecipeContentProps {
-  recipe: Recipe
+  recipe: RecipeWithLikedBy
   isOwner: boolean
   permitted: boolean
 }
@@ -26,10 +29,15 @@ const RecipeContent: React.FunctionComponent<RecipeContentProps> = ({
   isOwner,
   permitted,
 }) => {
-  const { title, authorUsername, authorName, publishedAt } = recipe
+  const { title, authorUsername, authorName, publishedAt, isPrivate } = recipe
   const ingredients = recipe?.ingredients as Prisma.JsonObject[]
   const instructions = recipe?.instructions as Prisma.JsonObject[]
   const notes = recipe?.notes as Prisma.JsonObject[]
+  const initiallyLiked = recipe?.likedBy.length === 1
+  const [isLiked, setIsLiked] = useState<boolean>(initiallyLiked)
+  let change = 0
+  if (initiallyLiked && !isLiked) change = -1
+  if (!initiallyLiked && isLiked) change = 1
   return (
     <>
       <div className={`${styles.container} ${!permitted && styles.restrict} `}>
@@ -54,9 +62,31 @@ const RecipeContent: React.FunctionComponent<RecipeContentProps> = ({
               </div>
               <div className={styles.label}>{toDate(publishedAt)}</div>
             </div>
+            {isOwner && (
+              <div className={styles.meta}>
+                <div className={styles.icon_wrapper}>
+                  {isPrivate ? (
+                    <FiLock className={styles.icon} />
+                  ) : (
+                    <FiUnlock className={styles.icon} />
+                  )}
+                </div>
+                <div className={styles.label}>
+                  {isPrivate ? 'Private' : 'Public'}
+                </div>
+              </div>
+            )}
+            <div className={styles.meta}>
+              <div className={styles.icon_wrapper}>
+                <FiHeart className={styles.icon} />
+              </div>
+              <div className={styles.label}>
+                {(recipe?._count?.likedBy || 0) + change}
+              </div>
+            </div>
           </div>
-          {isOwner && (
-            <div className={styles.edit_button}>
+          <div className={styles.edit_button}>
+            {isOwner ? (
               <Link href={`/recipe/${recipe.id}/edit`}>
                 <a>
                   <IconButton
@@ -70,8 +100,14 @@ const RecipeContent: React.FunctionComponent<RecipeContentProps> = ({
                   />
                 </a>
               </Link>
-            </div>
-          )}
+            ) : (
+              <LikeButton
+                isLiked={isLiked}
+                onClick={() => setIsLiked(!isLiked)}
+                recipeId={recipe.id}
+              />
+            )}
+          </div>
         </div>
         <div className={styles.recipe_content}>
           {ingredients?.length > 0 && (
