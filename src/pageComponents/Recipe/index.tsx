@@ -78,7 +78,7 @@ const RecipeContent: React.FunctionComponent<RecipeContentProps> = ({
             )}
             <div className={styles.meta}>
               <div className={styles.icon_wrapper}>
-                <FiHeart className={styles.icon_heart} />
+                <FiHeart className={styles.icon} />
               </div>
               <div className={styles.label}>
                 {recipe?._count?.likedBy + change}
