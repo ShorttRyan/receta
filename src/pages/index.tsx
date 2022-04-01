@@ -9,18 +9,18 @@ import HomeContent from '../pageComponents/Home'
 import { Recipe } from '@prisma/client'
 import { UserDataProvider } from '../contexts/UserDataContext'
 import { AddRecipeProvider } from '../contexts/AddRecipeContext'
+import { ExtendedRecipe } from '../utils/extendedRecipe'
 
 export interface HomePageProps {
   username: string
   firstName: string
   lastName: string
   email: string
-  publishedRecipes: Recipe[]
-  likedRecipes: Recipe[]
+  publishedRecipes: ExtendedRecipe[]
+  likedRecipes: ExtendedRecipe[]
 }
 
 const Home: NextPage<HomePageProps> = (props) => {
-  console.log(props.likedRecipes)
   return (
     <>
       <Head>

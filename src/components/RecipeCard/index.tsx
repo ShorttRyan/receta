@@ -1,5 +1,4 @@
 import React from 'react'
-import { Recipe } from '@prisma/client'
 import styles from './RecipeCard.module.scss'
 import {
   FiClock,
@@ -8,12 +7,14 @@ import {
   FiLock,
   FiAtSign,
   FiUnlock,
+  FiHeart,
 } from 'react-icons/fi'
 import { toDate, toTime } from '../../utils/Client'
 import Link from 'next/link'
+import { ExtendedRecipe } from '../../utils/extendedRecipe'
 
 export interface RecipeCardProps {
-  recipe: Recipe
+  recipe: ExtendedRecipe
 }
 
 const RecipeCard: React.FunctionComponent<RecipeCardProps> = ({ recipe }) => {
@@ -56,6 +57,10 @@ const RecipeCard: React.FunctionComponent<RecipeCardProps> = ({ recipe }) => {
           <div className={styles.time_stamp}>
             <FiCalendar className={styles.icons} />
             <div className={styles.label}>{toDate(publishedAt)}</div>
+          </div>
+          <div className={styles.time_stamp}>
+            <FiHeart className={styles.icons} />
+            <div className={styles.label}>{recipe._count.likedBy}</div>
           </div>
         </div>
       </div>

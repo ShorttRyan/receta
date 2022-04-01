@@ -1,10 +1,10 @@
-import React from 'react'
-import { Recipe } from '@prisma/client'
+import React, { useState } from 'react'
 import styles from './RecipeContent.module.scss'
 import {
   FiAtSign,
   FiCalendar,
   FiEdit,
+  FiHeart,
   FiLock,
   FiTarget,
   FiUnlock,
@@ -16,9 +16,10 @@ import { getUnit } from '../AddRecipe/AddRecipeForm/IngredientSection/Ingredient
 import Link from 'next/link'
 import IconButton from '../../components/IconButton'
 import LikeButton from '../../components/LikeButton'
+import { RecipePageRecipe } from '../../pages/recipe/[rid]'
 
 interface RecipeContentProps {
-  recipe: Recipe
+  recipe: RecipePageRecipe
   isOwner: boolean
   permitted: boolean
 }
@@ -32,6 +33,11 @@ const RecipeContent: React.FunctionComponent<RecipeContentProps> = ({
   const ingredients = recipe?.ingredients as Prisma.JsonObject[]
   const instructions = recipe?.instructions as Prisma.JsonObject[]
   const notes = recipe?.notes as Prisma.JsonObject[]
+  const initiallyLiked = recipe?.likedBy.length === 1
+  const [isLiked, setIsLiked] = useState<boolean>(initiallyLiked)
+  let change = 0
+  if (initiallyLiked && !isLiked) change = -1
+  if (!initiallyLiked && isLiked) change = 1
   return (
     <>
       <div className={`${styles.container} ${!permitted && styles.restrict} `}>
@@ -70,6 +76,14 @@ const RecipeContent: React.FunctionComponent<RecipeContentProps> = ({
                 </div>
               </div>
             )}
+            <div className={styles.meta}>
+              <div className={styles.icon_wrapper}>
+                <FiHeart className={styles.icon_heart} />
+              </div>
+              <div className={styles.label}>
+                {recipe?._count?.likedBy + change}
+              </div>
+            </div>
           </div>
           <div className={styles.edit_button}>
             {!isOwner ? (
@@ -87,7 +101,10 @@ const RecipeContent: React.FunctionComponent<RecipeContentProps> = ({
                 </a>
               </Link>
             ) : (
-              <LikeButton isLiked={true} onClick={() => console.log()} />
+              <LikeButton
+                isLiked={isLiked}
+                onClick={() => setIsLiked(!isLiked)}
+              />
             )}
           </div>
         </div>

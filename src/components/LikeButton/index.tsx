@@ -7,7 +7,10 @@ export interface LikeButtonProps {
   onClick: () => void
 }
 
-const LikeButton: React.FunctionComponent<LikeButtonProps> = ({ isLiked }) => {
+const LikeButton: React.FunctionComponent<LikeButtonProps> = ({
+  isLiked,
+  onClick,
+}) => {
   return (
     <button
       className={`${styles.heartWrapper} ${
@@ -15,6 +18,7 @@ const LikeButton: React.FunctionComponent<LikeButtonProps> = ({ isLiked }) => {
       }`}
       type="button"
       aria-label={isLiked ? 'Unlike This Recipe' : 'Like This Recipe'}
+      onClick={() => onClick()}
     >
       <FiHeart
         className={`${styles.icon} ${isLiked ? styles.liked : styles.unliked}`}

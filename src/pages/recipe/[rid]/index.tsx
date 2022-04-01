@@ -3,11 +3,15 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { GetServerSideProps } from 'next'
-import { Recipe } from '@prisma/client'
 import MainTemplate from '../../../templates/Main'
 import { prisma, validateAccessToken } from '../../../utils/Server'
 import RecipeContent from '../../../pageComponents/Recipe'
 import { fakeRecipe } from '../../../utils/fakeRecipe'
+import { ExtendedRecipe } from '../../../utils/extendedRecipe'
+
+export interface RecipePageRecipe extends ExtendedRecipe {
+  likedBy: { id: number }[]
+}
 
 export interface RecipePageProps {
   id: number
@@ -15,12 +19,13 @@ export interface RecipePageProps {
   firstName: string
   lastName: string
   email: string
-  recipe: Recipe
+  recipe: RecipePageRecipe
   isOwner: boolean
   permitted: boolean
 }
 
 const Recipe: NextPage<RecipePageProps> = (props) => {
+  console.log(props.recipe)
   return (
     <>
       <Head>
@@ -74,6 +79,14 @@ export const getServerSideProps: GetServerSideProps = async ({
         _count: {
           select: {
             likedBy: true,
+          },
+        },
+        likedBy: {
+          where: {
+            id: token.id,
+          },
+          select: {
+            id: true,
           },
         },
       },
