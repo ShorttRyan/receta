@@ -61,6 +61,12 @@ const EditRecipe: NextPage<RecipePageProps> = ({ recipe }) => {
       error: false,
       message: '',
     },
+    description: {
+      value: recipe?.description || '',
+      required: true,
+      error: false,
+      message: '',
+    },
     ingredients: {
       value: [
         ...mappedIngredients,

@@ -23,6 +23,8 @@ interface AddRecipeInterface {
   minutes: number
   setMinutes: (newMinutes: number) => void
   timeToComplete: number
+  description: string
+  setDescription: (newDescription: string) => void
   ingredients: Ingredient[]
   setIngredients: (newIngredients: Ingredient[]) => void
   instructions: Instruction[]
@@ -57,6 +59,7 @@ export const AddRecipeProvider: React.FunctionComponent<
       setForm({
         title: { value: '', error: false, required: true, message: '' },
         timeToComplete: { value: 0, error: false, required: true, message: '' },
+        description: { value: '', error: false, required: true, message: '' },
         private: { value: false, error: false, required: true, message: '' },
         ingredients: {
           value: [{ name: '', amount: '', unit: '', id: uuid() }],
@@ -90,6 +93,13 @@ export const AddRecipeProvider: React.FunctionComponent<
   }
 
   const timeToComplete = hours * 60 + minutes
+
+  const description = form.description.value
+  const setDescription = (newDescription: string) => {
+    const newForm = { ...form }
+    newForm.description.value = newDescription
+    setForm(newForm)
+  }
 
   const ingredients = form.ingredients.value
   const setIngredients = (newIngredients: Ingredient[]) => {
@@ -133,6 +143,8 @@ export const AddRecipeProvider: React.FunctionComponent<
         minutes,
         setMinutes,
         timeToComplete,
+        description,
+        setDescription,
         ingredients,
         setIngredients,
         instructions,

@@ -33,6 +33,7 @@ model Recipe {
   isPrivate         Boolean
   isDraft           Boolean
   title             String
+  description       String?
   timeToComplete    Int
   ingredients       Json[]
   instructions      Json[]
