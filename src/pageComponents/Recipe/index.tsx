@@ -37,6 +37,7 @@ const RecipeContent: React.FunctionComponent<RecipeContentProps> = ({
     isDraft,
     timeToComplete,
     description,
+    isPrivate,
   } = recipe
   const ingredients = recipe?.ingredients as Prisma.JsonObject[]
   const instructions = recipe?.instructions as Prisma.JsonObject[]
@@ -83,7 +84,7 @@ const RecipeContent: React.FunctionComponent<RecipeContentProps> = ({
               </div>
               <div className={styles.label}>{toTime(timeToComplete)}</div>
             </div>
-            {!isDraft && (
+            {!isDraft && !isPrivate && (
               <div className={styles.meta}>
                 <div className={styles.icon_wrapper}>
                   <FiHeart className={styles.icon} />
