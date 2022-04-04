@@ -9,7 +9,7 @@ const NavBar: React.FunctionComponent = () => {
   return (
     <div className={styles.navbarWrapper}>
       <div className={styles.navbarContent}>
-        <Link href={'/'}>
+        <Link href={'/'} prefetch={false}>
           <a>
             <Horizontal />
           </a>
