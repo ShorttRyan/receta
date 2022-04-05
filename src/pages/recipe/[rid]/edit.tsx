@@ -143,6 +143,11 @@ export const getServerSideProps: GetServerSideProps = async ({
         id: rid as string,
       },
     })
+    if (recipe === null) {
+      res.writeHead(303, { Location: '/404' })
+      res.end()
+      return
+    }
   } catch (e) {
     console.log(`### Error on /recipe/${rid}/edit ###`)
     console.log('user token: ', token)
