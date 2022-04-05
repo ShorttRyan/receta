@@ -44,7 +44,7 @@ const LikedRecipes: React.FunctionComponent<LikedRecipes> = ({ recipes }) => {
       ) : (
         <EmptySectionComponent
           message={`Looks like you haven't liked any recipes yet!`}
-          showAddRecipeButton={true}
+          showAddRecipeButton={false}
         />
       )}
     </div>
