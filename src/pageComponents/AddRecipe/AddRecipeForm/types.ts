@@ -6,6 +6,7 @@ import { Instruction, Note } from './InstructionsSection/types'
 export interface AddRecipeForm {
   title: FormInput<string>
   timeToComplete: FormInput<number>
+  description: FormInput<string>
   ingredients: FormInput<Ingredient[]>
   instructions: FormInput<Instruction[]>
   notes: FormInput<Note[]>
@@ -21,6 +22,12 @@ export const initialValue: AddRecipeForm = {
   },
   timeToComplete: {
     value: 0,
+    required: true,
+    error: false,
+    message: '',
+  },
+  description: {
+    value: '',
     required: true,
     error: false,
     message: '',

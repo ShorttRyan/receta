@@ -26,6 +26,7 @@ const RecipeCard: React.FunctionComponent<RecipeCardProps> = ({ recipe }) => {
     publishedAt,
     authorName,
     timeToComplete,
+    isDraft,
   } = recipe
   return (
     <Link href={`/recipe/${id}`} passHref={true}>
@@ -58,10 +59,12 @@ const RecipeCard: React.FunctionComponent<RecipeCardProps> = ({ recipe }) => {
             <FiCalendar className={styles.icons} />
             <div className={styles.label}>{toDate(publishedAt)}</div>
           </div>
-          <div className={styles.time_stamp}>
-            <FiHeart className={styles.icons} />
-            <div className={styles.label}>{recipe?._count?.likedBy}</div>
-          </div>
+          {!isDraft && (
+            <div className={styles.time_stamp}>
+              <FiHeart className={styles.icons} />
+              <div className={styles.label}>{recipe?._count?.likedBy || 0}</div>
+            </div>
+          )}
         </div>
       </div>
     </Link>

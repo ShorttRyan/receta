@@ -4,7 +4,9 @@
   fill: $primary;
   cursor: pointer;
   &:hover {
-    fill: $primaryBright;
+    g {
+      fill: $primaryBright;
+    }
   }
 }
 

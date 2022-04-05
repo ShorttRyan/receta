@@ -12,6 +12,8 @@ import { addRecipe, deleteRecipe, updateRecipe } from '../../../API'
 import { AddRecipeContext } from '../../../contexts/AddRecipeContext'
 import { UserDataContext } from '../../../contexts/UserDataContext'
 import { useRouter } from 'next/router'
+import TextareaAutosize from 'react-textarea-autosize'
+import sharedStyles from './InstructionsSection/InstructionRow/InstructionRow.module.scss'
 
 const AddRecipe: React.FunctionComponent = () => {
   const {
@@ -30,6 +32,8 @@ const AddRecipe: React.FunctionComponent = () => {
     notes,
     isPrivate,
     recipeId,
+    description,
+    setDescription,
   } = useContext(AddRecipeContext)
   const { setAllRecipes } = useContext(UserDataContext)
   const [disabledNav, setDisableNav] = useState<boolean>(false)
@@ -82,6 +86,7 @@ const AddRecipe: React.FunctionComponent = () => {
                 const recipe = {
                   title,
                   timeToComplete: hours * 60 + minutes,
+                  description,
                   ingredients: [...ingredients].slice(0, -1),
                   instructions: [...instructions].slice(0, -1),
                   notes: [...notes].slice(0, -1),
@@ -121,6 +126,7 @@ const AddRecipe: React.FunctionComponent = () => {
                 const recipe = {
                   title,
                   timeToComplete: hours * 60 + minutes,
+                  description,
                   ingredients: [...ingredients].slice(0, -1),
                   instructions: [...instructions].slice(0, -1),
                   notes: [...notes].slice(0, -1),
@@ -196,6 +202,18 @@ const AddRecipe: React.FunctionComponent = () => {
               increment={5}
             />
           </div>
+        </div>
+        <div className={styles.description_wrapper}>
+          <div className={styles.input_name}>Description</div>
+          <TextareaAutosize
+            minRows={1}
+            className={sharedStyles.textarea}
+            name={'recipe description'}
+            value={description}
+            disabled={false}
+            onChange={(e) => setDescription(e.target.value)}
+            inputMode="text"
+          />
         </div>
         <IngredientSection />
         <InstructionSection />

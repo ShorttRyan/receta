@@ -3,14 +3,14 @@ import styles from './RecipeContent.module.scss'
 import {
   FiAtSign,
   FiCalendar,
+  FiClock,
   FiEdit,
   FiHeart,
   FiLock,
   FiTarget,
-  FiUnlock,
   FiUser,
 } from 'react-icons/fi'
-import { toDate } from '../../utils/Client'
+import { toDate, toTime } from '../../utils/Client'
 import { Prisma } from '@prisma/client'
 import { getUnit } from '../AddRecipe/AddRecipeForm/IngredientSection/IngredientRow/getUnit'
 import Link from 'next/link'
@@ -29,11 +29,20 @@ const RecipeContent: React.FunctionComponent<RecipeContentProps> = ({
   isOwner,
   permitted,
 }) => {
-  const { title, authorUsername, authorName, publishedAt, isPrivate } = recipe
+  const {
+    title,
+    authorUsername,
+    authorName,
+    publishedAt,
+    isDraft,
+    timeToComplete,
+    description,
+    isPrivate,
+  } = recipe
   const ingredients = recipe?.ingredients as Prisma.JsonObject[]
   const instructions = recipe?.instructions as Prisma.JsonObject[]
   const notes = recipe?.notes as Prisma.JsonObject[]
-  const initiallyLiked = recipe?.likedBy.length === 1
+  const initiallyLiked = recipe?.likedBy?.length === 1
   const [isLiked, setIsLiked] = useState<boolean>(initiallyLiked)
   let change = 0
   if (initiallyLiked && !isLiked) change = -1
@@ -42,48 +51,50 @@ const RecipeContent: React.FunctionComponent<RecipeContentProps> = ({
     <>
       <div className={`${styles.container} ${!permitted && styles.restrict} `}>
         <div className={styles.header}>
-          <div className={styles.title}>{title}</div>
+          <div className={styles.title}>
+            {title}
+            {isDraft && <span className={styles.draft_label}>[Draft]</span>}
+          </div>
           <div className={styles.user_info_wrapper}>
             <div className={styles.meta}>
               <div className={styles.icon_wrapper}>
+                <FiCalendar className={styles.icon} />
+                <div className={styles.meta_title}>Published At:</div>
+              </div>
+              <div className={styles.label}>{toDate(publishedAt)}</div>
+            </div>
+            <div className={styles.meta}>
+              <div className={styles.icon_wrapper}>
                 <FiUser className={styles.icon} />
+                <div className={styles.meta_title}>Author Name:</div>
               </div>
               <div className={styles.label}>{authorName}</div>
             </div>
             <div className={styles.meta}>
               <div className={styles.icon_wrapper}>
                 <FiAtSign className={styles.icon} />
+                <div className={styles.meta_title}>Author Username:</div>
               </div>
               <div className={styles.label}>{authorUsername}</div>
             </div>
             <div className={styles.meta}>
               <div className={styles.icon_wrapper}>
-                <FiCalendar className={styles.icon} />
+                <FiClock className={styles.icon} />
+                <div className={styles.meta_title}>Time To Complete:</div>
               </div>
-              <div className={styles.label}>{toDate(publishedAt)}</div>
+              <div className={styles.label}>{toTime(timeToComplete)}</div>
             </div>
-            {isOwner && (
+            {!isDraft && !isPrivate && (
               <div className={styles.meta}>
                 <div className={styles.icon_wrapper}>
-                  {isPrivate ? (
-                    <FiLock className={styles.icon} />
-                  ) : (
-                    <FiUnlock className={styles.icon} />
-                  )}
+                  <FiHeart className={styles.icon} />
+                  <div className={styles.meta_title}>Likes:</div>
                 </div>
                 <div className={styles.label}>
-                  {isPrivate ? 'Private' : 'Public'}
+                  {(recipe?._count?.likedBy || 0) + change}
                 </div>
               </div>
             )}
-            <div className={styles.meta}>
-              <div className={styles.icon_wrapper}>
-                <FiHeart className={styles.icon} />
-              </div>
-              <div className={styles.label}>
-                {(recipe?._count?.likedBy || 0) + change}
-              </div>
-            </div>
           </div>
           <div className={styles.edit_button}>
             {isOwner ? (
@@ -110,6 +121,11 @@ const RecipeContent: React.FunctionComponent<RecipeContentProps> = ({
           </div>
         </div>
         <div className={styles.recipe_content}>
+          {description && (
+            <div className={styles.description}>
+              <p>{description}</p>
+            </div>
+          )}
           {ingredients?.length > 0 && (
             <div className={styles.ingredient_section}>
               <div className={styles.section_title}>Ingredients</div>
@@ -143,7 +159,7 @@ const RecipeContent: React.FunctionComponent<RecipeContentProps> = ({
                     (instruction?.id as string) || `${content} ${index}`
                   return (
                     <div className={styles.instruction} key={id || index}>
-                      <div className={styles.number}>{index}.</div>
+                      <div className={styles.number}>{index + 1}.</div>
                       <div className={styles.content}>{content}</div>
                     </div>
                   )

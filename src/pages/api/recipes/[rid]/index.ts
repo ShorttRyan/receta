@@ -65,6 +65,7 @@ export default async function handler(
       if (body?.ingredients) payload.ingredients = body?.ingredients
       if (body?.instructions) payload.instructions = body?.instructions
       if (body?.notes) payload.notes = body?.notes
+      if (body?.description) payload.description = body?.description
       payload.isPrivate = body?.isPrivate || false
       payload.isDraft = body?.isDraft || false
       try {
