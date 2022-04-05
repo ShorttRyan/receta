@@ -93,6 +93,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
             id: token.id,
           },
         },
+        isPrivate: false,
+        isDraft: false,
       },
       include: {
         _count: {
