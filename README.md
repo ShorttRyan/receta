@@ -5,6 +5,8 @@
 ######
 🚀 **[Staging Site](https://recetastaging.vercel.app)**
 
+![alt-text](https://user-images.githubusercontent.com/100884476/161879796-f0428a94-0a63-4cad-8d32-0cfca9a50c1b.png)
+
 ---
 # Implemented Features
 ### All Pages
@@ -114,7 +116,7 @@ to storing it in local storage which can be vulnerable to these types of attacks
 Since the cookie is specified as same site, it is restricted to a first-party context meaning that it can only be accessed
 by the same site that issued it.
 
-### NextJS With User Token
+### NextJS Pages With User Token
 Now that we have a seamless authentication service in place. We can leverage it to serve dynamic content to users based
 on the contents of the user's token. For example if a user navigates to a page without a token or with an expired token,
 we can simply redirect them back to the login page.
@@ -124,4 +126,15 @@ you can re-fetch a page's props with each request which is how each user's dashb
 
 We are also able to protect certain pages. For example if a user saves a recipe as a draft, or publishes it as private,
 If a user who is not the author tries to access it we are able to block them from viewing it based on the contents of their token.
+![alt-text](https://user-images.githubusercontent.com/100884476/161880183-3d56bda2-d71b-43e8-abc9-73c56edac754.png)
 
+### NextJS API With Same-Site Cookies
+*getServersideProps* takes care of almost all the fetching of user data on the site. However, we still need to expose
+API routes for the user to securely upload and edit their recipes etc. If we use the Prisma libraries on the client side we
+will be exposing the credentials to our Postgres database.
+
+Thankfully, NextJS allows you to write API endpoints on the same server that hosts your site, so we will be able to use our same-site
+the exact same way we do when requesting pages. 
+
+(The [src/pages/api](https://github.com/ShorttRyan/receta/tree/master/src/pages/api) 
+directory contains all API endpoints)
