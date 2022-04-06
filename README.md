@@ -13,36 +13,36 @@
 - Redirect unauthenticated users to the login page
 - Fetch user dependent content at request time
 
-###[Home](https://receta.vercel.app)
+### [Home](https://receta.vercel.app)
 - Upload a recipe
 - Upload a recipe as a draft
 - View all user's published recipes
 - View all user's liked recipes
 - View all user's drafts
 
-###[/ login](https://receta.vercel.app/login)
+### [/ login](https://receta.vercel.app/login)
 - Sign up for an account
 - Sign in to an account
 - Redirect authenticated users to the home page
 
-###[/ profile](https://receta.vercel.app/profile)
+### [/ profile](https://receta.vercel.app/profile)
 - Edit first name, last name, and email
 - Sign out of an account
 
-###[/ recipe / [recipe-uuid]](https://receta.vercel.app)
+### [/ recipe / [recipe-uuid]](https://receta.vercel.app)
 - View a recipe
 - Like / Unlike a recipe
 
-###[/ recipe / [recipe-uuid] / edit](https://receta.vercel.app)
+### [/ recipe / [recipe-uuid] / edit](https://receta.vercel.app)
 - Edit a recipe
 - Delete a recipe
 
 
 ## Still To Come
-###[/ discover](https://receta.vercel.app/discover)
+### [/ discover](https://receta.vercel.app/discover)
 - View recently published recipes by other users
 
-###[/ user / [username]](https://receta.vercel.app/user/readme)
+### [/ user / [username]](https://receta.vercel.app/user/readme)
 - A user profile displaying a users published and liked recipes
 ---
 # Documentation
