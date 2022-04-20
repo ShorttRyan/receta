@@ -27,7 +27,6 @@ const ExplorePage: React.FunctionComponent<ExplorePageProps> = ({
       activeList = newestList
       break
   }
-
   return (
     <div>
       <div>
@@ -69,25 +68,31 @@ const ExplorePage: React.FunctionComponent<ExplorePageProps> = ({
             name="Load More"
             style="primary"
             label="Load More"
-            muted={loading}
+            disabled={loading}
             onClick={async () => {
               setLoading(true)
-              const [newRecipes, error] = await fetchRecipes(
-                currentTab,
-                activeList.length,
-                parseInt(process.env.EXPLORE_RESULTS || '6'),
-              )
-              if (newRecipes !== undefined) {
-                switch (currentTab) {
-                  case ExploreTabs.MostLiked:
-                    setMostLikedList([...mostLikedList, ...newRecipes.data])
-                    break
-                  case ExploreTabs.Newest:
-                  default:
+              switch (currentTab) {
+                case ExploreTabs.MostLiked:
+                  const [likedRecipes, likedError] = await fetchRecipes(
+                    currentTab,
+                    mostLikedList.length,
+                    parseInt(process.env.EXPLORE_RESULTS || '6'),
+                  )
+                  if (likedRecipes !== undefined)
+                    setMostLikedList([...mostLikedList, ...likedRecipes.data])
+                  break
+                case ExploreTabs.Newest:
+                default:
+                  const [newRecipes, newestError] = await fetchRecipes(
+                    currentTab,
+                    newestList.length,
+                    parseInt(process.env.EXPLORE_RESULTS || '6'),
+                  )
+                  if (newRecipes !== undefined)
                     setNewestList([...newestList, ...newRecipes.data])
-                    break
-                }
+                  break
               }
+              setLoading(false)
             }}
           />
         </div>

@@ -17,7 +17,7 @@ export const fetchLiked = (skip: number, take: number, id: number) => {
         },
       },
     },
-    skip: 0,
-    take: 3,
+    skip,
+    take,
   })
 }
