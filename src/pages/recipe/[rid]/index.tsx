@@ -4,7 +4,11 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import { GetServerSideProps } from 'next'
 import MainTemplate from '../../../templates/Main'
-import { prisma, validateAccessToken } from '../../../utils/Server'
+import {
+  logPageError,
+  prisma,
+  validateAccessToken,
+} from '../../../utils/Server'
 import RecipeContent from '../../../pageComponents/Recipe'
 import { fakeRecipe } from '../../../utils/fakeRecipe'
 import { RecipeWithLikedBy } from '../../../utils/extendedRecipe'
@@ -92,9 +96,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       return
     }
   } catch (e) {
-    console.log(`### Error on /recipe/${rid} ###`)
-    console.log('user token: ', token)
-    console.log(e)
+    logPageError(e, `/recipe/${rid}`, token)
   }
   const isOwner = recipe?.authorId === token.id
   let permitted = true
