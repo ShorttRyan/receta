@@ -3,7 +3,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { GetServerSideProps } from 'next'
-import { logPageError, validateAccessToken } from '../utils/Server'
+import { logPageError, prisma, validateAccessToken } from '../utils/Server'
 import MainTemplate from '../templates/Main'
 import { ExtendedRecipe } from '../utils/extendedRecipe'
 import ExplorePage from '../pageComponents/Explore'
@@ -15,6 +15,7 @@ export interface ExplorePageProps {
   firstName: string
   lastName: string
   email: string
+  totalRecipes: number
   mostLiked: ExtendedRecipe[]
   newest: ExtendedRecipe[]
 }
@@ -54,11 +55,26 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     res.end()
     return { props: {} }
   }
+  let totalRecipes
+  try {
+    totalRecipes = await prisma.recipe.count({
+      where: {
+        isPrivate: false,
+        isDraft: false,
+        authorId: {
+          not: token.id,
+        },
+      },
+    })
+  } catch (e) {
+    logPageError(e, '/explore', token)
+  }
+
   let mostLiked
   try {
     mostLiked = await fetchLiked(
       0,
-      parseInt(process.env.EXPLORE_RESULTS || '6'),
+      parseInt(process.env.NEXT_PUBLIC_EXPLORE_RESULTS as string),
       token.id,
     )
   } catch (e) {
@@ -68,7 +84,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   try {
     newest = await fetchNewest(
       0,
-      parseInt(process.env.EXPLORE_RESULTS || '6'),
+      parseInt(process.env.NEXT_PUBLIC_EXPLORE_RESULTS as string),
       token.id,
     )
   } catch (e) {
@@ -80,6 +96,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
       email: token.email,
       firstName: token.firstName,
       lastName: token.lastName,
+      totalRecipes,
       mostLiked,
       newest,
     },

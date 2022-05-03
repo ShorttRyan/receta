@@ -9,6 +9,7 @@ import { fetchRecipes } from '../../API/explore'
 import styles from './Explore.module.scss'
 
 const ExplorePage: React.FunctionComponent<ExplorePageProps> = ({
+  totalRecipes,
   mostLiked,
   newest,
 }) => {
@@ -68,7 +69,7 @@ const ExplorePage: React.FunctionComponent<ExplorePageProps> = ({
             name="Load More"
             style="primary"
             label="Load More"
-            disabled={loading}
+            disabled={loading || activeList.length === totalRecipes}
             onClick={async () => {
               setLoading(true)
               switch (currentTab) {
@@ -76,7 +77,6 @@ const ExplorePage: React.FunctionComponent<ExplorePageProps> = ({
                   const [likedRecipes, likedError] = await fetchRecipes(
                     currentTab,
                     mostLikedList.length,
-                    parseInt(process.env.EXPLORE_RESULTS || '6'),
                   )
                   if (likedRecipes !== undefined)
                     setMostLikedList([...mostLikedList, ...likedRecipes.data])
@@ -86,7 +86,6 @@ const ExplorePage: React.FunctionComponent<ExplorePageProps> = ({
                   const [newRecipes, newestError] = await fetchRecipes(
                     currentTab,
                     newestList.length,
-                    parseInt(process.env.EXPLORE_RESULTS || '6'),
                   )
                   if (newRecipes !== undefined)
                     setNewestList([...newestList, ...newRecipes.data])
