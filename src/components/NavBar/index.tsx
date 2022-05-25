@@ -11,12 +11,12 @@ const NavBar: React.FunctionComponent = () => {
     <div className={styles.navbarWrapper}>
       <div className={styles.navbarContent}>
         <div className={styles.leftSide}>
-          <Link href={'/'} prefetch={false}>
+          <Link href={'/'}>
             <a>
               <Horizontal />
             </a>
           </Link>
-          <Link href={'/explore'} prefetch={true}>
+          <Link href={'/explore'}>
             <a aria-label="Explore Page" className={styles.explore}>
               <FiCompass />
               Explore

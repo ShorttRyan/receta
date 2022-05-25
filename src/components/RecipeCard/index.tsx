@@ -15,9 +15,13 @@ import { ExtendedRecipe } from '../../utils/extendedRecipe'
 
 export interface RecipeCardProps {
   recipe: ExtendedRecipe
+  skipPublic?: boolean
 }
 
-const RecipeCard: React.FunctionComponent<RecipeCardProps> = ({ recipe }) => {
+const RecipeCard: React.FunctionComponent<RecipeCardProps> = ({
+  recipe,
+  skipPublic,
+}) => {
   const {
     title,
     id,
@@ -46,19 +50,31 @@ const RecipeCard: React.FunctionComponent<RecipeCardProps> = ({ recipe }) => {
             <div className={styles.label}>{toTime(timeToComplete)}</div>
           </div>
           <div className={styles.time_stamp}>
-            {isPrivate ? (
-              <FiLock className={styles.icons} />
+            {!skipPublic ? (
+              <>
+                {isPrivate ? (
+                  <FiLock className={styles.icons} />
+                ) : (
+                  <FiUnlock className={styles.icons} />
+                )}
+
+                <div className={styles.label}>
+                  {isPrivate ? 'Private' : 'Public'}
+                </div>
+              </>
             ) : (
-              <FiUnlock className={styles.icons} />
+              <div className={styles.time_stamp}>
+                <FiCalendar className={styles.icons} />
+                <div className={styles.label}>{toDate(publishedAt)}</div>
+              </div>
             )}
-            <div className={styles.label}>
-              {isPrivate ? 'Private' : 'Public'}
+          </div>
+          {!skipPublic && (
+            <div className={styles.time_stamp}>
+              <FiCalendar className={styles.icons} />
+              <div className={styles.label}>{toDate(publishedAt)}</div>
             </div>
-          </div>
-          <div className={styles.time_stamp}>
-            <FiCalendar className={styles.icons} />
-            <div className={styles.label}>{toDate(publishedAt)}</div>
-          </div>
+          )}
           {!isDraft && (
             <div className={styles.time_stamp}>
               <FiHeart className={styles.icons} />
