@@ -8,19 +8,19 @@ import { Prisma } from '@prisma/client'
 import { fetchNewest } from '../../../utils/Server/PrismaFunctions/fetchNewest'
 import { ExploreTabs } from '../../../pageComponents/Explore/type'
 import { fetchLiked } from '../../../utils/Server/PrismaFunctions/fetchLiked'
+import { guestToken } from '../../../constants'
 
 // noinspection JSUnusedGlobalSymbols
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const [token, error] = validateAccessToken(
+  let [token, error] = validateAccessToken(
     req.cookies?.auth,
     '/user/updateProfileInfo',
     res,
   )
-  if (error) {
-  }
+  if (token === undefined) token = guestToken
   switch (req.method) {
     case 'GET':
       // noinspection JSUnusedLocalSymbols

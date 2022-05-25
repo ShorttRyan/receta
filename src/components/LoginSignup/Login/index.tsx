@@ -30,7 +30,7 @@ const Login: React.FunctionComponent<LoginProps> = ({ hide }) => {
           password: credentials.password.value,
         })
         if (error === undefined) {
-          await router.reload()
+          await router.push((router.query.returnUrl as string) || '/')
         } else {
           const newCredentials = { ...credentials }
           newCredentials.username.error = true

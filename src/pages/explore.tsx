@@ -9,6 +9,7 @@ import { ExtendedRecipe } from '../utils/extendedRecipe'
 import ExplorePage from '../pageComponents/Explore'
 import { fetchLiked } from '../utils/Server/PrismaFunctions/fetchLiked'
 import { fetchNewest } from '../utils/Server/PrismaFunctions/fetchNewest'
+import { guestToken } from '../constants'
 
 export interface ExplorePageProps {
   username: string
@@ -49,12 +50,8 @@ const Explore: NextPage<ExplorePageProps> = (props) => {
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const cookies = req.cookies
   // noinspection JSUnusedLocalSymbols
-  const [token, error] = validateAccessToken(cookies?.auth)
-  if (token === undefined) {
-    res.writeHead(303, { Location: '/login' })
-    res.end()
-    return { props: {} }
-  }
+  let [token, error] = validateAccessToken(cookies?.auth)
+  if (token === undefined) token = guestToken
   let totalRecipes
   try {
     totalRecipes = await prisma.recipe.count({

@@ -20,6 +20,13 @@
 - View all user's liked recipes
 - View all user's drafts
 
+### [/ explore](https://receta.vercel.app/explore)
+- The only page non-authenticated users can visit
+- Can view most recent and most liked recipes
+- Paginates through all recipes
+- When you click on a recipe, non-authenticated users will be redirected back to the login page
+where they will proceed to the desired recipe page once authenticated.
+
 ### [/ login](https://receta.vercel.app/login)
 - Sign up for an account
 - Sign in to an account
@@ -39,9 +46,6 @@
 
 
 ## Still To Come
-### [/ discover](https://receta.vercel.app/discover)
-- View recently published recipes by other users
-
 ### [/ user / [username]](https://receta.vercel.app/user/readme)
 - A user profile displaying a users published and liked recipes
 ---
