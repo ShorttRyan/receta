@@ -11,19 +11,19 @@ const NavBar: React.FunctionComponent = () => {
     <div className={styles.navbarWrapper}>
       <div className={styles.navbarContent}>
         <div className={styles.leftSide}>
-          <Link href={'/'}>
+          <Link href={'/'} replace={true}>
             <a>
               <Horizontal />
             </a>
           </Link>
-          <Link href={'/explore'}>
+          <Link href={'/explore'} replace={true}>
             <a aria-label="Explore Page" className={styles.explore}>
               <FiCompass />
               Explore
             </a>
           </Link>
         </div>
-        <Link href={'/profile'}>
+        <Link href={'/profile'} replace={true}>
           <a aria-label="Profile Page">
             <NavLink icon={<ChefHat />} />
           </a>
