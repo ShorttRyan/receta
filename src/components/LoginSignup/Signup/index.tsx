@@ -31,7 +31,7 @@ const Signup: React.FunctionComponent<SignupProps> = ({ hide }) => {
         })
         setDisabled(false)
         if (error === undefined) {
-          await router.reload()
+          await router.push((router.query.returnUrl as string) || '/')
           return
         }
         const newCredentials: SignupForm = { ...credentials }
