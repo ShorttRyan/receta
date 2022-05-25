@@ -24,7 +24,9 @@ const ProfileContent: React.FunctionComponent<ProfilePageProps> = (props) => {
               // noinspection JSUnusedLocalSymbols
               const [response, error] = await logOut()
               if (error === undefined) {
-                await router.replace(router.asPath)
+                await router.replace('/')
+                await router.replace('/profile')
+                await router.replace('/explore')
                 await router.reload()
                 return
               }

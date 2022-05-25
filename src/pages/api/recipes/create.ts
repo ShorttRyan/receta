@@ -58,7 +58,6 @@ export default async function handler(
           })
           res.json(userRecipes)
         } catch (e) {
-          console.log(e)
           const errorResponse: {
             message: string
             prismaError?: Prisma.PrismaClientKnownRequestError
