@@ -27,7 +27,7 @@ const ProfileContent: React.FunctionComponent<ProfilePageProps> = (props) => {
                 await router.replace('/')
                 await router.replace('/profile')
                 await router.replace('/explore')
-                await router.reload()
+                await router.push('/')
                 return
               }
               setDisabled(false)
