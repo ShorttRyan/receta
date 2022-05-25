@@ -60,7 +60,7 @@ const ExplorePage: React.FunctionComponent<ExplorePageProps> = ({
       <div>
         <div className={sharedStyles.recipe_results_wrapper}>
           {activeList.map((recipe) => (
-            <RecipeCard key={recipe.id} recipe={recipe} />
+            <RecipeCard key={recipe.id} recipe={recipe} skipPublic={true} />
           ))}
         </div>
         <div className={styles.loadMoreWrapper}>

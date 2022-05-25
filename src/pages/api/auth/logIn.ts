@@ -26,9 +26,7 @@ export default async function handler(
           : { where: { username: identifier } }
         const user = await prisma.user.findUnique(clause)
         if (user) {
-          console.log(user)
           const encryptedPass = await bcrypt.hash(password, user.salt)
-          console.log(encryptedPass)
           if (encryptedPass === user.password) {
             const accessToken = generateAccessToken({
               username: user.username,
