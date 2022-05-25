@@ -5,22 +5,22 @@ import Head from 'next/head'
 import { GetServerSideProps } from 'next'
 import { logPageError, prisma, validateAccessToken } from '../utils/Server'
 import MainTemplate from '../templates/Main'
-import HomeContent from '../pageComponents/Home'
-import { Recipe } from '@prisma/client'
-import { UserDataProvider } from '../contexts/UserDataContext'
-import { AddRecipeProvider } from '../contexts/AddRecipeContext'
 import { ExtendedRecipe } from '../utils/extendedRecipe'
+import ExplorePage from '../pageComponents/Explore'
+import { fetchLiked } from '../utils/Server/PrismaFunctions/fetchLiked'
+import { fetchNewest } from '../utils/Server/PrismaFunctions/fetchNewest'
 
-export interface HomePageProps {
+export interface ExplorePageProps {
   username: string
   firstName: string
   lastName: string
   email: string
-  publishedRecipes: ExtendedRecipe[]
-  likedRecipes: ExtendedRecipe[]
+  totalRecipes: number
+  mostLiked: ExtendedRecipe[]
+  newest: ExtendedRecipe[]
 }
 
-const Home: NextPage<HomePageProps> = (props) => {
+const Explore: NextPage<ExplorePageProps> = (props) => {
   return (
     <>
       <Head>
@@ -38,14 +38,7 @@ const Home: NextPage<HomePageProps> = (props) => {
         />
       </Head>
       <MainTemplate>
-        <AddRecipeProvider>
-          <UserDataProvider
-            publishedRecipes={props.publishedRecipes}
-            likedRecipes={props.likedRecipes}
-          >
-            <HomeContent />
-          </UserDataProvider>
-        </AddRecipeProvider>
+        <ExplorePage {...props} />
       </MainTemplate>
     </>
   )
@@ -62,47 +55,40 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     res.end()
     return { props: {} }
   }
-
-  let publishedRecipes: Recipe[] = []
+  let totalRecipes
   try {
-    publishedRecipes = await prisma.recipe.findMany({
+    totalRecipes = await prisma.recipe.count({
       where: {
-        authorUsername: token.username,
-      },
-      include: {
-        _count: {
-          select: {
-            likedBy: true,
-          },
-        },
-      },
-    })
-  } catch (e) {
-    logPageError(e, '/', token)
-  }
-
-  let likedRecipes: Recipe[] = []
-  try {
-    likedRecipes = await prisma.recipe.findMany({
-      where: {
-        likedBy: {
-          some: {
-            id: token.id,
-          },
-        },
         isPrivate: false,
         isDraft: false,
-      },
-      include: {
-        _count: {
-          select: {
-            likedBy: true,
-          },
+        authorId: {
+          not: token.id,
         },
       },
     })
   } catch (e) {
-    logPageError(e, '/', token)
+    logPageError(e, '/explore', token)
+  }
+
+  let mostLiked
+  try {
+    mostLiked = await fetchLiked(
+      0,
+      parseInt(process.env.NEXT_PUBLIC_EXPLORE_RESULTS as string),
+      token.id,
+    )
+  } catch (e) {
+    logPageError(e, '/explore', token)
+  }
+  let newest
+  try {
+    newest = await fetchNewest(
+      0,
+      parseInt(process.env.NEXT_PUBLIC_EXPLORE_RESULTS as string),
+      token.id,
+    )
+  } catch (e) {
+    logPageError(e, '/explore', token)
   }
   return {
     props: {
@@ -110,10 +96,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
       email: token.email,
       firstName: token.firstName,
       lastName: token.lastName,
-      publishedRecipes,
-      likedRecipes,
+      totalRecipes,
+      mostLiked,
+      newest,
     },
   }
 }
 
-export default Home
+export default Explore

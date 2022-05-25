@@ -5,7 +5,11 @@ import Head from 'next/head'
 import { GetServerSideProps } from 'next'
 import { Recipe } from '@prisma/client'
 import MainTemplate from '../../../templates/Main'
-import { prisma, validateAccessToken } from '../../../utils/Server'
+import {
+  logPageError,
+  prisma,
+  validateAccessToken,
+} from '../../../utils/Server'
 import { AddRecipeProvider } from '../../../contexts/AddRecipeContext'
 import AddRecipe from '../../../pageComponents/AddRecipe/AddRecipeForm'
 import { JsonObject } from 'type-fest'
@@ -149,9 +153,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       return
     }
   } catch (e) {
-    console.log(`### Error on /recipe/${rid}/edit ###`)
-    console.log('user token: ', token)
-    console.log(e)
+    logPageError(e, `/recipe/${rid}/edit`, token)
   }
   const isOwner = recipe?.authorId === token.id
   if (!isOwner) {

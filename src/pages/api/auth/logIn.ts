@@ -26,7 +26,9 @@ export default async function handler(
           : { where: { username: identifier } }
         const user = await prisma.user.findUnique(clause)
         if (user) {
+          console.log(user)
           const encryptedPass = await bcrypt.hash(password, user.salt)
+          console.log(encryptedPass)
           if (encryptedPass === user.password) {
             const accessToken = generateAccessToken({
               username: user.username,
@@ -57,6 +59,8 @@ export default async function handler(
             code: e.code,
             message: 'Username or password is incorrect.',
           })
+        } else {
+          res.status(400).json(e)
         }
       }
     }

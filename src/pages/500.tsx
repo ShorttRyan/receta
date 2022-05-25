@@ -2,7 +2,7 @@ import React from 'react'
 import { NextPage } from 'next'
 import Head from 'next/head'
 import MainTemplate from '../templates/Main'
-import Page404, { ErrorCode } from '../pageComponents/ErrorPage'
+import { ErrorCode } from '../pageComponents/ErrorPage'
 import ErrorPage from '../pageComponents/ErrorPage'
 
 const Custom404: NextPage = () => {
