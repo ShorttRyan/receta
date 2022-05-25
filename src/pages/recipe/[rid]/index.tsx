@@ -64,7 +64,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   // noinspection JSUnusedLocalSymbols
   const [token, error] = validateAccessToken(cookies?.auth)
   if (token === undefined) {
-    res.writeHead(303, { Location: '/login' })
+    res.writeHead(303, { Location: `/login?returnUrl=/recipe/${rid}` })
     res.end()
     return { props: {} }
   }
