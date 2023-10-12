@@ -3,15 +3,23 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { GetServerSideProps } from 'next'
-import { logPageError, prisma, validateAccessToken } from '../utils/Server'
 import MainTemplate from '../templates/Main'
-import HomeContent from '../pageComponents/Home'
 import { Recipe } from '@prisma/client'
+
+/* Types */
+import { ExtendedRecipe } from '../types/extendedRecipe'
+
+/* Utils */
+import { logPageError, prisma, validateAccessToken } from '../utils/Server'
+
+/* Child Components */
+import HomeContent from '../pageComponents/Home'
+
+/* Contexts */
 import { UserDataProvider } from '../contexts/UserDataContext'
 import { AddRecipeProvider } from '../contexts/AddRecipeContext'
-import { ExtendedRecipe } from '../utils/extendedRecipe'
 
-export interface HomePageProps {
+export type HomePageProps = {
   username: string
   firstName: string
   lastName: string

@@ -1,11 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import { Prisma } from '@prisma/client'
+
+/* Utils */
 import {
   checkBody,
   logPrismaError,
   prisma,
   validateAccessToken,
 } from '../../../utils/Server'
-import { Prisma } from '@prisma/client'
 
 export default async function handler(
   req: NextApiRequest,

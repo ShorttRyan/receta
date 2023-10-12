@@ -1,12 +1,18 @@
 import React, { useState } from 'react'
-import styles from './Login.module.scss'
-import Input from '../../Input'
-import { logIn } from '../../../API'
 import { useRouter } from 'next/router'
+import styles from './Login.module.scss'
+
+/* API */
+import { logIn } from '../../../API'
+
+/* Types */
 import { initialValue, LoginForm } from './type'
+
+/* Child Components */
+import Input from '../../Input'
 import Button from '../../Button'
 
-interface LoginProps {
+type LoginProps = {
   hide: boolean
 }
 

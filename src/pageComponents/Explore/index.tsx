@@ -1,12 +1,18 @@
 import React, { useState } from 'react'
-import { ExplorePageProps } from '../../pages/explore'
 import sharedStyles from '../Home/HomeContent.module.scss'
-import RecipeCard from '../../components/RecipeCard'
-import { ExploreTabs } from './type'
-import { ExtendedRecipe } from '../../utils/extendedRecipe'
-import Button from '../../components/Button'
-import { fetchRecipes } from '../../API/explore'
 import styles from './Explore.module.scss'
+
+/* API */
+import { fetchRecipes } from '../../API/explore'
+
+/* Types */
+import { ExploreTabs } from './type'
+import { ExtendedRecipe } from '../../types/extendedRecipe'
+import { ExplorePageProps } from '../../pages/explore'
+
+/* Child Components */
+import RecipeCard from '../../components/RecipeCard'
+import Button from '../../components/Button'
 
 const ExplorePage: React.FunctionComponent<ExplorePageProps> = ({
   totalRecipes,
@@ -60,7 +66,12 @@ const ExplorePage: React.FunctionComponent<ExplorePageProps> = ({
       <div>
         <div className={sharedStyles.recipe_results_wrapper}>
           {activeList.map((recipe) => (
-            <RecipeCard key={recipe.id} recipe={recipe} skipPublic={true} />
+            <RecipeCard
+              key={recipe.id}
+              recipe={recipe}
+              hidePublic
+              hideAuthor={false}
+            />
           ))}
         </div>
         <div className={styles.loadMoreWrapper}>

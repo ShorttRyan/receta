@@ -1,4 +1,4 @@
-export interface UpdateProfileBody {
+export type UpdateProfileBody = {
   firstName: string
   lastName: string
   email: string

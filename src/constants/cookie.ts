@@ -1,5 +1,5 @@
 import { CookieSerializeOptions } from 'cookie'
-import { DecodedToken } from './utils/Server'
+import { DecodedToken } from '../utils/Server'
 
 export const cookieOptions: CookieSerializeOptions = {
   httpOnly: true,

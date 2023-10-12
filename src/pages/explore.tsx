@@ -3,15 +3,27 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { GetServerSideProps } from 'next'
-import { logPageError, prisma, validateAccessToken } from '../utils/Server'
 import MainTemplate from '../templates/Main'
-import { ExtendedRecipe } from '../utils/extendedRecipe'
-import ExplorePage from '../pageComponents/Explore'
-import { fetchLiked } from '../utils/Server/PrismaFunctions/fetchLiked'
-import { fetchNewest } from '../utils/Server/PrismaFunctions/fetchNewest'
-import { guestToken } from '../constants'
 
-export interface ExplorePageProps {
+/* Types */
+import { ExtendedRecipe } from '../types/extendedRecipe'
+
+/* Utils */
+import {
+  logPageError,
+  prisma,
+  validateAccessToken,
+  fetchLiked,
+  fetchNewest,
+} from '../utils/Server'
+
+/* Child Components */
+import ExplorePage from '../pageComponents/Explore'
+
+/* Constants */
+import { guestToken } from '../constants/cookie'
+
+export type ExplorePageProps = {
   username: string
   firstName: string
   lastName: string

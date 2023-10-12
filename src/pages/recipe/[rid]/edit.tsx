@@ -3,24 +3,32 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { GetServerSideProps } from 'next'
+import { JsonObject } from 'type-fest'
 import { Recipe } from '@prisma/client'
 import MainTemplate from '../../../templates/Main'
+
+/* Types */
+import { Ingredient } from '../../../pageComponents/AddRecipe/AddRecipeForm/IngredientSection/types'
+import {
+  Instruction,
+  Note,
+} from '../../../pageComponents/AddRecipe/AddRecipeForm/InstructionsSection/types'
+
+/* Utils */
 import {
   logPageError,
   prisma,
   validateAccessToken,
 } from '../../../utils/Server'
-import { AddRecipeProvider } from '../../../contexts/AddRecipeContext'
-import AddRecipe from '../../../pageComponents/AddRecipe/AddRecipeForm'
-import { JsonObject } from 'type-fest'
-import {
-  Instruction,
-  Note,
-} from '../../../pageComponents/AddRecipe/AddRecipeForm/InstructionsSection/types'
-import { Ingredient } from '../../../pageComponents/AddRecipe/AddRecipeForm/IngredientSection/types'
 import { uuid } from '../../../utils'
 
-export interface RecipePageProps {
+/* Child Components */
+import AddRecipe from '../../../pageComponents/AddRecipe/AddRecipeForm'
+
+/* Contexts */
+import { AddRecipeProvider } from '../../../contexts/AddRecipeContext'
+
+export type RecipePageProps = {
   id: number
   username: string
   firstName: string

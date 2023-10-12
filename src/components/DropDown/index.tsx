@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './DropDown.module.scss'
 
-interface DropDownProps {
+type DropDownProps = {
   options: string[]
   value: string
   onChange: (newVal: string) => void

@@ -1,11 +1,13 @@
 import React, { useContext, useState } from 'react'
 import styles from './HomeContent.module.scss'
-import MyRecipes from './MyRecipes'
-import LikedRecipes from './LikedRecipes'
-import AddRecipe from '../AddRecipe/AddRecipeForm'
+
+/* Contexts */
 import { AddRecipeContext } from '../../contexts/AddRecipeContext'
 import { UserDataContext } from '../../contexts/UserDataContext'
-import MyDrafts from './MyDrafts'
+
+/* Child Components */
+import AddRecipe from '../AddRecipe/AddRecipeForm'
+import RecipeCardList from '../../components/RecipeCardList'
 
 enum HomeTabs {
   MyRecipes = 'myRecipes',
@@ -26,9 +28,9 @@ const HomeContent: React.FunctionComponent = () => {
             <div className={styles.subNavLinkWrapper}>
               <button
                 className={`
-            ${styles.subNavLink} 
-            ${content === HomeTabs.MyRecipes && styles.activeTab}
-            `}
+                  ${styles.subNavLink} 
+                  ${content === HomeTabs.MyRecipes && styles.activeTab}
+                `}
                 onClick={() => switchContent(HomeTabs.MyRecipes)}
                 aria-label="My Recipes"
               >
@@ -56,11 +58,29 @@ const HomeContent: React.FunctionComponent = () => {
               </button>
             </div>
           </div>
-          {content === HomeTabs.MyRecipes && <MyRecipes recipes={published} />}
-          {content === HomeTabs.LikedRecipes && (
-            <LikedRecipes recipes={liked} />
+          {content === HomeTabs.MyRecipes && (
+            <RecipeCardList
+              recipes={published}
+              emptyListText="Looks like you haven't published any recipes yet!"
+              canAddRecipes
+              hideAuthor
+            />
           )}
-          {content === HomeTabs.MyDrafts && <MyDrafts recipes={drafts} />}
+          {content === HomeTabs.LikedRecipes && (
+            <RecipeCardList
+              recipes={liked}
+              emptyListText="Looks like you haven't liked any recipes yet!"
+              hidePublic
+            />
+          )}
+          {content === HomeTabs.MyDrafts && (
+            <RecipeCardList
+              recipes={drafts}
+              emptyListText="You have no masterpieces in progress."
+              hideAuthor
+              canAddRecipes
+            />
+          )}
         </>
       ) : (
         <AddRecipe />

@@ -1,5 +1,16 @@
 import React, { useState } from 'react'
+import { Prisma } from '@prisma/client'
+import Link from 'next/link'
 import styles from './RecipeContent.module.scss'
+
+/* Types */
+import { RecipeWithLikedBy } from '../../types/extendedRecipe'
+
+/* Utils */
+import { toDate, toTime } from '../../utils'
+import { getUnit } from '../AddRecipe/AddRecipeForm/IngredientSection/IngredientRow/getUnit'
+
+/* Child Components */
 import {
   FiAtSign,
   FiCalendar,
@@ -10,15 +21,10 @@ import {
   FiTarget,
   FiUser,
 } from 'react-icons/fi'
-import { toDate, toTime } from '../../utils/Client'
-import { Prisma } from '@prisma/client'
-import { getUnit } from '../AddRecipe/AddRecipeForm/IngredientSection/IngredientRow/getUnit'
-import Link from 'next/link'
 import IconButton from '../../components/IconButton'
 import LikeButton from '../../components/LikeButton'
-import { RecipeWithLikedBy } from '../../utils/extendedRecipe'
 
-interface RecipeContentProps {
+type RecipeContentProps = {
   recipe: RecipeWithLikedBy
   isOwner: boolean
   permitted: boolean
@@ -56,31 +62,26 @@ const RecipeContent: React.FunctionComponent<RecipeContentProps> = ({
             {isDraft && <span className={styles.draft_label}>[Draft]</span>}
           </div>
           <div className={styles.user_info_wrapper}>
-            <div className={styles.meta}>
-              <div className={styles.icon_wrapper}>
-                <FiCalendar className={styles.icon} />
-                <div className={styles.meta_title}>Published At:</div>
+            <Link href={`/profile/${authorUsername}`}>
+              <div className={`${styles.clickable_meta} ${styles.meta}`}>
+                <div className={styles.icon_wrapper}>
+                  <FiUser className={styles.icon} />
+                </div>
+                <div className={styles.label}>{authorName}</div>
               </div>
-              <div className={styles.label}>{toDate(publishedAt)}</div>
-            </div>
-            <div className={styles.meta}>
-              <div className={styles.icon_wrapper}>
-                <FiUser className={styles.icon} />
-                <div className={styles.meta_title}>Author Name:</div>
+            </Link>
+            <Link href={`/profile/${authorUsername}`}>
+              <div className={`${styles.clickable_meta} ${styles.meta}`}>
+                <div className={styles.icon_wrapper}>
+                  <FiAtSign className={styles.icon} />
+                </div>
+                <div className={styles.label}>{authorUsername}</div>
               </div>
-              <div className={styles.label}>{authorName}</div>
-            </div>
-            <div className={styles.meta}>
-              <div className={styles.icon_wrapper}>
-                <FiAtSign className={styles.icon} />
-                <div className={styles.meta_title}>Author Username:</div>
-              </div>
-              <div className={styles.label}>{authorUsername}</div>
-            </div>
+            </Link>
             <div className={styles.meta}>
               <div className={styles.icon_wrapper}>
                 <FiClock className={styles.icon} />
-                <div className={styles.meta_title}>Time To Complete:</div>
+                <div className={styles.meta_title}>Cook time:</div>
               </div>
               <div className={styles.label}>{toTime(timeToComplete)}</div>
             </div>
@@ -95,6 +96,13 @@ const RecipeContent: React.FunctionComponent<RecipeContentProps> = ({
                 </div>
               </div>
             )}
+            <div className={styles.meta}>
+              <div className={styles.icon_wrapper}>
+                <FiCalendar className={styles.icon} />
+                <div className={styles.meta_title}>Published:</div>
+              </div>
+              <div className={styles.label}>{toDate(publishedAt)}</div>
+            </div>
           </div>
           <div className={styles.edit_button}>
             {isOwner ? (

@@ -1,12 +1,21 @@
 import React, { useState } from 'react'
-import styles from '../Login/Login.module.scss'
-import Input from '../../Input'
-import { initialValue, SignupForm } from './type'
-import { preSignupSubmit } from '../../../utils/Client'
-import { isSignUpPrismaFailure, signUp } from '../../../API'
 import { useRouter } from 'next/router'
+import styles from '../Login/Login.module.scss'
+
+/* API */
+import { isSignUpPrismaFailure, signUp } from '../../../API'
+
+/* Types */
+import { initialValue, SignupForm } from './type'
+
+/* Child Components */
 import Button from '../../Button'
-interface SignupProps {
+import Input from '../../Input'
+
+/* Utils */
+import { preSignupSubmit } from '../../../utils'
+
+type SignupProps = {
   hide: boolean
 }
 

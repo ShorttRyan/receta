@@ -7,7 +7,7 @@ export enum ErrorCode {
   ServerError = '500',
 }
 
-export interface ErrorPageProps {
+export type ErrorPageProps = {
   code: ErrorCode
   subTitle: string
 }

@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios'
 
-export interface LogInCredentials {
+export type LogInCredentials = {
   username: string
   password: string
 }

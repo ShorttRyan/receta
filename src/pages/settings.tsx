@@ -3,22 +3,26 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { GetServerSideProps } from 'next'
-import { validateAccessToken } from '../utils/Server'
 import MainTemplate from '../templates/Main'
-import ProfileContent from '../pageComponents/Profile'
 
-export interface ProfilePageProps {
+/* Utils */
+import { validateAccessToken } from '../utils/Server'
+
+/* Child Components */
+import SettingsContent from '../pageComponents/Settings'
+
+export type SettingsPageProps = {
   username: string
   firstName: string
   lastName: string
   email: string
 }
 
-const Profile: NextPage<ProfilePageProps> = (props) => {
+const Settings: NextPage<SettingsPageProps> = (props) => {
   return (
     <>
       <Head>
-        <title>Receta</title>
+        <title>Receta - Settings</title>
         <link
           rel="apple-touch-icon"
           sizes="180x180"
@@ -32,7 +36,7 @@ const Profile: NextPage<ProfilePageProps> = (props) => {
         />
       </Head>
       <MainTemplate>
-        <ProfileContent {...props} />
+        <SettingsContent {...props} />
       </MainTemplate>
     </>
   )
@@ -60,4 +64,4 @@ export const getServerSideProps: GetServerSideProps = ({ req, res }) => {
 }
 
 // noinspection JSUnusedGlobalSymbols
-export default Profile
+export default Settings

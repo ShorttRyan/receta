@@ -6,7 +6,7 @@ import {
 } from '../../../../pageComponents/AddRecipe/AddRecipeForm/InstructionsSection/types'
 import { AxiosResponse } from 'axios'
 
-export interface UpdateRecipeBody {
+export type UpdateRecipeBody = {
   title: string
   timeToComplete: number
   ingredients: Ingredient[]

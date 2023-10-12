@@ -1,11 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import { Prisma } from '@prisma/client'
+
+/* Utils */
 import {
   checkOwner,
   prisma,
   reportError,
   validateAccessToken,
 } from '../../../../utils/Server'
-import { Prisma } from '@prisma/client'
 
 // noinspection JSUnusedGlobalSymbols
 export default async function handler(

@@ -1,5 +1,8 @@
 import React from 'react'
+import Link from 'next/link'
 import styles from './RecipeCard.module.scss'
+
+/* Child Components */
 import {
   FiClock,
   FiUser,
@@ -9,18 +12,23 @@ import {
   FiUnlock,
   FiHeart,
 } from 'react-icons/fi'
-import { toDate, toTime } from '../../utils/Client'
-import Link from 'next/link'
-import { ExtendedRecipe } from '../../utils/extendedRecipe'
 
-export interface RecipeCardProps {
+/* Utils */
+import { toDate, toTime } from '../../utils'
+
+/* Types */
+import { ExtendedRecipe } from '../../types/extendedRecipe'
+
+export type RecipeCardProps = {
   recipe: ExtendedRecipe
-  skipPublic?: boolean
+  hideAuthor: boolean
+  hidePublic: boolean
 }
 
 const RecipeCard: React.FunctionComponent<RecipeCardProps> = ({
   recipe,
-  skipPublic,
+  hideAuthor,
+  hidePublic,
 }) => {
   const {
     title,
@@ -37,20 +45,30 @@ const RecipeCard: React.FunctionComponent<RecipeCardProps> = ({
       <div className={styles.card_container}>
         <div className={styles.title}>{title}</div>
         <div className={styles.card_info}>
-          <div className={styles.author}>
-            <FiUser className={styles.icons} />
-            <div className={styles.label}>{authorName}</div>
-          </div>
-          <div className={styles.author}>
-            <FiAtSign className={styles.icons} />
-            <div className={styles.label}>{authorUsername}</div>
-          </div>
-          <div className={styles.time_stamp}>
+          {!hideAuthor && (
+            <>
+              <div className={styles.author}>
+                <FiUser className={styles.icons} />
+                <div className={styles.label}>{authorName}</div>
+              </div>
+              <div className={styles.author}>
+                <FiAtSign className={styles.icons} />
+                <div className={styles.label}>{authorUsername}</div>
+              </div>
+            </>
+          )}
+          <div className={styles.recipe_trait}>
             <FiClock className={styles.icons} />
             <div className={styles.label}>{toTime(timeToComplete)}</div>
           </div>
-          <div className={styles.time_stamp}>
-            {!skipPublic ? (
+          {!isDraft && (
+            <div className={styles.recipe_trait}>
+              <FiHeart className={styles.icons} />
+              <div className={styles.label}>{recipe?._count?.likedBy || 0}</div>
+            </div>
+          )}
+          {!hidePublic && (
+            <div className={styles.recipe_trait}>
               <>
                 {isPrivate ? (
                   <FiLock className={styles.icons} />
@@ -62,25 +80,12 @@ const RecipeCard: React.FunctionComponent<RecipeCardProps> = ({
                   {isPrivate ? 'Private' : 'Public'}
                 </div>
               </>
-            ) : (
-              <div className={styles.time_stamp}>
-                <FiCalendar className={styles.icons} />
-                <div className={styles.label}>{toDate(publishedAt)}</div>
-              </div>
-            )}
+            </div>
+          )}
+          <div className={styles.recipe_trait}>
+            <FiCalendar className={styles.icons} />
+            <div className={styles.label}>{toDate(publishedAt)}</div>
           </div>
-          {!skipPublic && (
-            <div className={styles.time_stamp}>
-              <FiCalendar className={styles.icons} />
-              <div className={styles.label}>{toDate(publishedAt)}</div>
-            </div>
-          )}
-          {!isDraft && (
-            <div className={styles.time_stamp}>
-              <FiHeart className={styles.icons} />
-              <div className={styles.label}>{recipe?._count?.likedBy || 0}</div>
-            </div>
-          )}
         </div>
       </div>
     </Link>

@@ -1,9 +1,12 @@
+/* Types */
 import { FormInput } from '../../../components/Input/type'
 import { Ingredient } from './IngredientSection/types'
-import { uuid } from '../../../utils'
 import { Instruction, Note } from './InstructionsSection/types'
 
-export interface AddRecipeForm {
+/* Utils */
+import { uuid } from '../../../utils'
+
+export type AddRecipeForm = {
   title: FormInput<string>
   timeToComplete: FormInput<number>
   description: FormInput<string>

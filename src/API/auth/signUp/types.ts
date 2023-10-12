@@ -1,4 +1,4 @@
-export interface SignupCredentials {
+export type SignupCredentials = {
   email: string
   username: string
   password: string
