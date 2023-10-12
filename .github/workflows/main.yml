@@ -22,6 +22,7 @@ jobs:
           prCommentEnabled: false
           prCommentSaveOld: false
           gitHubAccessToken: ${{ secrets.LHCI_COMMENT_TOKEN }}
+          commentUrl: https://api.github.com/repos/ShorttRyan/receta/pulls/80/reviews
       - name: Lighthouse Audit Staging
         uses: foo-software/lighthouse-check-action@master
         with:
