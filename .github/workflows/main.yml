@@ -16,26 +16,22 @@ jobs:
         uses: foo-software/lighthouse-check-action@master
         with:
           outputDirectory: ./artifacts
-          device: 'desktop'
+          device: 'all'
           urls: 'https://receta-git-${{ github.head_ref }}-shorttryan.vercel.app'
           extraHeaders: '{"Cookie":"auth=${{ secrets.LHCI_FEAT_ACCESS_TOKEN }}"}'
           prCommentEnabled: false
           prCommentSaveOld: false
           gitHubAccessToken: ${{ secrets.LHCI_COMMENT_TOKEN }}
-          gitAuthor: ${{ github.actor }}
-          gitBranch: ${{ github.ref }}
       - name: Lighthouse Audit Staging
         uses: foo-software/lighthouse-check-action@master
         with:
           outputDirectory: ./artifacts
-          device: 'mobile'
+          device: 'all'
           urls: 'https://recetastaging.vercel.app'
           extraHeaders: '{"Cookie":"auth=${{ secrets.LHCI_STAGING_ACCESS_TOKEN }}"}'
-          prCommentEnabled: false
+          prCommentEnabled: true
           prCommentSaveOld: false
           gitHubAccessToken: ${{ secrets.LHCI_COMMENT_TOKEN }}
-          gitAuthor: ${{ github.actor }}
-          gitBranch: ${{ github.ref }}
       - name: Lighthouse Audit Master
         uses: foo-software/lighthouse-check-action@master
         with:
@@ -43,11 +39,9 @@ jobs:
           device: 'all'
           urls: 'https://receta.vercel.app'
           extraHeaders: '{"Cookie":"auth=${{ secrets.LHCI_PROD_ACCESS_TOKEN }}"}'
-          prCommentEnabled: true
+          prCommentEnabled: false
           prCommentSaveOld: true
           gitHubAccessToken: ${{ secrets.LHCI_COMMENT_TOKEN }}
-          gitAuthor: ${{ github.actor }}
-          gitBranch: ${{ github.ref }}
       - name: Upload artifacts
         uses: actions/upload-artifact@master
         with:
