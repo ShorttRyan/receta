@@ -1,5 +1,10 @@
 import React, { useContext, useState } from 'react'
+import { useRouter } from 'next/router'
+import TextareaAutosize from 'react-textarea-autosize'
+import sharedStyles from './InstructionsSection/InstructionRow/InstructionRow.module.scss'
 import styles from './AddRecipeForm.module.scss'
+
+/* Child Components */
 import Input from '../../../components/Input'
 import Timer from './Timer'
 import IngredientSection from './IngredientSection'
@@ -8,12 +13,13 @@ import IconButton from '../../../components/IconButton'
 import { FiSave, FiUploadCloud, FiArrowLeft, FiTrash2 } from 'react-icons/fi'
 import NotesSection from './NotesSection'
 import IsPrivateSection from './IsPrivateSection'
+
+/* API */
 import { addRecipe, deleteRecipe, updateRecipe } from '../../../API'
+
+/* Contexts */
 import { AddRecipeContext } from '../../../contexts/AddRecipeContext'
 import { UserDataContext } from '../../../contexts/UserDataContext'
-import { useRouter } from 'next/router'
-import TextareaAutosize from 'react-textarea-autosize'
-import sharedStyles from './InstructionsSection/InstructionRow/InstructionRow.module.scss'
 
 const AddRecipe: React.FunctionComponent = () => {
   const {

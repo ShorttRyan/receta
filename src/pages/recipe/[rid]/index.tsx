@@ -4,16 +4,24 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import { GetServerSideProps } from 'next'
 import MainTemplate from '../../../templates/Main'
+
+/* Utils */
 import {
   logPageError,
   prisma,
   validateAccessToken,
 } from '../../../utils/Server'
-import RecipeContent from '../../../pageComponents/Recipe'
-import { fakeRecipe } from '../../../utils/fakeRecipe'
-import { RecipeWithLikedBy } from '../../../utils/extendedRecipe'
 
-export interface RecipePageProps {
+/* Types */
+import { RecipeWithLikedBy } from '../../../types/extendedRecipe'
+
+/* Constants */
+import { fakeRecipe } from '../../../constants/fakeRecipe'
+
+/* Child Components */
+import RecipeContent from '../../../pageComponents/Recipe'
+
+export type RecipePageProps = {
   id: number
   username: string
   firstName: string

@@ -1,6 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { serialize } from 'cookie'
-import { cookieOptions } from '../../../constants'
+
+/* Constants */
+import { cookieOptions } from '../../../constants/cookie'
 
 // noinspection JSUnusedGlobalSymbols
 export default async function handler(

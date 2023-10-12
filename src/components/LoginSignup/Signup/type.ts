@@ -1,6 +1,6 @@
 import { FormInput } from '../../Input/type'
 
-export interface SignupForm {
+export type SignupForm = {
   email: FormInput<string>
   username: FormInput<string>
   password: FormInput<string>

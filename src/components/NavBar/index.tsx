@@ -1,7 +1,9 @@
 import React from 'react'
-import styles from './NavBar.module.scss'
-import NavLink from './NavLink'
 import Link from 'next/link'
+import styles from './NavBar.module.scss'
+
+/* Child Components */
+import NavLink from './NavLink'
 import Horizontal from '../Logos/Horizontal'
 import ChefHat from '../Logos/ChefHat'
 import { FiCompass } from 'react-icons/fi'
@@ -23,8 +25,8 @@ const NavBar: React.FunctionComponent = () => {
             </a>
           </Link>
         </div>
-        <Link href={'/profile'} replace={true}>
-          <a aria-label="Profile Page">
+        <Link href={'/settings'} replace={true}>
+          <a aria-label="Settings Page">
             <NavLink icon={<ChefHat />} />
           </a>
         </Link>

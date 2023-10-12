@@ -1,4 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import bcrypt from 'bcrypt'
+import { Prisma } from '@prisma/client'
+import { serialize } from 'cookie'
+
+/* Utils */
 import { email } from '../../../utils'
 import {
   checkBody,
@@ -6,10 +11,9 @@ import {
   generateAccessToken,
   prisma,
 } from '../../../utils/Server'
-import bcrypt from 'bcrypt'
-import { Prisma } from '@prisma/client'
-import { serialize } from 'cookie'
-import { cookieOptions } from '../../../constants'
+
+/* Constants */
+import { cookieOptions } from '../../../constants/cookie'
 
 export default async function handler(
   req: NextApiRequest,

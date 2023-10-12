@@ -1,4 +1,4 @@
-export interface InstructionRowProps {
+export type InstructionRowProps = {
   value: string
   isLast: boolean
   editingIndex: number

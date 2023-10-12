@@ -1,21 +1,29 @@
 import React, { useState } from 'react'
-import styles from './ProfileOverview.module.scss'
+import styles from './SettingsOverview.module.scss'
+import { useRouter } from 'next/router'
+
+/* API */
+import { isUpdateProfilePrismaFailure, updateProfileInfo } from '../../API'
+
+/* Types */
+import { UpdateProfileForm } from './type'
+
+/* Child Components */
 import IconButton from '../IconButton'
 import Input from '../Input'
-import { UpdateProfileForm } from './type'
 import Button from '../Button'
-import { preUpdateProfileSubmit } from '../../utils/Client'
-import { isUpdateProfilePrismaFailure, updateProfileInfo } from '../../API'
-import { useRouter } from 'next/router'
 import { FiEdit } from 'react-icons/fi'
 
-interface ProfileOverviewProps {
+/* Utils */
+import { preUpdateProfileSubmit } from '../../utils'
+
+type SettingsOverviewProps = {
   email: string
   firstName: string
   lastName: string
 }
 
-const ProfileOverview: React.FunctionComponent<ProfileOverviewProps> = ({
+const SettingsOverview: React.FunctionComponent<SettingsOverviewProps> = ({
   email,
   firstName,
   lastName,
@@ -177,4 +185,4 @@ const ProfileOverview: React.FunctionComponent<ProfileOverviewProps> = ({
   )
 }
 
-export default ProfileOverview
+export default SettingsOverview

@@ -1,7 +1,13 @@
 import React, { useContext, useState } from 'react'
-import IngredientRow from './IngredientRow'
 import styles from './IngredientsSection.module.scss'
+
+/* Child Components */
+import IngredientRow from './IngredientRow'
+
+/* Utils */
 import { uuid } from '../../../../utils'
+
+/* Contexts */
 import { AddRecipeContext } from '../../../../contexts/AddRecipeContext'
 
 const IngredientSection: React.FunctionComponent = () => {

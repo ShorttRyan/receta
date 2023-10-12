@@ -2,6 +2,8 @@ import React from 'react'
 import { NextPage } from 'next'
 import Head from 'next/head'
 import MainTemplate from '../templates/Main'
+
+/* Child Components */
 import ErrorPage, { ErrorCode } from '../pageComponents/ErrorPage'
 
 const Custom404: NextPage = () => {

@@ -1,7 +1,11 @@
 import React from 'react'
-import styles from './InstructionRow.module.scss'
-import { InstructionRowProps } from './types'
 import TextareaAutosize from 'react-textarea-autosize'
+import styles from './InstructionRow.module.scss'
+
+/* Types */
+import { InstructionRowProps } from './types'
+
+/* Child Components */
 import IconButton from '../../../../../components/IconButton'
 import { FiEdit, FiMinus, FiPlus, FiSave } from 'react-icons/fi'
 

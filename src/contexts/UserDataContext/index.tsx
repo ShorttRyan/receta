@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
-import { ExtendedRecipe } from '../../utils/extendedRecipe'
 
-interface UserDataContextInterface {
+/* Utils */
+import { ExtendedRecipe } from '../../types/extendedRecipe'
+
+type UserDataContextType = {
   allRecipes: ExtendedRecipe[]
   setAllRecipes: (recipes: ExtendedRecipe[]) => void
   published: ExtendedRecipe[]
@@ -9,14 +11,12 @@ interface UserDataContextInterface {
   liked: ExtendedRecipe[]
   setLiked: (newArr: ExtendedRecipe[]) => void
 }
-interface UserDataProviderProps {
+type UserDataProviderProps = {
   publishedRecipes: ExtendedRecipe[]
   likedRecipes: ExtendedRecipe[]
 }
 
-export const UserDataContext = React.createContext(
-  {} as UserDataContextInterface,
-)
+export const UserDataContext = React.createContext({} as UserDataContextType)
 
 export const UserDataProvider: React.FunctionComponent<
   UserDataProviderProps

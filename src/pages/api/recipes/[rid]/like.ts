@@ -1,12 +1,14 @@
 // noinspection DuplicatedCode
 
 import { NextApiRequest, NextApiResponse } from 'next'
+import { Prisma } from '@prisma/client'
+
+/* Utils */
 import {
   logPrismaError,
   prisma,
   validateAccessToken,
 } from '../../../../utils/Server'
-import { Prisma } from '@prisma/client'
 
 // noinspection JSUnusedGlobalSymbols
 export default async function handler(

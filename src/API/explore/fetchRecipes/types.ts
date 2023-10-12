@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios'
-import { ExtendedRecipe } from '../../../utils/extendedRecipe'
+import { ExtendedRecipe } from '../../../types/extendedRecipe'
 
 export type FetchRecipesFailure = {
   message: string

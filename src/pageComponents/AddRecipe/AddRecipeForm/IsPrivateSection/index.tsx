@@ -1,6 +1,10 @@
 import React, { useContext } from 'react'
 import styles from './IsPrivateSection.module.scss'
+
+/* Child Components */
 import Checkbox from '../../../../components/Checkbox'
+
+/* Contexts */
 import { AddRecipeContext } from '../../../../contexts/AddRecipeContext'
 
 const IsPrivateSection: React.FunctionComponent = () => {

@@ -1,4 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import { Prisma } from '@prisma/client'
+import { serialize } from 'cookie'
+
+/* Utils */
 import {
   checkBody,
   generateAccessToken,
@@ -6,9 +10,9 @@ import {
   prisma,
   validateAccessToken,
 } from '../../../utils/Server'
-import { Prisma } from '@prisma/client'
-import { serialize } from 'cookie'
-import { cookieOptions } from '../../../constants'
+
+/* Constants */
+import { cookieOptions } from '../../../constants/cookie'
 
 // noinspection JSUnusedGlobalSymbols
 export default async function handler(

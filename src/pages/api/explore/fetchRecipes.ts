@@ -1,14 +1,20 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import { Prisma } from '@prisma/client'
+
+/* Utils */
 import {
+  fetchNewest,
+  fetchLiked,
   checkBody,
   logPrismaError,
   validateAccessToken,
 } from '../../../utils/Server'
-import { Prisma } from '@prisma/client'
-import { fetchNewest } from '../../../utils/Server/PrismaFunctions/fetchNewest'
+
+/* Types */
 import { ExploreTabs } from '../../../pageComponents/Explore/type'
-import { fetchLiked } from '../../../utils/Server/PrismaFunctions/fetchLiked'
-import { guestToken } from '../../../constants'
+
+/* Constants */
+import { guestToken } from '../../../constants/cookie'
 
 // noinspection JSUnusedGlobalSymbols
 export default async function handler(
