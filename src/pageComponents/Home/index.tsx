@@ -78,6 +78,7 @@ const HomeContent: React.FunctionComponent = () => {
               recipes={drafts}
               emptyListText="You have no masterpieces in progress."
               hideAuthor
+              canAddRecipes
             />
           )}
         </>

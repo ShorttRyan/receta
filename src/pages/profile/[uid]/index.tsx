@@ -80,7 +80,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       },
     })
   } catch (e) {
-    logPageError(e, `/user/${uid}`, token)
+    logPageError(e, `/profile/${uid}`, token)
   }
   if (user === null) {
     res.writeHead(303, { Location: '/' })
@@ -102,7 +102,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       },
     })
   } catch (e) {
-    logPageError(e, `/user/${uid}`, token)
+    logPageError(e, `/profile/${uid}`, token)
   }
 
   let likedRecipes: ExtendedRecipe[] = []
