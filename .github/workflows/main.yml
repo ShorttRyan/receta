@@ -33,6 +33,7 @@ jobs:
           prCommentEnabled: true
           prCommentSaveOld: false
           gitHubAccessToken: ${{ secrets.LHCI_COMMENT_TOKEN }}
+          commentUrl: https://api.github.com/repos/ShorttRyan/receta/pulls/80/reviews
       - name: Lighthouse Audit Master
         uses: foo-software/lighthouse-check-action@master
         with:
@@ -43,6 +44,7 @@ jobs:
           prCommentEnabled: false
           prCommentSaveOld: true
           gitHubAccessToken: ${{ secrets.LHCI_COMMENT_TOKEN }}
+          commentUrl: https://api.github.com/repos/ShorttRyan/receta/pulls/80/reviews
       - name: Upload artifacts
         uses: actions/upload-artifact@master
         with:
