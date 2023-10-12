@@ -1,14 +1,18 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import bcrypt from 'bcrypt'
+import { Prisma } from '@prisma/client'
+import { serialize } from 'cookie'
+
+/* Utils */
 import {
   checkBody,
   generateAccessToken,
   logPrismaError,
   prisma,
 } from '../../../utils/Server'
-import bcrypt from 'bcrypt'
-import { Prisma } from '@prisma/client'
-import { serialize } from 'cookie'
-import { cookieOptions } from '../../../constants'
+
+/* Constants */
+import { cookieOptions } from '../../../constants/cookie'
 
 // noinspection JSUnusedGlobalSymbols
 export default async function handler(

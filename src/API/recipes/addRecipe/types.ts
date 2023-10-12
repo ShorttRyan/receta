@@ -4,9 +4,9 @@ import {
   Instruction,
   Note,
 } from '../../../pageComponents/AddRecipe/AddRecipeForm/InstructionsSection/types'
-import { ExtendedRecipe } from '../../../utils/extendedRecipe'
+import { ExtendedRecipe } from '../../../types/extendedRecipe'
 
-export interface AddRecipeBody {
+export type AddRecipeBody = {
   title: string
   timeToComplete: number
   ingredients: Ingredient[]

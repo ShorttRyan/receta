@@ -1,5 +1,5 @@
 import { FormInput } from '../Input/type'
-export interface UpdateProfileForm {
+export type UpdateProfileForm = {
   firstName: FormInput<string>
   lastName: FormInput<string>
   email: FormInput<string>

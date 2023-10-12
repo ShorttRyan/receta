@@ -1,13 +1,16 @@
 import React from 'react'
 import styles from './Timer.module.scss'
+
+/* Child Components */
 import Button from '../../../../components/Button'
 
-interface TimerProps {
+type TimerProps = {
   label: string
   value: number
   setValue: (newVal: number) => void
   increment: number
 }
+
 const Timer: React.FunctionComponent<TimerProps> = ({
   label,
   value,

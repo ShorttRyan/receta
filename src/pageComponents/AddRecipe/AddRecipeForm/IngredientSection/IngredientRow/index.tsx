@@ -1,12 +1,18 @@
 import React from 'react'
 import styles from './IngredientRow.module.scss'
+
+/* Child Components */
 import DropDown from '../../../../../components/DropDown'
-import { Units } from '../types'
 import IconButton from '../../../../../components/IconButton'
 import { FiEdit, FiSave, FiPlus, FiMinus } from 'react-icons/fi'
+
+/* Types */
+import { Units } from '../types'
+
+/* Utils */
 import { getUnit } from './getUnit'
 
-interface IngredientRowProps {
+type IngredientRowProps = {
   name: string
   onNameChange: (newVal: string) => void
   amount: string

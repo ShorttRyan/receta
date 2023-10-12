@@ -1,10 +1,14 @@
 import React, { useContext } from 'react'
 import styles from './EmptySectionComponent.module.scss'
-import IconButton from '../../../components/IconButton'
-import { FiEdit } from 'react-icons/fi'
+
+/* Contexts */
 import { AddRecipeContext } from '../../../contexts/AddRecipeContext'
 
-interface EmptySectionProps {
+/* Child Components */
+import { FiEdit } from 'react-icons/fi'
+import IconButton from '../../IconButton'
+
+type EmptySectionProps = {
   message: string
   showAddRecipeButton: boolean
 }

@@ -1,10 +1,14 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import FloatingBackground from '../components/FloatingBackground'
-import LoginSignup from '../components/LoginSignup'
 import styles from '../styles/pages/Login.module.scss'
 import { GetServerSideProps } from 'next'
+
+/* Utils */
 import { validateAccessToken } from '../utils/Server'
+
+/* Child Components */
+import LoginSignup from '../components/LoginSignup'
+import FloatingBackground from '../components/FloatingBackground'
 
 const Login: NextPage = () => {
   return (

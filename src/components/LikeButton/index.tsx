@@ -1,10 +1,14 @@
 import React from 'react'
-import { FiHeart } from 'react-icons/fi'
 import styles from './LikeButton.module.scss'
+
+/* APIs */
 import { likeRecipe } from '../../API/recipes/[rid]/like'
 import { unlikeRecipe } from '../../API/recipes/[rid]/unlike'
 
-export interface LikeButtonProps {
+/* Child Components */
+import { FiHeart } from 'react-icons/fi'
+
+type LikeButtonProps = {
   isLiked: boolean
   onClick: () => void
   recipeId: string

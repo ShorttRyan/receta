@@ -1,4 +1,5 @@
-@import './src/styles/variables';
+@import '../../styles/variables';
+
 .profileWrapper {
   @media(max-width: $mobile) {
     padding: 0 15px;

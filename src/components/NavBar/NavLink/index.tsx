@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react'
 import styles from './NavLink.module.scss'
 
-export interface NavLinkProps {
+type NavLinkProps = {
   label?: string
   icon?: ReactElement
 }

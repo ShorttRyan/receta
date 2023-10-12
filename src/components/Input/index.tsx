@@ -1,8 +1,7 @@
 import React from 'react'
 import styles from './Input.module.scss'
-import { number } from '../../utils'
 
-interface InputProps {
+type InputProps = {
   name: string
   value: any
   setValue: (newValue: any) => void

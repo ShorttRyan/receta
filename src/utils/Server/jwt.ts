@@ -7,7 +7,7 @@ export interface DecodedToken extends AccessTokenBody {
   exp: number
 }
 
-export interface AccessTokenBody {
+export type AccessTokenBody = {
   username: string
   email: string
   firstName: string

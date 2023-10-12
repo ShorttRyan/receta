@@ -1,4 +1,6 @@
 import React, { useCallback, useState } from 'react'
+
+/* Types */
 import {
   AddRecipeForm,
   initialValue,
@@ -8,9 +10,11 @@ import {
   Instruction,
   Note,
 } from '../../pageComponents/AddRecipe/AddRecipeForm/InstructionsSection/types'
+
+/* Utils */
 import { uuid } from '../../utils'
 
-interface AddRecipeInterface {
+type AddRecipeType = {
   addingRecipe: boolean
   setAddingRecipe: (newState: boolean) => void
   form: AddRecipeForm
@@ -36,9 +40,9 @@ interface AddRecipeInterface {
   recipeId?: string
 }
 
-export const AddRecipeContext = React.createContext({} as AddRecipeInterface)
+export const AddRecipeContext = React.createContext({} as AddRecipeType)
 
-export interface AddRecipeProviderProps {
+export type AddRecipeProviderProps = {
   seedForm?: AddRecipeForm
   recipeId?: string
 }

@@ -1,4 +1,4 @@
-@import 'src/styles/variables';
+@import '../../styles/variables';
 
 .container {
   width: 100%;
@@ -91,6 +91,14 @@
     font-size: 18px;
     margin-left: 5px;
     color: #545454;
+  }
+}
+
+.clickable_meta {
+  cursor: pointer;
+  .label {
+    color: $primaryBright !important;
+    text-decoration: underline;
   }
 }
 

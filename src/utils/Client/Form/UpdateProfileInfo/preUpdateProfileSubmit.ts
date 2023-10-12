@@ -1,6 +1,6 @@
 import { FormFunction } from '../types'
 import { email } from '../../../regex'
-import { UpdateProfileForm } from '../../../../components/ProfileOverview/type'
+import { UpdateProfileForm } from '../../../../components/SettingsOverview/type'
 import { checkRequired } from '../checkRequired'
 
 export const preUpdateProfileSubmit: FormFunction<

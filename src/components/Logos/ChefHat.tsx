@@ -1,9 +1,20 @@
 import React from 'react'
 import styles from './Logos.module.scss'
 
-const ChefHat: React.FunctionComponent = () => {
+type ChefHatProps = {
+  isStatic?: boolean
+}
+
+const ChefHat: React.FunctionComponent<ChefHatProps> = ({
+  isStatic = false,
+}) => {
   return (
-    <svg width="25" height="25" viewBox="0 0 25 25" className={styles.svgFill}>
+    <svg
+      width="25"
+      height="25"
+      viewBox="0 0 25 25"
+      className={isStatic ? styles.justPrimary : styles.svgFill}
+    >
       <defs id="SvgjsDefs3921" />
       <g
         id="SvgjsG3922"

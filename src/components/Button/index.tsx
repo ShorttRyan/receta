@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Button.module.scss'
 
-interface ButtonProps {
+type ButtonProps = {
   type: 'button' | 'submit' | 'reset'
   label?: string
   style?:

@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './IconButton.module.scss'
 import { IconType } from 'react-icons'
 
-interface IconButtonProps {
+type IconButtonProps = {
   onClick?: () => void
   Icon: IconType
   disabled: boolean
