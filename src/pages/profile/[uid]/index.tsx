@@ -70,6 +70,8 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   if (!uid || typeof uid != 'string') {
     res.writeHead(303, { Location: '/' })
+    res.end()
+    return { props: {} }
   }
 
   let user: User | null = null
@@ -82,8 +84,10 @@ export const getServerSideProps: GetServerSideProps = async ({
   } catch (e) {
     logPageError(e, `/profile/${uid}`, token)
   }
-  if (user === null) {
+  if (user === null || user.id === token.id) {
     res.writeHead(303, { Location: '/' })
+    res.end()
+    return { props: {} }
   }
 
   let publishedRecipes: Recipe[] = []
