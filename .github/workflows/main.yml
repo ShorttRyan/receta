@@ -16,11 +16,11 @@ jobs:
         uses: foo-software/lighthouse-check-action@master
         with:
           outputDirectory: ./artifacts
-          device: 'all'
+          device: 'desktop'
           urls: 'https://receta-git-${{ github.head_ref }}-shorttryan.vercel.app'
           extraHeaders: '{"Cookie":"auth=${{ secrets.LHCI_FEAT_ACCESS_TOKEN }}"}'
-          prCommentEnabled: true
-          prCommentSaveOld: true
+          prCommentEnabled: false
+          prCommentSaveOld: false
           gitHubAccessToken: ${{ secrets.LHCI_COMMENT_TOKEN }}
           gitAuthor: ${{ github.actor }}
           gitBranch: ${{ github.ref }}
@@ -28,11 +28,11 @@ jobs:
         uses: foo-software/lighthouse-check-action@master
         with:
           outputDirectory: ./artifacts
-          device: 'all'
+          device: 'mobile'
           urls: 'https://recetastaging.vercel.app'
           extraHeaders: '{"Cookie":"auth=${{ secrets.LHCI_STAGING_ACCESS_TOKEN }}"}'
-          prCommentEnabled: true
-          prCommentSaveOld: true
+          prCommentEnabled: false
+          prCommentSaveOld: false
           gitHubAccessToken: ${{ secrets.LHCI_COMMENT_TOKEN }}
           gitAuthor: ${{ github.actor }}
           gitBranch: ${{ github.ref }}
