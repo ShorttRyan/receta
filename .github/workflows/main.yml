@@ -15,36 +15,39 @@ jobs:
       - name: Lighthouse Audit Feature Branch
         uses: foo-software/lighthouse-check-action@master
         with:
-          outputDirectory: ./artifacts
-          device: 'all'
           urls: 'https://receta-git-${{ github.head_ref }}-shorttryan.vercel.app'
+          gitAuthor: ${{ github.actor }}
+          gitBranch: ${{ github.ref }}
+          gitHubAccessToken: ${{ secrets.GITHUB_TOKEN }}
+          prCommentEnabled: true
+          prCommentSaveOld: true
+          device: 'all'
+          outputDirectory: ./artifacts
           extraHeaders: '{"Cookie":"auth=${{ secrets.LHCI_FEAT_ACCESS_TOKEN }}"}'
-          prCommentEnabled: false
-          prCommentSaveOld: false
-          gitHubAccessToken: ${{ secrets.LHCI_COMMENT_TOKEN }}
-          commentUrl: https://api.github.com/repos/ShorttRyan/receta/pulls/80/reviews
       - name: Lighthouse Audit Staging
         uses: foo-software/lighthouse-check-action@master
         with:
-          outputDirectory: ./artifacts
-          device: 'all'
           urls: 'https://recetastaging.vercel.app'
-          extraHeaders: '{"Cookie":"auth=${{ secrets.LHCI_STAGING_ACCESS_TOKEN }}"}'
+          gitAuthor: ${{ github.actor }}
+          gitBranch: ${{ github.ref }}
+          gitHubAccessToken: ${{ secrets.GITHUB_TOKEN }}
           prCommentEnabled: true
-          prCommentSaveOld: false
-          gitHubAccessToken: ${{ secrets.LHCI_COMMENT_TOKEN }}
-          commentUrl: https://api.github.com/repos/ShorttRyan/receta/pulls/80/reviews
+          prCommentSaveOld: true
+          device: 'all'
+          outputDirectory: ./artifacts
+          extraHeaders: '{"Cookie":"auth=${{ secrets.LHCI_STAGING_ACCESS_TOKEN }}"}'
       - name: Lighthouse Audit Master
         uses: foo-software/lighthouse-check-action@master
         with:
-          outputDirectory: ./artifacts
-          device: 'all'
           urls: 'https://receta.vercel.app'
-          extraHeaders: '{"Cookie":"auth=${{ secrets.LHCI_PROD_ACCESS_TOKEN }}"}'
-          prCommentEnabled: false
+          gitAuthor: ${{ github.actor }}
+          gitBranch: ${{ github.ref }}
+          gitHubAccessToken: ${{ secrets.GITHUB_TOKEN }}
+          prCommentEnabled: true
           prCommentSaveOld: true
-          gitHubAccessToken: ${{ secrets.LHCI_COMMENT_TOKEN }}
-          commentUrl: https://api.github.com/repos/ShorttRyan/receta/pulls/80/reviews
+          device: 'all'
+          outputDirectory: ./artifacts
+          extraHeaders: '{"Cookie":"auth=${{ secrets.LHCI_FEAT_ACCESS_TOKEN }}"}'
       - name: Upload artifacts
         uses: actions/upload-artifact@master
         with:
