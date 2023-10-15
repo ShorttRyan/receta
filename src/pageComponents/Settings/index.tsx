@@ -12,6 +12,10 @@ import { SettingsPageProps } from '../../pages/settings'
 import Button from '../../components/Button'
 import SettingsOverview from '../../components/SettingsOverview'
 
+/* Utils */
+import { eraseCookie } from '../../utils'
+
+
 const SettingsContent: React.FunctionComponent<SettingsPageProps> = (props) => {
   const [disabled, setDisabled] = useState<boolean>(false)
   const router = useRouter()
@@ -30,9 +34,7 @@ const SettingsContent: React.FunctionComponent<SettingsPageProps> = (props) => {
               // noinspection JSUnusedLocalSymbols
               const [response, error] = await logOut()
               if (error === undefined) {
-                await router.replace('/')
-                await router.replace('/profile')
-                await router.replace('/explore')
+                eraseCookie('auth')
                 await router.push('/')
                 return
               }
