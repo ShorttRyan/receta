@@ -1,10 +1,20 @@
 import React, { useState } from 'react'
-import styles from './ProfileContent.module.scss'
-import { ProfilePageProps } from '../../pages/profile'
-import Button from '../../components/Button'
-import { logOut } from '../../API'
 import { useRouter } from 'next/router'
+import styles from './ProfileContent.module.scss'
+
+/* API */
+import { logOut } from '../../API'
+
+/* Types */
+import { ProfilePageProps } from '../../pages/profile'
+
+/* Child Components */
+import Button from '../../components/Button'
 import ProfileOverview from '../../components/ProfileOverview'
+
+/* Utils */
+import { eraseCookie } from '../../utils/Client/cookie'
+
 
 const ProfileContent: React.FunctionComponent<ProfilePageProps> = (props) => {
   const [disabled, setDisabled] = useState<boolean>(false)
@@ -24,9 +34,7 @@ const ProfileContent: React.FunctionComponent<ProfilePageProps> = (props) => {
               // noinspection JSUnusedLocalSymbols
               const [response, error] = await logOut()
               if (error === undefined) {
-                await router.replace('/')
-                await router.replace('/profile')
-                await router.replace('/explore')
+                eraseCookie('auth')
                 await router.push('/')
                 return
               }
